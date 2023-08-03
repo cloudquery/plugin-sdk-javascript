@@ -1,12 +1,12 @@
-# plugin-pb-js
+# CloudQuery Plugin SDK for JavaScript
 
-This is a low-level auto-generated gRPC client and server for CloudQuery plugin from [plugin-pb protos](https://github.com/cloudquery/plugin-pb).
+This is the high-level package to use for developing CloudQuery plugins in JavaScript.
 
-## Development
-
-### Prerequisites
+## Prerequisites
 
 Node.js 16 or higher. Install Node.js from [here](https://nodejs.org/en/download/).
+
+## Setup
 
 ### Install dependencies
 

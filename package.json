@@ -11,7 +11,7 @@
     "build": "rm -rf dist && tsc",
     "test": "ava"
   },
-  "description": "This is a low-level auto-generated gRPC client and server for CloudQuery plugins",
+  "description": "This is the high-level package to use for developing CloudQuery plugins in JavaScript",
   "keywords": [
     "nodejs",
     "javascript",
