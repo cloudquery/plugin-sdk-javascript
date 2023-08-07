@@ -65,7 +65,7 @@
     }
   },
   "dependencies": {
-    "@cloudquery/plugin-pb-javascript": "^0.0.5",
+    "@cloudquery/plugin-pb-javascript": "^0.0.6",
     "yargs": "^17.7.2"
   }
 }
