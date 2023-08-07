@@ -15,11 +15,11 @@ export class Bool {
     return new ArrowBool();
   }
 
-  public get Valid() {
+  public get Valid(): boolean {
     return this._valid;
   }
 
-  public get Value() {
+  public get Value(): boolean {
     return this._value;
   }
 
@@ -29,10 +29,11 @@ export class Bool {
       return;
     }
 
-    let val = value;
     // Check if this might be a scalar boolean
-    if (Object.hasOwnProperty.call(value, 'value')) {
-      val = (value as { value: unknown }).value;
+    if (value instanceof Bool) {
+      this._valid = value.Valid;
+      this._value = value.Value;
+      return;
     }
 
     if (isBooleanable(value)) {

@@ -10,7 +10,7 @@ import { Bool } from './bool.js';
   });
 });
 
-[1, true, 'true', 'Y', 'y', 'TRUE', 'on'].forEach((v, i) => {
+[1, true, 'true', 'Y', 'y', 'TRUE', 'on', new Bool(true)].forEach((v, i) => {
   test(`should support truthy value '${v}' (${i})`, (t) => {
     const b = new Bool(v);
     t.is(b.Valid, true);
@@ -20,7 +20,7 @@ import { Bool } from './bool.js';
   });
 });
 
-[0, false, 'false', 'N', 'n', 'FALSE', 'off'].forEach((v, i) => {
+[0, false, 'false', 'N', 'n', 'FALSE', 'off', new Bool(false)].forEach((v, i) => {
   test(`should support falsy value '${v}' (${i})`, (t) => {
     const b = new Bool(v);
     t.is(b.Valid, true);
