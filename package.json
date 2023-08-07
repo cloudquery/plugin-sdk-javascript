@@ -4,7 +4,8 @@
   "files": [
     "dist",
     "!dist/**/*.test.*",
-    "!dist/tsconfig.tsbuildinfo"
+    "!dist/tsconfig.tsbuildinfo",
+    "!dist/**/*.map"
   ],
   "scripts": {
     "dev": "ts-node src/index.ts",
@@ -38,9 +39,9 @@
   "author": "cloudquery (https://github.com/cloudquery)",
   "devDependencies": {
     "@ava/typescript": "^4.1.0",
-    "@cloudquery/plugin-pb-js": "^0.0.4",
     "@grpc/grpc-js": "^1.9.0",
     "@tsconfig/node16": "^16.1.0",
+    "@types/yargs": "^17.0.24",
     "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^6.2.1",
     "ava": "^5.3.1",
@@ -62,5 +63,9 @@
       },
       "compile": "tsc"
     }
+  },
+  "dependencies": {
+    "@cloudquery/plugin-pb-javascript": "^0.0.5",
+    "yargs": "^17.7.2"
   }
 }

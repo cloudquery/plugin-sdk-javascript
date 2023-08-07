@@ -1,5 +1,5 @@
-import { discovery1 } from '@cloudquery/plugin-pb-js';
-import { pluginV3 } from '@cloudquery/plugin-pb-js';
+import { discovery1 } from '@cloudquery/plugin-pb-javascript';
+import { pluginV3 } from '@cloudquery/plugin-pb-javascript';
 import grpc = require('@grpc/grpc-js');
 
 class DiscoveryServer extends discovery1.cloudquery.discovery.v1.UnimplementedDiscoveryService {
@@ -92,11 +92,10 @@ export const getServer = () => {
   return server;
 };
 
-const main = () => {
+export const startServer = (address: string) => {
   const server = getServer();
-  server.bindAsync(`0.0.0.0:9999`, grpc.ServerCredentials.createInsecure(), (err, port) => {
+  server.bindAsync(address, grpc.ServerCredentials.createInsecure(), (err, port) => {
     server.start();
+    console.log('server running on port', port);
   });
 };
-
-main();
