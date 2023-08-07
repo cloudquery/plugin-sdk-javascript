@@ -1,5 +1,5 @@
 {
-  "name": "@cloudquery/plugin-pb-javascript",
+  "name": "@cloudquery/plugin-sdk-javascript",
   "version": "0.0.1",
   "files": [
     "dist",
@@ -24,13 +24,13 @@
     "data engineering"
   ],
   "license": "MPL-2.0",
-  "homepage": "https://github.com/cloudquery/plugin-pb-javascript",
+  "homepage": "https://github.com/cloudquery/plugin-sdk-javascript",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cloudquery/plugin-pb-javascript.git"
+    "url": "git+https://github.com/cloudquery/plugin-sdk-javascript.git"
   },
   "bugs": {
-    "url": "https://github.com/cloudquery/plugin-pb-javascript/issues"
+    "url": "https://github.com/cloudquery/plugin-sdk-javascript/issues"
   },
   "author": "cloudquery (https://github.com/cloudquery)",
   "devDependencies": {

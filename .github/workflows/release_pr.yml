@@ -12,7 +12,7 @@ jobs:
         id: release
         with:
           release-type: node
-          package-name: plugin-pb-javascript
+          package-name: plugin-sdk-javascript
           token: ${{ secrets.GH_CQ_BOT }}
           pull-request-title-pattern: "chore${scope}: Release${component} v${version}"
           # Should breaking changes before 1.0.0 produce minor bumps?
