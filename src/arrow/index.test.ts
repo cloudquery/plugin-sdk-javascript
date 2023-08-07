@@ -1,5 +1,5 @@
 import test from 'ava';
-import { testArrow } from './';
+import { testArrow } from './index.js';
 
 test('testArrow', (t) => {
   const vectors = testArrow();

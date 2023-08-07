@@ -1,5 +1,5 @@
 import test from 'ava';
-import { serve as serveWithExit, ServeArgs } from './serve';
+import { serve as serveWithExit, ServeArgs } from './serve.js';
 
 const serve = serveWithExit.exitProcess(false);
 

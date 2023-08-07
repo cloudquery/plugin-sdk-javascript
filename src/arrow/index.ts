@@ -1,4 +1,4 @@
-import { makeVector, vectorFromArray, Dictionary, Uint8, Utf8 } from 'apache-arrow';
+import { makeVector, vectorFromArray, Dictionary, Uint8, Utf8 } from '@apache-arrow/esnext-esm';
 
 export const testArrow = () => {
   const uft8Vector = vectorFromArray(['foo', 'bar', 'baz'], new Utf8());
