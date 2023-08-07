@@ -1,7 +1,8 @@
-import test from "ava";
-import { getServer } from ".";
+import test from 'ava';
+import { getServer } from '.';
 
-test("getServer", (t) => {
+test('getServer', (t) => {
   const serve = getServer();
+  t.not(serve, undefined);
   t.pass();
 });
