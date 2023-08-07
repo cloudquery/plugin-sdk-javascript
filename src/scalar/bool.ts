@@ -29,7 +29,6 @@ export class Bool {
       return;
     }
 
-    // Check if this might be a scalar boolean
     if (value instanceof Bool) {
       this._valid = value.Valid;
       this._value = value.Value;
