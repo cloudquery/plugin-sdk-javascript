@@ -31,3 +31,13 @@ npm run build
 ```bash
 npm test
 ```
+
+### Formatting and Linting
+
+```bash
+# Format code. Omit -w to just check for formatting issues
+prettier -w 'src/**/*.ts'
+
+# Lint
+eslint --max-warnings 0 --ext .ts src
+ ```
