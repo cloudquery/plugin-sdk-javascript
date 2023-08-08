@@ -1,16 +1,14 @@
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
-import { startServer } from '../grpc/server.js';
+import { startServer, Network } from '../grpc/server.js';
 import { LogFormat, LogLevel, createLogger } from '../logger/logger.js';
-
-const NETWORK_CHOICES = ['tcp', 'tcp4', 'tcp6', 'unix', 'unixpacket'] as const;
 
 const TELEMETRY_LEVEL_CHOICES = ['none', 'errors', 'stats', 'all'] as const;
 
 export type ServeArguments = {
   address: string;
-  network: (typeof NETWORK_CHOICES)[number];
+  network: Network;
   logLevel: LogLevel;
   logFormat: LogFormat;
   sentry: boolean;
@@ -40,7 +38,7 @@ export const serve = yargs(hideBin(process.argv))
     network: {
       alias: 'n',
       type: 'string',
-      choices: NETWORK_CHOICES,
+      choices: Object.values(Network),
       description: 'network to bind to',
       default: 'tcp',
     },

@@ -5,6 +5,10 @@ import winston from 'winston';
 import { DiscoveryServer } from './discovery.js';
 import { PluginServer } from './plugin.js';
 
+export enum Network {
+  TCP = 'tcp',
+}
+
 export const getServer = () => {
   const server = new grpc.Server();
   server.addService(pluginV3.cloudquery.plugin.v3.UnimplementedPluginService.definition, new PluginServer());
