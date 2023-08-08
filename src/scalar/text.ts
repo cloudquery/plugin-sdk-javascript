@@ -4,10 +4,10 @@ import { isInvalid, NULL_VALUE } from './util.js';
 
 export class Text {
   private _valid = false;
-  private _value = "";
+  private _value = '';
 
   public constructor(v: unknown) {
-    this.Value = v
+    this.Value = v;
     return this;
   }
 
@@ -33,7 +33,7 @@ export class Text {
       this._valid = true;
       return;
     }
-    
+
     throw new Error(`Unable to set '${value}' as Text`);
   }
 
