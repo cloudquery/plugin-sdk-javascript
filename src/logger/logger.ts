@@ -14,8 +14,10 @@ export enum LogFormat {
 }
 
 export const createLogger = (level: LogLevel, format: LogFormat) => {
+  // Winston doesn't have a TRACE level, so we need to normalize it to DEBUG.
+  const normalizedLevel = level === LogLevel.TRACE ? LogLevel.DEBUG : level;
   const logger = winston.createLogger({
-    level,
+    level: normalizedLevel,
     format: format == LogFormat.JSON ? winston.format.json() : winston.format.simple(),
     transports: [new winston.transports.Console()],
   });
