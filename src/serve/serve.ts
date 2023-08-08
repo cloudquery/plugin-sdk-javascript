@@ -1,17 +1,17 @@
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { startServer } from '../grpc/server.js';
+import { LogFormat, LogLevel, createLogger } from '../logger/logger.js';
 
 const NETWORK_CHOICES = ['tcp', 'tcp4', 'tcp6', 'unix', 'unixpacket'] as const;
-const LOG_LEVEL_CHOICES = ['trace', 'debug', 'info', 'warn', 'error'] as const;
-const LOG_FORMAT_CHOICES = ['json', 'text'] as const;
+
 const TELEMETRY_LEVEL_CHOICES = ['none', 'errors', 'stats', 'all'] as const;
 
 export type ServeArguments = {
   address: string;
   network: (typeof NETWORK_CHOICES)[number];
-  logLevel: (typeof LOG_LEVEL_CHOICES)[number];
-  logFormat: (typeof LOG_FORMAT_CHOICES)[number];
+  logLevel: LogLevel;
+  logFormat: LogFormat;
   sentry: boolean;
   otelEndpoint: string;
   otelEndpointInsecure: boolean;
@@ -24,8 +24,9 @@ export const serve = yargs(hideBin(process.argv))
     'start plugin gRPC server',
     () => {},
     ({ address, network, logLevel, logFormat, sentry: sentry, otelEndpoint, telemetryLevel }: ServeArguments) => {
-      console.log({ address, network, logLevel, logFormat, sentry, otelEndpoint, telemetryLevel });
-      startServer(address);
+      const logger = createLogger(logLevel, logFormat);
+      logger.info(JSON.stringify({ address, network, logLevel, logFormat, sentry, otelEndpoint, telemetryLevel }));
+      startServer(logger, address);
     },
   )
   .options({
@@ -45,14 +46,14 @@ export const serve = yargs(hideBin(process.argv))
     'log-level': {
       alias: 'l',
       type: 'string',
-      choices: LOG_LEVEL_CHOICES,
+      choices: Object.values(LogLevel),
       description: 'log level',
       default: 'info',
     },
     'log-format': {
       alias: 'f',
       type: 'string',
-      choices: LOG_FORMAT_CHOICES,
+      choices: Object.values(LogFormat),
       description: 'log format',
       default: 'text',
     },

@@ -1,3 +1,4 @@
+import winston from 'winston';
 import grpc = require('@grpc/grpc-js');
 import { pluginV3 } from '@cloudquery/plugin-pb-javascript';
 

@@ -1,3 +1,4 @@
+import winston from 'winston';
 import grpc = require('@grpc/grpc-js');
 import { pluginV3 } from '@cloudquery/plugin-pb-javascript';
 import { discovery1 } from '@cloudquery/plugin-pb-javascript';
@@ -12,10 +13,14 @@ export const getServer = () => {
   return server;
 };
 
-export const startServer = (address: string) => {
+export const startServer = (logger: winston.Logger, address: string) => {
   const server = getServer();
   server.bindAsync(address, grpc.ServerCredentials.createInsecure(), (error, port) => {
+    if (error) {
+      logger.error(error);
+      return;
+    }
     server.start();
-    console.log('server running on port', port);
+    logger.info('server running on port', port);
   });
 };

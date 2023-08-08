@@ -73,6 +73,7 @@
     "@apache-arrow/esnext-esm": "^12.0.1",
     "@cloudquery/plugin-pb-javascript": "^0.0.6",
     "boolean": "^3.2.0",
+    "winston": "^3.10.0",
     "yargs": "^17.7.2"
   }
 }
