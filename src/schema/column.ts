@@ -37,7 +37,7 @@ export const formatColumn = (column: Column): string => {
   return `Column(name=${name}, type=${type}, description=${description}, primary_key=${primaryKey}, not_null=${notNull}, incremental_key=${incrementalKey}, unique=${unique})`;
 };
 
-export const equals = (column: Column, other: object): boolean => {
+export const equals = (column: Column, other: unknown): boolean => {
   return isDeepStrictEqual(column, other);
 };
 
