@@ -7,17 +7,17 @@ import { Bool } from './bool.js';
 [null, undefined].forEach((v) => {
   test(`should set values to false when ${v} is passed`, (t) => {
     const b = new Bool(v);
-    t.is(b.Valid, false);
-    t.true(DataType.isBool(b.DataType));
+    t.is(b.valid, false);
+    t.true(DataType.isBool(b.dataType));
   });
 });
 
 [1, true, 'true', 'Y', 'y', 'TRUE', 'on', new Bool(true)].forEach((v, index) => {
   test(`should support truthy value '${v}' (${index})`, (t) => {
     const b = new Bool(v);
-    t.is(b.Valid, true);
-    t.is(b.Value, true);
-    t.true(DataType.isBool(b.DataType));
+    t.is(b.valid, true);
+    t.is(b.value, true);
+    t.true(DataType.isBool(b.dataType));
     t.is(b.toString(), 'true');
   });
 });
@@ -25,9 +25,9 @@ import { Bool } from './bool.js';
 [0, false, 'false', 'N', 'n', 'FALSE', 'off'].forEach((v, index) => {
   test(`should support falsy value '${v}' (${index})`, (t) => {
     const b = new Bool(v);
-    t.is(b.Valid, true);
-    t.is(b.Value, false);
-    t.true(DataType.isBool(b.DataType));
+    t.is(b.valid, true);
+    t.is(b.value, false);
+    t.true(DataType.isBool(b.dataType));
     t.is(b.toString(), 'false');
   });
 });

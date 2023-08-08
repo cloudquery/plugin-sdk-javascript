@@ -24,6 +24,7 @@
     "@typescript-eslint/no-unused-vars": 0,
     "require-await": "off",
     "@typescript-eslint/require-await": "error",
+    "@typescript-eslint/naming-convention": "error",
     "import/order": [
       2,
       {
@@ -39,7 +40,8 @@
     {
       "files": ["src/grpc/**/*.ts"],
       "rules": {
-        "unicorn/no-null": 0
+        "unicorn/no-null": 0,
+        "@typescript-eslint/naming-convention": 0
       }
     },
     {

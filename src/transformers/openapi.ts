@@ -59,7 +59,7 @@ export function oapiDefinitionToColumns(definition: OAPIDefinition, overrideColu
     const overrideColumn = getColumnByName(overrideColumns, key);
     if (overrideColumn) {
       column.type = overrideColumn.type;
-      column.primary_key = overrideColumn.primary_key;
+      column.primaryKey = overrideColumn.primaryKey;
       column.unique = overrideColumn.unique;
     }
     columns.push(column);

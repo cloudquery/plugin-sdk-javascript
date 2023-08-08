@@ -45,6 +45,7 @@ export const createServeCommand = (plugin: Plugin) => {
         description: 'network to bind to',
         default: 'tcp',
       },
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       'log-level': {
         alias: 'l',
         type: 'string',
@@ -52,6 +53,7 @@ export const createServeCommand = (plugin: Plugin) => {
         description: 'log level',
         default: 'info',
       },
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       'log-format': {
         alias: 'f',
         type: 'string',
@@ -64,16 +66,19 @@ export const createServeCommand = (plugin: Plugin) => {
         description: 'enable sentry reporting. Pass `--no-sentry` to disable.',
         default: true,
       },
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       'otel-endpoint': {
         type: 'string',
         description: 'OpenTelemetry collector endpoint',
         default: '',
       },
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       'otel-endpoint-insecure': {
         type: 'boolean',
         description: 'use Open Telemetry HTTP endpoint (for development only)',
         default: false,
       },
+      // eslint-disable-next-line @typescript-eslint/naming-convention
       'telemetry-level': {
         type: 'string',
         description: 'CQ Telemetry level',

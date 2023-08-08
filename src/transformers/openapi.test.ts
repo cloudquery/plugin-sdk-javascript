@@ -19,6 +19,7 @@ const OAPI_SPEC = {
   produces: ['application/json'],
   paths: {},
   definitions: {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     TestDefinition: {
       type: 'object',
       properties: {
