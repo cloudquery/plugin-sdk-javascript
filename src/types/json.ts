@@ -1,6 +1,6 @@
-import { DataType, Binary } from '@apache-arrow/esnext-esm';
+import { DataType, Binary, Type } from '@apache-arrow/esnext-esm';
 
-export class JSONType extends DataType {
+export class JSONType extends DataType<Type.Binary> {
   readonly extensionName: string = 'json';
 
   constructor() {
