@@ -1,7 +1,7 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prettier", "unicorn"],
+  "plugins": ["@typescript-eslint", "prettier", "unicorn", "unused-imports"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },
@@ -19,6 +19,7 @@
     "plugin:you-dont-need-lodash-underscore/all"
   ],
   "rules": {
+    "unused-imports/no-unused-imports": "error",
     "no-console": "error",
     "@typescript-eslint/no-unused-vars": 0,
     "require-await": "off",

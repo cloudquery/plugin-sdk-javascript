@@ -1,8 +1,9 @@
 import test from 'ava';
 
-import { serve as serveWithExit, ServeArguments } from './serve.js';
+import { newPlugin, newUnimplementedClient } from './plugin.js';
+import { createServeCommand, ServeArguments } from './serve.js';
 
-const serve = serveWithExit.exitProcess(false);
+const serve = createServeCommand(newPlugin('test', 'v1.0.0', newUnimplementedClient)).exitProcess(false);
 
 test('should return error without command', (t) => {
   t.throws(() => serve.parse([]), { message: 'Specify a command to run' });
