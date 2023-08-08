@@ -19,6 +19,7 @@
     "plugin:you-dont-need-lodash-underscore/all"
   ],
   "rules": {
+    "unicorn/no-null": 0,
     "unused-imports/no-unused-imports": "error",
     "no-console": "error",
     "@typescript-eslint/no-unused-vars": 0,
@@ -40,7 +41,6 @@
     {
       "files": ["src/grpc/**/*.ts"],
       "rules": {
-        "unicorn/no-null": 0,
         "@typescript-eslint/naming-convention": 0
       }
     },
