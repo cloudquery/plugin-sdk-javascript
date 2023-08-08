@@ -1,6 +1,5 @@
 import { discovery1 } from '@cloudquery/plugin-pb-javascript';
 import grpc = require('@grpc/grpc-js');
-import winston from 'winston';
 
 const SUPPORTED_VERSIONS = [3];
 

@@ -1,3 +1,4 @@
-import { serve } from './serve/serve.js';
+import { newPlugin, newUnimplementedClient } from './plugin/plugin.js';
+import { createServeCommand } from './plugin/serve.js';
 
-serve.parse();
+createServeCommand(newPlugin('test', 'v1.0.0', newUnimplementedClient)).parse();

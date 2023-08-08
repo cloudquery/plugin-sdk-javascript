@@ -1,4 +1,4 @@
-import { DataType, Utf8, Int64, Bool } from '@apache-arrow/esnext-esm';
+import { Utf8, Int64, Bool } from '@apache-arrow/esnext-esm';
 import test from 'ava';
 
 import { Column } from '../schema/column.js';
