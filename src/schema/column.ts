@@ -3,6 +3,10 @@ import { isDeepStrictEqual } from 'node:util';
 import { DataType, Field, Bool } from '@apache-arrow/esnext-esm';
 
 import * as arrow from './arrow.js';
+import { ClientMeta } from './meta.js';
+import { Resource } from './resource.js';
+
+export type ColumnResolver = (meta: ClientMeta, resource: Resource, c: Column) => void;
 
 export type Column = {
   name: string;
@@ -12,6 +16,8 @@ export type Column = {
   notNull: boolean;
   incrementalKey: boolean;
   unique: boolean;
+  resolver?: ColumnResolver;
+  ignoreInTests: boolean;
 };
 
 export const createColumn = ({
@@ -30,6 +36,7 @@ export const createColumn = ({
   notNull,
   incrementalKey,
   unique,
+  ignoreInTests: false,
 });
 
 export const formatColumn = (column: Column): string => {
@@ -58,13 +65,12 @@ export const fromArrowField = (field: Field): Column => {
   const unique = metadata.get(arrow.METADATA_UNIQUE) === arrow.METADATA_TRUE;
   const incrementalKey = metadata.get(arrow.METADATA_INCREMENTAL) === arrow.METADATA_TRUE;
 
-  return {
+  return createColumn({
     name,
     type,
-    description: '',
     primaryKey,
     notNull: !nullable,
     unique,
     incrementalKey,
-  };
+  });
 };

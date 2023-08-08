@@ -1,14 +1,15 @@
 import { Bool as ArrowBool } from '@apache-arrow/esnext-esm';
 import { boolean, isBooleanable } from 'boolean';
 
+import { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
-export class Bool {
+export class Bool implements Scalar<boolean> {
   private _valid = false;
   private _value = false;
 
   public constructor(v: unknown) {
-    this.valid = v;
+    this.value = v;
     return this;
   }
 
@@ -24,7 +25,7 @@ export class Bool {
     return this._value;
   }
 
-  public set valid(value: unknown) {
+  public set value(value: unknown) {
     if (isInvalid(value)) {
       this._valid = false;
       return;
