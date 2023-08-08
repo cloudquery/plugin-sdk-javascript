@@ -1,4 +1,5 @@
 import { DataType, Field } from '@apache-arrow/esnext-esm';
+
 import * as arrow from './arrow.js';
 
 export class Column {
@@ -37,7 +38,7 @@ export class Column {
     return this.toString();
   }
 
-  equals(value: any): boolean {
+  equals(value: object): boolean {
     if (value instanceof Column) {
       return (
         this.name === value.name &&

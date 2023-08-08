@@ -1,49 +1,61 @@
-import { DataType, Utf8, Int64, Bool } from '@apache-arrow/esnext-esm';
-import { JSONType } from '../types/json.js';
-import { Column } from '../schema/column.js';
+import { DataType, Field, Utf8, Int64, Bool } from '@apache-arrow/esnext-esm';
 
-interface Field {
+import { Column } from '../schema/column.js';
+import { JSONType } from '../types/json.js';
+
+interface OAPIProperty {
   type?: string;
-  [key: string]: any;
+  description?: string;
+  $ref?: string;
+  items?: {
+    $ref: string;
+  };
 }
 
-function oapiTypeToArrowType(field: Field): DataType {
+interface OAPIDefinition {
+  properties: {
+    [key: string]: OAPIProperty;
+  };
+}
+
+function oapiTypeToArrowType(field: OAPIProperty): DataType {
   const oapiType = field.type;
   switch (oapiType) {
-    case 'string':
+    case 'string': {
       return new Utf8();
+    }
     case 'number':
-    case 'integer':
+    case 'integer': {
       return new Int64();
-    case 'boolean':
+    }
+    case 'boolean': {
       return new Bool();
+    }
     case 'array':
-    case 'object':
+    case 'object': {
       return new JSONType();
-    default:
-      if (!oapiType && '$ref' in field) {
-        return new JSONType();
-      } else {
-        return new Utf8();
-      }
+    }
+    default: {
+      return !oapiType && '$ref' in field ? new JSONType() : new Utf8();
+    }
   }
 }
 
-export function getColumnByName(columns: Column[], name: string): Column | null {
-  for (let column of columns) {
+export function getColumnByName(columns: Column[], name: string): Column | undefined {
+  for (const column of columns) {
     if (column.name === name) {
       return column;
     }
   }
-  return null;
+  return undefined;
 }
 
-export function oapiDefinitionToColumns(definition: any, overrideColumns: Column[] = []): Column[] {
-  let columns: Column[] = [];
-  for (let key in definition.properties) {
+export function oapiDefinitionToColumns(definition: OAPIDefinition, overrideColumns: Column[] = []): Column[] {
+  const columns: Column[] = [];
+  for (const key in definition.properties) {
     const value = definition.properties[key];
     const columnType = oapiTypeToArrowType(value);
-    let column = new Column(key, columnType, value.description);
+    const column = new Column(key, columnType, value.description);
     const overrideColumn = getColumnByName(overrideColumns, key);
     if (overrideColumn) {
       column.type = overrideColumn.type;

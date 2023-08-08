@@ -1,9 +1,10 @@
+import { DataType, Utf8, Int64, Bool } from '@apache-arrow/esnext-esm';
 import test from 'ava';
 
-import { oapiDefinitionToColumns } from './openapi.js';
-import { JSONType } from '../types/json.js';
 import { Column } from '../schema/column.js';
-import { DataType, Utf8, Int64, Bool } from '@apache-arrow/esnext-esm';
+import { JSONType } from '../types/json.js';
+
+import { oapiDefinitionToColumns } from './openapi.js';
 
 const OAPI_SPEC = {
   swagger: '2.0',
@@ -55,6 +56,6 @@ test('should parse spec as expected', (t) => {
     new Column('array', new JSONType(), ''),
   ];
 
-  let columns = oapiDefinitionToColumns(OAPI_SPEC['definitions']['TestDefinition']);
+  const columns = oapiDefinitionToColumns(OAPI_SPEC['definitions']['TestDefinition']);
   t.deepEqual(columns, expectedColumns);
 });
