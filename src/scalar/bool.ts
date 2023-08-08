@@ -1,5 +1,6 @@
 import { Bool as ArrowBool } from '@apache-arrow/esnext-esm';
 import { boolean, isBooleanable } from 'boolean';
+
 import { isInvalid, NULL_VALUE } from './util.js';
 
 export class Bool {

@@ -1,17 +1,38 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint", "prettier"],
+  "plugins": ["@typescript-eslint", "prettier", "unicorn"],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
   "extends": [
     "eslint:recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
     "prettier",
-    "plugin:unicorn/recommended"
+    "plugin:unicorn/recommended",
+    "plugin:n/recommended",
+    "plugin:promise/recommended",
+    "plugin:ava/recommended",
+    "plugin:you-dont-need-lodash-underscore/all"
   ],
   "rules": {
     "no-console": "error",
-    "@typescript-eslint/no-unused-vars": 0
+    "@typescript-eslint/no-unused-vars": 0,
+    "require-await": "off",
+    "@typescript-eslint/require-await": "error",
+    "import/order": [
+      2,
+      {
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
   },
   "overrides": [
     {
@@ -26,5 +47,11 @@
         "unicorn/no-array-for-each": 0
       }
     }
-  ]
+  ],
+  "settings": {
+    "import/resolver": {
+      "typescript": true,
+      "node": true
+    }
+  }
 }

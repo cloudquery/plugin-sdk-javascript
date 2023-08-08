@@ -1,5 +1,6 @@
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
+
 import { startServer } from '../grpc/server.js';
 import { LogFormat, LogLevel, createLogger } from '../logger/logger.js';
 

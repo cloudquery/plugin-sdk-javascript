@@ -1,4 +1,5 @@
 import test from 'ava';
+
 import { serve as serveWithExit, ServeArguments } from './serve.js';
 
 const serve = serveWithExit.exitProcess(false);

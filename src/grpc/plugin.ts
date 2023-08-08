@@ -1,6 +1,6 @@
-import winston from 'winston';
-import grpc = require('@grpc/grpc-js');
 import { pluginV3 } from '@cloudquery/plugin-pb-javascript';
+import grpc = require('@grpc/grpc-js');
+import winston from 'winston';
 
 export class PluginServer extends pluginV3.cloudquery.plugin.v3.UnimplementedPluginService {
   GetName(
