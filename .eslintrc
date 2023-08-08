@@ -6,9 +6,24 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "prettier",
+    "plugin:unicorn/recommended"
   ],
   "rules": {
     "@typescript-eslint/no-unused-vars": 0
-  }
+  },
+  "overrides": [
+    {
+      "files": ["src/grpc/**/*.ts"],
+      "rules": {
+        "unicorn/no-null": 0
+      }
+    },
+    {
+      "files": ["*test.ts"],
+      "rules": {
+        "unicorn/no-array-for-each": 0
+      }
+    }
+  ]
 }

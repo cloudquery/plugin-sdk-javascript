@@ -7,7 +7,7 @@ const LOG_LEVEL_CHOICES = ['trace', 'debug', 'info', 'warn', 'error'] as const;
 const LOG_FORMAT_CHOICES = ['json', 'text'] as const;
 const TELEMETRY_LEVEL_CHOICES = ['none', 'errors', 'stats', 'all'] as const;
 
-export type ServeArgs = {
+export type ServeArguments = {
   address: string;
   network: (typeof NETWORK_CHOICES)[number];
   logLevel: (typeof LOG_LEVEL_CHOICES)[number];
@@ -19,11 +19,11 @@ export type ServeArgs = {
 };
 
 export const serve = yargs(hideBin(process.argv))
-  .command<ServeArgs>(
+  .command<ServeArguments>(
     'serve',
     'start plugin gRPC server',
     () => {},
-    ({ address, network, logLevel, logFormat, sentry: sentry, otelEndpoint, telemetryLevel }: ServeArgs) => {
+    ({ address, network, logLevel, logFormat, sentry: sentry, otelEndpoint, telemetryLevel }: ServeArguments) => {
       console.log({ address, network, logLevel, logFormat, sentry, otelEndpoint, telemetryLevel });
       startServer(address);
     },
