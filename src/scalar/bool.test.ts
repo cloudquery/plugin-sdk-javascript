@@ -2,6 +2,7 @@ import test from 'ava';
 import { DataType } from '@apache-arrow/esnext-esm';
 import { Bool } from './bool.js';
 
+// eslint-disable-next-line unicorn/no-null
 [null, undefined].forEach((v) => {
   test(`should set values to false when ${v} is passed`, (t) => {
     const b = new Bool(v);
@@ -10,8 +11,8 @@ import { Bool } from './bool.js';
   });
 });
 
-[1, true, 'true', 'Y', 'y', 'TRUE', 'on', new Bool(true)].forEach((v, i) => {
-  test(`should support truthy value '${v}' (${i})`, (t) => {
+[1, true, 'true', 'Y', 'y', 'TRUE', 'on', new Bool(true)].forEach((v, index) => {
+  test(`should support truthy value '${v}' (${index})`, (t) => {
     const b = new Bool(v);
     t.is(b.Valid, true);
     t.is(b.Value, true);
@@ -20,8 +21,8 @@ import { Bool } from './bool.js';
   });
 });
 
-[0, false, 'false', 'N', 'n', 'FALSE', 'off', new Bool(false)].forEach((v, i) => {
-  test(`should support falsy value '${v}' (${i})`, (t) => {
+[0, false, 'false', 'N', 'n', 'FALSE', 'off'].forEach((v, index) => {
+  test(`should support falsy value '${v}' (${index})`, (t) => {
     const b = new Bool(v);
     t.is(b.Valid, true);
     t.is(b.Value, false);

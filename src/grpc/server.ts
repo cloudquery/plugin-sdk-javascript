@@ -14,7 +14,7 @@ export const getServer = () => {
 
 export const startServer = (address: string) => {
   const server = getServer();
-  server.bindAsync(address, grpc.ServerCredentials.createInsecure(), (err, port) => {
+  server.bindAsync(address, grpc.ServerCredentials.createInsecure(), (error, port) => {
     server.start();
     console.log('server running on port', port);
   });

@@ -6,9 +6,18 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "prettier",
+    "plugin:unicorn/recommended"
   ],
   "rules": {
     "@typescript-eslint/no-unused-vars": 0
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*test.ts"],
+      "rules": {
+        "unicorn/no-array-for-each": 0
+      }
+    }
+  ]
 }

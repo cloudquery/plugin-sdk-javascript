@@ -1,5 +1,5 @@
 import test from 'ava';
-import { serve as serveWithExit, ServeArgs } from './serve.js';
+import { serve as serveWithExit, ServeArguments } from './serve.js';
 
 const serve = serveWithExit.exitProcess(false);
 
@@ -9,7 +9,7 @@ test('should return error without command', (t) => {
 
 test('should pass with serve command and return default flags', (t) => {
   delete process.env.CQ_TELEMETRY_LEVEL;
-  const results = serve.parse(['serve']) as ServeArgs;
+  const results = serve.parse(['serve']) as ServeArguments;
   const { address, network, logLevel, logFormat, sentry, otelEndpoint, telemetryLevel } = results;
   t.deepEqual(
     { address, network, logLevel, logFormat, sentry, otelEndpoint, telemetryLevel },
