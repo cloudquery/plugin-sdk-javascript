@@ -1,4 +1,5 @@
 import test from 'ava';
+
 import { testArrow } from './index.js';
 
 test('testArrow', (t) => {

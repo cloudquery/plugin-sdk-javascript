@@ -1,5 +1,6 @@
-import test from 'ava';
 import { DataType } from '@apache-arrow/esnext-esm';
+import test from 'ava';
+
 import { Bool } from './bool.js';
 
 // eslint-disable-next-line unicorn/no-null
