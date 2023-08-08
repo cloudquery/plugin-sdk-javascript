@@ -1,8 +1,17 @@
 import { pluginV3 } from '@cloudquery/plugin-pb-javascript';
 import grpc = require('@grpc/grpc-js');
-import winston from 'winston';
+
+import { Plugin } from '../plugin/plugin.js';
 
 export class PluginServer extends pluginV3.cloudquery.plugin.v3.UnimplementedPluginService {
+  // Needed due to some TypeScript nonsense
+  private plugin: Plugin & grpc.UntypedHandleCall;
+
+  constructor(plugin: Plugin) {
+    super();
+    this.plugin = plugin as Plugin & grpc.UntypedHandleCall;
+  }
+
   GetName(
     call: grpc.ServerUnaryCall<
       pluginV3.cloudquery.plugin.v3.GetName.Request,
@@ -10,7 +19,7 @@ export class PluginServer extends pluginV3.cloudquery.plugin.v3.UnimplementedPlu
     >,
     callback: grpc.sendUnaryData<pluginV3.cloudquery.plugin.v3.GetName.Response>,
   ): void {
-    throw new Error('Method not implemented.');
+    return callback(null, new pluginV3.cloudquery.plugin.v3.GetName.Response({ name: this.plugin.name() }));
   }
   GetVersion(
     call: grpc.ServerUnaryCall<
@@ -19,13 +28,27 @@ export class PluginServer extends pluginV3.cloudquery.plugin.v3.UnimplementedPlu
     >,
     callback: grpc.sendUnaryData<pluginV3.cloudquery.plugin.v3.GetVersion.Response>,
   ): void {
-    throw new Error('Method not implemented.');
+    return callback(null, new pluginV3.cloudquery.plugin.v3.GetVersion.Response({ version: this.plugin.version() }));
   }
   Init(
     call: grpc.ServerUnaryCall<pluginV3.cloudquery.plugin.v3.Init.Request, pluginV3.cloudquery.plugin.v3.Init.Response>,
     callback: grpc.sendUnaryData<pluginV3.cloudquery.plugin.v3.Init.Response>,
   ): void {
-    throw new Error('Method not implemented.');
+    const {
+      request: { spec, no_connection: noConnection },
+    } = call;
+
+    const stringSpec = new TextDecoder().decode(spec);
+    this.plugin
+      .init(stringSpec, { noConnection })
+      .then(() => {
+        // eslint-disable-next-line promise/no-callback-in-promise
+        return callback(null, new pluginV3.cloudquery.plugin.v3.Init.Response());
+      })
+      .catch((error) => {
+        // eslint-disable-next-line promise/no-callback-in-promise
+        return callback(error, null);
+      });
   }
   GetTables(
     call: grpc.ServerUnaryCall<
@@ -34,7 +57,21 @@ export class PluginServer extends pluginV3.cloudquery.plugin.v3.UnimplementedPlu
     >,
     callback: grpc.sendUnaryData<pluginV3.cloudquery.plugin.v3.GetTables.Response>,
   ): void {
-    throw new Error('Method not implemented.');
+    const {
+      request: { tables, skip_tables: skipTables, skip_dependent_tables: skipDependentTables },
+    } = call;
+
+    this.plugin
+      .tables({ tables, skipTables, skipDependentTables })
+      .then((tables) => {
+        const encodedTables = tables.map((table) => new TextEncoder().encode(table));
+        // eslint-disable-next-line promise/no-callback-in-promise
+        return callback(null, new pluginV3.cloudquery.plugin.v3.GetTables.Response({ tables: encodedTables }));
+      })
+      .catch((error) => {
+        // eslint-disable-next-line promise/no-callback-in-promise
+        return callback(error, null);
+      });
   }
   Sync(
     call: grpc.ServerWritableStream<
@@ -42,7 +79,24 @@ export class PluginServer extends pluginV3.cloudquery.plugin.v3.UnimplementedPlu
       pluginV3.cloudquery.plugin.v3.Sync.Response
     >,
   ): void {
-    throw new Error('Method not implemented.');
+    const {
+      request: {
+        tables,
+        skip_tables: skipTables,
+        skip_dependent_tables: skipDependentTables,
+        deterministic_cq_id: deterministicCQId,
+        backend: { connection, table_name: tableName },
+      },
+    } = call;
+
+    this.plugin.sync({
+      tables,
+      skipTables,
+      skipDependentTables,
+      deterministicCQId,
+      backendOptions: { connection, tableName },
+      stream: call,
+    });
   }
   Read(
     call: grpc.ServerWritableStream<
@@ -50,7 +104,7 @@ export class PluginServer extends pluginV3.cloudquery.plugin.v3.UnimplementedPlu
       pluginV3.cloudquery.plugin.v3.Read.Response
     >,
   ): void {
-    throw new Error('Method not implemented.');
+    this.plugin.read(call);
   }
   Write(
     call: grpc.ServerReadableStream<
@@ -59,7 +113,8 @@ export class PluginServer extends pluginV3.cloudquery.plugin.v3.UnimplementedPlu
     >,
     callback: grpc.sendUnaryData<pluginV3.cloudquery.plugin.v3.Write.Response>,
   ): void {
-    throw new Error('Method not implemented.');
+    this.plugin.write(call);
+    callback(null, new pluginV3.cloudquery.plugin.v3.Write.Response());
   }
   Close(
     call: grpc.ServerUnaryCall<
@@ -68,6 +123,15 @@ export class PluginServer extends pluginV3.cloudquery.plugin.v3.UnimplementedPlu
     >,
     callback: grpc.sendUnaryData<pluginV3.cloudquery.plugin.v3.Close.Response>,
   ): void {
-    throw new Error('Method not implemented.');
+    this.plugin
+      .close()
+      .then(() => {
+        // eslint-disable-next-line promise/no-callback-in-promise
+        return callback(null, new pluginV3.cloudquery.plugin.v3.Close.Response());
+      })
+      .catch((error) => {
+        // eslint-disable-next-line promise/no-callback-in-promise
+        return callback(error, null);
+      });
   }
 }

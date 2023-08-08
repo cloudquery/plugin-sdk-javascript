@@ -1,6 +1,6 @@
-import { DataType, Field, Utf8, Int64, Bool } from '@apache-arrow/esnext-esm';
+import { DataType, Utf8, Int64, Bool } from '@apache-arrow/esnext-esm';
 
-import { Column } from '../schema/column.js';
+import { Column, createColumn } from '../schema/column.js';
 import { JSONType } from '../types/json.js';
 
 interface OAPIProperty {
@@ -55,11 +55,11 @@ export function oapiDefinitionToColumns(definition: OAPIDefinition, overrideColu
   for (const key in definition.properties) {
     const value = definition.properties[key];
     const columnType = oapiTypeToArrowType(value);
-    const column = new Column(key, columnType, value.description);
+    const column = createColumn({ name: key, type: columnType, description: value.description });
     const overrideColumn = getColumnByName(overrideColumns, key);
     if (overrideColumn) {
       column.type = overrideColumn.type;
-      column.primary_key = overrideColumn.primary_key;
+      column.primaryKey = overrideColumn.primaryKey;
       column.unique = overrideColumn.unique;
     }
     columns.push(column);

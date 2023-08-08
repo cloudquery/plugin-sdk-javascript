@@ -1,73 +1,76 @@
-import { DataType, Field } from '@apache-arrow/esnext-esm';
+import { isDeepStrictEqual } from 'node:util';
+
+import { DataType, Field, Bool } from '@apache-arrow/esnext-esm';
 
 import * as arrow from './arrow.js';
+import { ClientMeta } from './meta.js';
+import { Resource } from './resource.js';
 
-export class Column {
+export type ColumnResolver = (meta: ClientMeta, resource: Resource, c: Column) => void;
+
+export type Column = {
   name: string;
   type: DataType;
   description: string;
-  primary_key: boolean;
-  not_null: boolean;
-  incremental_key: boolean;
+  primaryKey: boolean;
+  notNull: boolean;
+  incrementalKey: boolean;
   unique: boolean;
+  resolver?: ColumnResolver;
+  ignoreInTests: boolean;
+};
 
-  constructor(
-    name: string,
-    type: DataType,
-    description: string = '',
-    primary_key: boolean = false,
-    not_null: boolean = false,
-    incremental_key: boolean = false,
-    unique: boolean = false,
-  ) {
-    this.name = name;
-    this.type = type;
-    this.description = description;
-    this.primary_key = primary_key;
-    this.not_null = not_null;
-    this.incremental_key = incremental_key;
-    this.unique = unique;
-  }
+export const createColumn = ({
+  name = '',
+  type = new Bool(),
+  description = '',
+  incrementalKey = false,
+  notNull = false,
+  primaryKey = false,
+  unique = false,
+}: Partial<Column> = {}): Column => ({
+  name,
+  type,
+  description,
+  primaryKey,
+  notNull,
+  incrementalKey,
+  unique,
+  ignoreInTests: false,
+});
 
-  toString(): string {
-    return `Column(name=${this.name}, type=${this.type}, description=${this.description}, primary_key=${this.primary_key}, not_null=${this.not_null}, incremental_key=${this.incremental_key}, unique=${this.unique})`;
-  }
+export const formatColumn = (column: Column): string => {
+  const { name, type, description, primaryKey, notNull, incrementalKey, unique } = column;
+  return `Column(name=${name}, type=${type}, description=${description}, primary_key=${primaryKey}, not_null=${notNull}, incremental_key=${incrementalKey}, unique=${unique})`;
+};
 
-  // JavaScript (and TypeScript) uses a single method for both string representation and debugging output
-  toJSON(): string {
-    return this.toString();
-  }
+export const equals = (column: Column, other: unknown): boolean => {
+  return isDeepStrictEqual(column, other);
+};
 
-  equals(value: object): boolean {
-    if (value instanceof Column) {
-      return (
-        this.name === value.name &&
-        this.type === value.type &&
-        this.description === value.description &&
-        this.primary_key === value.primary_key &&
-        this.not_null === value.not_null &&
-        this.incremental_key === value.incremental_key &&
-        this.unique === value.unique
-      );
-    }
-    return false;
-  }
+export const toArrowField = (column: Column): Field => {
+  const { name, type, notNull, primaryKey, unique, incrementalKey } = column;
+  const metadataMap = new Map<string, string>();
+  metadataMap.set(arrow.METADATA_PRIMARY_KEY, primaryKey ? arrow.METADATA_TRUE : arrow.METADATA_FALSE);
+  metadataMap.set(arrow.METADATA_UNIQUE, unique ? arrow.METADATA_TRUE : arrow.METADATA_FALSE);
+  metadataMap.set(arrow.METADATA_INCREMENTAL, incrementalKey ? arrow.METADATA_TRUE : arrow.METADATA_FALSE);
 
-  toArrowField(): Field {
-    const metadataMap = new Map<string, string>();
-    metadataMap.set(arrow.METADATA_PRIMARY_KEY, this.primary_key ? arrow.METADATA_TRUE : arrow.METADATA_FALSE);
-    metadataMap.set(arrow.METADATA_UNIQUE, this.unique ? arrow.METADATA_TRUE : arrow.METADATA_FALSE);
-    metadataMap.set(arrow.METADATA_INCREMENTAL, this.incremental_key ? arrow.METADATA_TRUE : arrow.METADATA_FALSE);
+  return new Field(name, type, /*nullable=*/ !notNull, metadataMap);
+};
 
-    return new Field(this.name, this.type, /*nullable=*/ !this.not_null, metadataMap);
-  }
+export const fromArrowField = (field: Field): Column => {
+  const { name, type, nullable } = field;
+  const metadata = field.metadata;
+  const primaryKey = metadata.get(arrow.METADATA_PRIMARY_KEY) === arrow.METADATA_TRUE;
+  const unique = metadata.get(arrow.METADATA_UNIQUE) === arrow.METADATA_TRUE;
+  const incrementalKey = metadata.get(arrow.METADATA_INCREMENTAL) === arrow.METADATA_TRUE;
 
-  static fromArrowField(field: Field): Column {
-    const metadata = field.metadata;
-    const primary_key = metadata.get(arrow.METADATA_PRIMARY_KEY) === arrow.METADATA_TRUE;
-    const unique = metadata.get(arrow.METADATA_UNIQUE) === arrow.METADATA_TRUE;
-    const incremental_key = metadata.get(arrow.METADATA_INCREMENTAL) === arrow.METADATA_TRUE;
-
-    return new Column(field.name, field.type, '', primary_key, !field.nullable, unique, incremental_key);
-  }
-}
+  return createColumn({
+    name,
+    type,
+    primaryKey,
+    notNull: !nullable,
+    unique,
+    incrementalKey,
+  });
+};
