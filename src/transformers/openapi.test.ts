@@ -1,7 +1,7 @@
 import { Utf8, Int64, Bool } from '@apache-arrow/esnext-esm';
 import test from 'ava';
 
-import { Column } from '../schema/column.js';
+import { Column, createColumn } from '../schema/column.js';
 import { JSONType } from '../types/json.js';
 
 import { oapiDefinitionToColumns } from './openapi.js';
@@ -49,12 +49,36 @@ const OAPI_SPEC = {
 
 test('should parse spec as expected', (t) => {
   const expectedColumns: Column[] = [
-    new Column('string', new Utf8(), ''),
-    new Column('number', new Int64(), ''),
-    new Column('integer', new Int64(), ''),
-    new Column('boolean', new Bool(), ''),
-    new Column('object', new JSONType(), ''),
-    new Column('array', new JSONType(), ''),
+    createColumn({
+      name: 'string',
+      type: new Utf8(),
+      description: '',
+    }),
+    createColumn({
+      name: 'number',
+      type: new Int64(),
+      description: '',
+    }),
+    createColumn({
+      name: 'integer',
+      type: new Int64(),
+      description: '',
+    }),
+    createColumn({
+      name: 'boolean',
+      type: new Bool(),
+      description: '',
+    }),
+    createColumn({
+      name: 'object',
+      type: new JSONType(),
+      description: '',
+    }),
+    createColumn({
+      name: 'array',
+      type: new JSONType(),
+      description: '',
+    }),
   ];
 
   const columns = oapiDefinitionToColumns(OAPI_SPEC['definitions']['TestDefinition']);
