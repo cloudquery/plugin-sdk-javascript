@@ -9,10 +9,10 @@
   ],
   "type": "module",
   "exports": {
-    "./serve": "./dist/serve.js"
+    "./serve": "./dist/serve/serve.js"
   },
   "scripts": {
-    "dev": "ts-node src/index.ts",
+    "dev": "ts-node --esm src/main.ts serve",
     "build": "rm -rf dist && tsc",
     "format": "prettier --write 'src/**/*.ts'",
     "format:check": "prettier --check 'src/**/*.ts'",

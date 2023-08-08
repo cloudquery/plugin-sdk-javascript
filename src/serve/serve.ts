@@ -1,5 +1,6 @@
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
+import { startServer } from '../grpc/server.js';
 
 const NETWORK_CHOICES = ['tcp', 'tcp4', 'tcp6', 'unix', 'unixpacket'] as const;
 const LOG_LEVEL_CHOICES = ['trace', 'debug', 'info', 'warn', 'error'] as const;
@@ -24,6 +25,7 @@ export const serve = yargs(hideBin(process.argv))
     () => {},
     ({ address, network, logLevel, logFormat, sentry: sentry, otelEndpoint, telemetryLevel }: ServeArgs) => {
       console.log({ address, network, logLevel, logFormat, sentry, otelEndpoint, telemetryLevel });
+      startServer(address);
     },
   )
   .options({
