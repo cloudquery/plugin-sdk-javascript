@@ -31,3 +31,16 @@ npm run build
 ```bash
 npm test
 ```
+
+### Formatting and Linting
+
+```bash
+# This is just to check if the code is formatted
+npm run format:check
+
+# Automatically format code
+npm run format
+
+# Lint
+npm run lint
+ ```
