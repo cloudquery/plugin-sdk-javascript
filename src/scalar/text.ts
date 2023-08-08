@@ -7,23 +7,23 @@ export class Text {
   private _value = '';
 
   public constructor(v: unknown) {
-    this.Value = v;
+    this.value = v;
     return this;
   }
 
-  public get DataType() {
+  public get dataType() {
     return new ArrowString();
   }
 
-  public get Valid(): boolean {
+  public get valid(): boolean {
     return this._valid;
   }
 
-  public get Value(): string {
+  public get value(): string {
     return this._value;
   }
 
-  public set Value(value: unknown) {
+  public set value(value: unknown) {
     if (isInvalid(value)) {
       this._valid = false;
       return;

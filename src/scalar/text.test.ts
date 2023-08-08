@@ -7,17 +7,17 @@ import { Text } from './text.js';
 [null, undefined].forEach((v) => {
   test(`should set values to empty string when ${v} is passed`, (t) => {
     const s = new Text(v);
-    t.is(s.Value, '');
-    t.true(DataType.isUtf8(s.DataType));
+    t.is(s.value, '');
+    t.true(DataType.isUtf8(s.dataType));
   });
 });
 
 ['', 'test string', String('asdf')].forEach((v, index) => {
   test(`valid strings: '${v}' (${index})`, (t) => {
     const s = new Text(v);
-    t.is(s.Valid, true);
-    t.is(s.Value, v.toString());
-    t.true(DataType.isUtf8(s.DataType));
+    t.is(s.valid, true);
+    t.is(s.value, v.toString());
+    t.true(DataType.isUtf8(s.dataType));
   });
 });
 
