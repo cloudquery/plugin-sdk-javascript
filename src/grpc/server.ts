@@ -22,6 +22,6 @@ export const startServer = (logger: winston.Logger, address: string, plugin: Plu
       return;
     }
     server.start();
-    logger.info('server running on port', port);
+    logger.info(`server running on port: ${port}`);
   });
 };
