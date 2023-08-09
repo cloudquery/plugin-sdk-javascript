@@ -32,13 +32,11 @@ export class Text implements Scalar<string> {
 
     switch (typeof value) {
       case 'object':
-        if (value !== undefined && 
-            value !== null && 
-            Object.hasOwn(value,'toString')) {
+        if (value !== undefined && value !== null && Object.hasOwn(value, 'toString')) {
           this._value = value.toString();
           this._valid = true;
           return;
-        }    
+        }
       case 'string':
         if (typeof value === 'string' || value instanceof String) {
           this._value = value.toString();
@@ -47,14 +45,14 @@ export class Text implements Scalar<string> {
         }
       default:
         throw new Error(`Unable to set '${value}' as Text`);
-    }    
+    }
   }
-  
-  public toString = () : string => {
+
+  public toString = (): string => {
     if (this._valid) {
       return this._value.toString();
     }
 
     return NULL_VALUE;
-  }
+  };
 }
