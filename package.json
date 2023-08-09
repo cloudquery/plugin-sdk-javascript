@@ -17,6 +17,7 @@
     "format": "prettier --write 'src/**/*.ts'",
     "format:check": "prettier --check 'src/**/*.ts'",
     "lint": "eslint --max-warnings 0 --ext .ts src",
+    "lint:fix": "eslint --max-warnings 0 --ext .ts --fix src",
     "test": "ava"
   },
   "description": "This is the high-level package to use for developing CloudQuery plugins in JavaScript",

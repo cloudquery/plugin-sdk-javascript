@@ -52,32 +52,26 @@ test('should parse spec as expected', (t) => {
     createColumn({
       name: 'string',
       type: new Utf8(),
-      description: '',
     }),
     createColumn({
       name: 'number',
       type: new Int64(),
-      description: '',
     }),
     createColumn({
       name: 'integer',
       type: new Int64(),
-      description: '',
     }),
     createColumn({
       name: 'boolean',
       type: new Bool(),
-      description: '',
     }),
     createColumn({
       name: 'object',
       type: new JSONType(),
-      description: '',
     }),
     createColumn({
       name: 'array',
       type: new JSONType(),
-      description: '',
     }),
   ];
 
