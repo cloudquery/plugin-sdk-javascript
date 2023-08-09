@@ -2,6 +2,27 @@ import { pluginV3 } from '@cloudquery/plugin-pb-javascript';
 import grpc = require('@grpc/grpc-js');
 
 import { Plugin } from '../plugin/plugin.js';
+import { encode as encodeTables } from '../schema/table.js';
+
+export class MigrateTable extends pluginV3.cloudquery.plugin.v3.Sync.MessageMigrateTable {}
+export class SyncResponse extends pluginV3.cloudquery.plugin.v3.Sync.Response {}
+export class ReadResponse extends pluginV3.cloudquery.plugin.v3.Read.Response {}
+export class WriteResponse extends pluginV3.cloudquery.plugin.v3.Write.Response {}
+
+export type SyncStream = grpc.ServerWritableStream<
+  pluginV3.cloudquery.plugin.v3.Sync.Request,
+  pluginV3.cloudquery.plugin.v3.Sync.Response
+>;
+
+export type ReadStream = grpc.ServerWritableStream<
+  pluginV3.cloudquery.plugin.v3.Read.Request,
+  pluginV3.cloudquery.plugin.v3.Read.Response
+>;
+
+export type WriteStream = grpc.ServerReadableStream<
+  pluginV3.cloudquery.plugin.v3.Write.Request,
+  pluginV3.cloudquery.plugin.v3.Write.Response
+>;
 
 export class PluginServer extends pluginV3.cloudquery.plugin.v3.UnimplementedPluginService {
   // Needed due to some TypeScript nonsense
@@ -34,9 +55,7 @@ export class PluginServer extends pluginV3.cloudquery.plugin.v3.UnimplementedPlu
     call: grpc.ServerUnaryCall<pluginV3.cloudquery.plugin.v3.Init.Request, pluginV3.cloudquery.plugin.v3.Init.Response>,
     callback: grpc.sendUnaryData<pluginV3.cloudquery.plugin.v3.Init.Response>,
   ): void {
-    const {
-      request: { spec, no_connection: noConnection },
-    } = call;
+    const { spec = new Uint8Array(), no_connection: noConnection = false } = call.request.toObject();
 
     const stringSpec = new TextDecoder().decode(spec);
     this.plugin
@@ -58,36 +77,30 @@ export class PluginServer extends pluginV3.cloudquery.plugin.v3.UnimplementedPlu
     callback: grpc.sendUnaryData<pluginV3.cloudquery.plugin.v3.GetTables.Response>,
   ): void {
     const {
-      request: { tables, skip_tables: skipTables, skip_dependent_tables: skipDependentTables },
-    } = call;
+      tables = [],
+      skip_tables: skipTables = [],
+      skip_dependent_tables: skipDependentTables = false,
+    } = call.request.toObject();
 
     this.plugin
       .tables({ tables, skipTables, skipDependentTables })
       .then((tables) => {
-        const encodedTables = tables.map((table) => new TextEncoder().encode(table));
         // eslint-disable-next-line promise/no-callback-in-promise
-        return callback(null, new pluginV3.cloudquery.plugin.v3.GetTables.Response({ tables: encodedTables }));
+        return callback(null, new pluginV3.cloudquery.plugin.v3.GetTables.Response({ tables: encodeTables(tables) }));
       })
       .catch((error) => {
         // eslint-disable-next-line promise/no-callback-in-promise
         return callback(error, null);
       });
   }
-  Sync(
-    call: grpc.ServerWritableStream<
-      pluginV3.cloudquery.plugin.v3.Sync.Request,
-      pluginV3.cloudquery.plugin.v3.Sync.Response
-    >,
-  ): void {
+  Sync(call: SyncStream): void {
     const {
-      request: {
-        tables,
-        skip_tables: skipTables,
-        skip_dependent_tables: skipDependentTables,
-        deterministic_cq_id: deterministicCQId,
-        backend: { connection, table_name: tableName },
-      },
-    } = call;
+      tables = [],
+      skip_tables: skipTables = [],
+      skip_dependent_tables: skipDependentTables = false,
+      deterministic_cq_id: deterministicCQId = false,
+      backend: { connection = '', table_name: tableName = '' } = {},
+    } = call.request.toObject();
 
     this.plugin.sync({
       tables,
@@ -98,21 +111,10 @@ export class PluginServer extends pluginV3.cloudquery.plugin.v3.UnimplementedPlu
       stream: call,
     });
   }
-  Read(
-    call: grpc.ServerWritableStream<
-      pluginV3.cloudquery.plugin.v3.Read.Request,
-      pluginV3.cloudquery.plugin.v3.Read.Response
-    >,
-  ): void {
+  Read(call: ReadStream): void {
     this.plugin.read(call);
   }
-  Write(
-    call: grpc.ServerReadableStream<
-      pluginV3.cloudquery.plugin.v3.Write.Request,
-      pluginV3.cloudquery.plugin.v3.Write.Response
-    >,
-    callback: grpc.sendUnaryData<pluginV3.cloudquery.plugin.v3.Write.Response>,
-  ): void {
+  Write(call: WriteStream, callback: grpc.sendUnaryData<pluginV3.cloudquery.plugin.v3.Write.Response>): void {
     this.plugin.write(call);
     callback(null, new pluginV3.cloudquery.plugin.v3.Write.Response());
   }

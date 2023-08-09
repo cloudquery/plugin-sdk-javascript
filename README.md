@@ -32,6 +32,12 @@ npm run build
 npm test
 ```
 
+### Start a local memory based plugin server
+
+```bash
+npm run dev
+```
+
 ### Formatting and Linting
 
 ```bash
