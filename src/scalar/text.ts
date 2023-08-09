@@ -31,21 +31,21 @@ export class Text implements Scalar<string> {
     }
 
     switch (typeof value) {
-      case 'object':
+      case 'object': {
         if (value !== undefined && value !== null && Object.hasOwn(value, 'toString')) {
           this._value = value.toString();
           this._valid = true;
           return;
         }
-      case 'string':
-        if (typeof value === 'string' || value instanceof String) {
-          this._value = value.toString();
-          this._valid = true;
-          return;
-        }
-      default:
-        throw new Error(`Unable to set '${value}' as Text`);
+        break;
+      }
+      case 'string': {
+        this._value = value.toString();
+        this._valid = true;
+        return;
+      }
     }
+    throw new Error(`Unable to set '${value}' as Text`);
   }
 
   public toString = (): string => {
