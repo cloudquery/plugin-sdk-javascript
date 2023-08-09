@@ -1,9 +1,10 @@
 import test from 'ava';
 
-import { newPlugin, newUnimplementedClient } from './plugin.js';
+import { newMemDBPlugin } from '../memdb/memdb.js';
+
 import { createServeCommand, ServeArguments } from './serve.js';
 
-const serve = createServeCommand(newPlugin('test', 'v1.0.0', newUnimplementedClient)).exitProcess(false);
+const serve = createServeCommand(newMemDBPlugin()).exitProcess(false);
 
 test('should return error without command', (t) => {
   t.throws(() => serve.parse([]), { message: 'Specify a command to run' });

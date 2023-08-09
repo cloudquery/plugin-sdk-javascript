@@ -1,6 +1,7 @@
-import { Readable, Writable } from 'node:stream';
-
 import { Logger } from 'winston';
+
+import { SyncStream, ReadStream, WriteStream } from '../grpc/plugin.js';
+import { Table } from '../schema/table.js';
 
 export type BackendOptions = {
   tableName: string;
@@ -19,7 +20,7 @@ export type SyncOptions = {
   skipDependentTables: boolean;
   deterministicCQId: boolean;
   backendOptions: BackendOptions;
-  stream: Writable;
+  stream: SyncStream;
 };
 
 export type NewClientOptions = {
@@ -29,52 +30,38 @@ export type NewClientOptions = {
 export type NewClientFunction = (logger: Logger, spec: string, options: NewClientOptions) => Promise<Client>;
 
 export interface SourceClient {
-  close: () => Promise<void>;
-  tables: (options: TableOptions) => Promise<string[]>;
+  tables: (options: TableOptions) => Promise<Table[]>;
   sync: (options: SyncOptions) => void;
 }
 
 export interface DestinationClient {
-  close: () => Promise<void>;
-  read: (stream: Writable) => void;
-  write: (stream: Readable) => void;
+  read: (stream: ReadStream) => void;
+  write: (stream: WriteStream) => void;
 }
 
-export interface Client extends SourceClient, DestinationClient {}
-
-export interface Plugin {
-  name: () => string;
-  version: () => string;
-  write: (stream: Readable) => void;
-  read: (stream: Writable) => void;
-  setLogger: (logger: Logger) => void;
-  sync: (options: SyncOptions) => void;
-  tables: (options: TableOptions) => Promise<string[]>;
+export interface Client extends SourceClient, DestinationClient {
   init: (spec: string, options: NewClientOptions) => Promise<void>;
   close: () => Promise<void>;
 }
 
-export const newUnimplementedSourceClient = (): SourceClient => {
+export interface Plugin extends Client {
+  setLogger: (logger: Logger) => void;
+  name: () => string;
+  version: () => string;
+}
+
+export const newUnimplementedSource = (): SourceClient => {
   return {
-    close: () => Promise.reject(new Error('unimplemented')),
     tables: () => Promise.reject(new Error('unimplemented')),
     sync: () => Promise.reject(new Error('unimplemented')),
   };
 };
 
-export const newUnimplementedDestinationClient = (): DestinationClient => {
+export const newUnimplementedDestination = (): DestinationClient => {
   return {
-    close: () => Promise.reject(new Error('unimplemented')),
     read: () => Promise.reject(new Error('unimplemented')),
     write: () => Promise.reject(new Error('unimplemented')),
   };
-};
-
-export const newUnimplementedClient: NewClientFunction = (logger: Logger, spec: string, options: NewClientOptions) => {
-  return Promise.resolve({
-    ...newUnimplementedSourceClient(),
-    ...newUnimplementedDestinationClient(),
-  });
 };
 
 export const newPlugin = (name: string, version: string, newClient: NewClientFunction): Plugin => {
@@ -83,14 +70,21 @@ export const newPlugin = (name: string, version: string, newClient: NewClientFun
     logger: undefined as Logger | undefined,
     name: () => name,
     version: () => version,
-    write: (stream: Readable) => plugin.client?.write(stream) ?? new Error('client not initialized'),
-    read: (stream: Writable) => plugin.client?.read(stream) ?? new Error('client not initialized'),
+    write: (stream: WriteStream) => {
+      return plugin.client?.write(stream) ?? new Error('client not initialized');
+    },
+    read: (stream: ReadStream) => {
+      return plugin.client?.read(stream) ?? new Error('client not initialized');
+    },
     setLogger: (logger: Logger) => {
       plugin.logger = logger;
     },
-    sync: (options: SyncOptions) => plugin.client?.sync(options) ?? new Error('client not initialized'),
-    tables: (options: TableOptions) =>
-      plugin.client?.tables(options) ?? Promise.reject(new Error('client not initialized')),
+    sync: (options: SyncOptions) => {
+      return plugin.client?.sync(options) ?? new Error('client not initialized');
+    },
+    tables: (options: TableOptions) => {
+      return plugin.client?.tables(options) ?? Promise.reject(new Error('client not initialized'));
+    },
     init: async (spec: string, options: NewClientOptions) => {
       plugin.client = await newClient(plugin.logger!, spec, options);
     },
