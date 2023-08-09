@@ -142,9 +142,13 @@ export const toArrowSchema = (table: Table) => {
   return new Schema(fields, metadata);
 };
 
-export const encode = (tables: Table[]): Uint8Array[] => {
-  const schemas = tables.map((table) => toArrowSchema(table));
-  const arrowTables = schemas.map((schema) => new ArrowTable(schema));
-  const bytes = arrowTables.map((table) => tableToIPC(table));
+export const encodeTable = (table: Table): Uint8Array => {
+  const schema = toArrowSchema(table);
+  const arrowTable = new ArrowTable(schema);
+  const bytes = tableToIPC(arrowTable);
   return bytes;
+};
+
+export const encodeTables = (tables: Table[]): Uint8Array[] => {
+  return tables.map((table) => encodeTable(table));
 };
