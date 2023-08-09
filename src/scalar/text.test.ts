@@ -8,11 +8,12 @@ import { Text } from './text.js';
   test(`should set values to empty string when ${v} is passed`, (t) => {
     const s = new Text(v);
     t.is(s.value, '');
+    t.is(s.valid, false);
     t.true(DataType.isUtf8(s.dataType));
   });
 });
 
-['', 'test string', String('asdf')].forEach((v, index) => {
+['', 'test string', String('new string object'), new Text('new text object')].forEach((v, index) => {
   test(`valid strings: '${v}' (${index})`, (t) => {
     const s = new Text(v);
     t.is(s.valid, true);

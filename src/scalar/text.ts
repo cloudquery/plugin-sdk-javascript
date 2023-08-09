@@ -1,8 +1,9 @@
 import { Utf8 as ArrowString } from '@apache-arrow/esnext-esm';
 
+import { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
-export class Text {
+export class Text implements Scalar<string> {
   private _valid = false;
   private _value = '';
 
@@ -28,16 +29,28 @@ export class Text {
       this._valid = false;
       return;
     }
-    if (typeof value === 'string' || value instanceof String) {
-      this._value = value.toString();
-      this._valid = true;
-      return;
-    }
 
-    throw new Error(`Unable to set '${value}' as Text`);
+    switch (typeof value) {
+      case 'object':
+        if (value !== undefined && 
+            value !== null && 
+            Object.hasOwn(value,'toString')) {
+          this._value = value.toString();
+          this._valid = true;
+          return;
+        }    
+      case 'string':
+        if (typeof value === 'string' || value instanceof String) {
+          this._value = value.toString();
+          this._valid = true;
+          return;
+        }
+      default:
+        throw new Error(`Unable to set '${value}' as Text`);
+    }    
   }
-
-  public toString() {
+  
+  public toString = () : string => {
     if (this._valid) {
       return this._value.toString();
     }
