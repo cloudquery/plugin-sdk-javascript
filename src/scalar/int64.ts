@@ -51,13 +51,6 @@ export class Int64 implements Scalar<bigint> {
       return;
     }
 
-    const bigintValue = BigInt(value);
-    if (bigintValue !== undefined) {
-      this._value = bigintValue;
-      this._valid = true;
-      return;
-    }
-
     throw new Error(`Unable to set '${value}' as Int64`);
   }
 

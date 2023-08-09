@@ -1,4 +1,4 @@
-import { DataType, Timestamp as ArrowTimestamp } from '@apache-arrow/esnext-esm';
+import { DataType, Timestamp as ArrowTimestamp, TimeUnit } from '@apache-arrow/esnext-esm';
 import { DateTime } from 'luxon';
 
 import { Scalar } from './scalar.js';
@@ -7,14 +7,18 @@ import { isInvalid, NULL_VALUE } from './util.js';
 export class Timestamp implements Scalar<DateTime> {
   private _valid = false;
   private _value: DateTime = DateTime.fromMillis(0);
+  private _unit: TimeUnit = TimeUnit.NANOSECOND;
 
-  public constructor(v: unknown) {
+  public constructor(v: unknown, unit?: TimeUnit) {
     this.value = v;
+    if (unit) {
+      this._unit = unit;
+    }
     return this;
   }
 
   public get dataType(): DataType {
-    return new ArrowTimestamp();
+    return new ArrowTimestamp(this._unit);
   }
 
   public get valid(): boolean {
@@ -64,21 +68,11 @@ export class Timestamp implements Scalar<DateTime> {
     throw new Error(`Unable to set '${value}' as Timestamp`);
   }
 
-  public toString() {
+  public toString(): string {
     if (this._valid) {
-      return this._value.toISO();
+      return this._value.toISO()!;
     }
 
     return NULL_VALUE;
-  }
-
-  public equals(scalar: Timestamp): boolean {
-    if (!scalar) {
-      return false;
-    }
-    if (scalar instanceof Timestamp) {
-      return this._value.equals(scalar.value) && this._valid === scalar.valid;
-    }
-    return false;
   }
 }
