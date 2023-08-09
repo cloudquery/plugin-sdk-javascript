@@ -1,6 +1,6 @@
 import test from 'ava';
 
-import { filterTables, createTable, flattenTables } from './table.js';
+import { filterTables, createTable } from './table.js';
 
 const tableA = createTable({ name: 'a' });
 const tableC = createTable({ name: 'c' });
