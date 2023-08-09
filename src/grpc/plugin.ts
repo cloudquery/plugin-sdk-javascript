@@ -2,7 +2,7 @@ import { pluginV3 } from '@cloudquery/plugin-pb-javascript';
 import grpc = require('@grpc/grpc-js');
 
 import { Plugin } from '../plugin/plugin.js';
-import { encode as encodeTables } from '../schema/table.js';
+import { encodeTables } from '../schema/table.js';
 
 export class MigrateTable extends pluginV3.cloudquery.plugin.v3.Sync.MessageMigrateTable {}
 export class SyncResponse extends pluginV3.cloudquery.plugin.v3.Sync.Response {}
