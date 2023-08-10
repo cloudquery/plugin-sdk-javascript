@@ -34,8 +34,7 @@ export const newMemDBPlugin = (): Plugin => {
     createTable({ name: 'table2', title: 'Table 2', description: 'Table 2 description' }),
   ];
 
-  //eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const memdb: { inserts: any[]; [key: string]: any } = {
+  const memdb: { inserts: unknown[]; [key: string]: unknown } = {
     inserts: [],
     ...memoryDB,
   };
