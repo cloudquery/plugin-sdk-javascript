@@ -18,7 +18,13 @@ export type Options = {
   stream: SyncStream;
   deterministicCQId: boolean;
   concurrency: number;
+  strategy?: Strategy;
 };
+
+export enum Strategy {
+  dfs = 'dfs',
+  roundRobin = 'round-robin',
+}
 
 class TableResolverStream extends Duplex {
   queue: unknown[] = [];
@@ -100,19 +106,81 @@ const resolveTable = async (
 
     syncStream.write(new SyncResponse({ insert: new Insert({ record: encodeResource(resource) }) }));
 
-    await Promise.all(table.relations.map((child) => resolveTable(logger, client, child, resource, syncStream)));
+    await pMap(table.relations, (child) => resolveTable(logger, client, child, resource, syncStream));
   }
 };
 
-export const sync = async ({ logger, client, tables, stream: syncStream, concurrency }: Options) => {
+const syncDfs = async ({ logger, client, tables, stream: syncStream, concurrency }: Omit<Options, 'strategy'>) => {
+  const tableClients = tables.flatMap((table) => {
+    const clients = table.multiplexer(client);
+    return clients.map((client) => ({ table, client }));
+  });
+
+  await pMap(tableClients, ({ table, client }) => resolveTable(logger, client, table, null, syncStream), {
+    concurrency,
+  });
+};
+
+export const getRoundRobinTableClients = (tables: Table[], client: ClientMeta) => {
+  let tablesWithClients = tables
+    .map((table) => ({ table, clients: table.multiplexer(client) }))
+    .filter(({ clients }) => clients.length > 0);
+
+  const tableClients: { table: Table; client: ClientMeta }[] = [];
+  while (tablesWithClients.length > 0) {
+    for (const { table, clients } of tablesWithClients) {
+      tableClients.push({ table, client: clients.shift() as ClientMeta });
+    }
+    tablesWithClients = tablesWithClients.filter(({ clients }) => clients.length > 0);
+  }
+
+  return tableClients;
+};
+
+const syncRoundRobin = async ({
+  logger,
+  client,
+  tables,
+  stream: syncStream,
+  concurrency,
+}: Omit<Options, 'strategy'>) => {
+  const tableClients = getRoundRobinTableClients(tables, client);
+  await pMap(tableClients, ({ table, client }) => resolveTable(logger, client, table, null, syncStream), {
+    concurrency,
+  });
+};
+
+export const sync = async ({
+  logger,
+  client,
+  tables,
+  stream,
+  concurrency,
+  strategy = Strategy.dfs,
+  deterministicCQId,
+}: Options) => {
   for (const table of tables) {
     logger.info(`sending migrate message for table ${table.name}`);
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    syncStream.write(new SyncResponse({ migrate_table: new MigrateTable({ table: encodeTable(table) }) }));
+    stream.write(new SyncResponse({ migrate_table: new MigrateTable({ table: encodeTable(table) }) }));
   }
 
-  await pMap(tables, (table) => resolveTable(logger, client, table, null, syncStream), { concurrency });
+  switch (strategy) {
+    case Strategy.dfs: {
+      logger.debug(`using dfs strategy`);
+      await syncDfs({ logger, client, tables, stream, concurrency, deterministicCQId });
+      break;
+    }
+    case Strategy.roundRobin: {
+      logger.debug(`using round-robin strategy`);
+      await syncRoundRobin({ logger, client, tables, stream, concurrency, deterministicCQId });
+      break;
+    }
+    default: {
+      throw new Error(`unknown strategy ${strategy}`);
+    }
+  }
 
-  syncStream.end();
+  stream.end();
   return await Promise.resolve();
 };

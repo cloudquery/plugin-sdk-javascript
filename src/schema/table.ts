@@ -39,7 +39,7 @@ export const createTable = ({
   relations = [],
   transform = () => {},
   resolver = () => Promise.resolve(),
-  multiplexer = () => [],
+  multiplexer = (client) => [client],
   postResourceResolver = () => Promise.resolve(),
   preResourceResolver = () => Promise.resolve(),
   isIncremental = false,
