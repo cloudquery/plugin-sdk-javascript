@@ -4,7 +4,6 @@
     "allowJs": true,
     "declaration": true,
     "outDir": "dist",
-    "sourceMap": true,
-    "lib": ["esnext", "dom"]
+    "sourceMap": true
   }
 }

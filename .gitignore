@@ -131,4 +131,4 @@ dist
 
 # Editor settings
 .idea
-.vscode/launch.json
+.vscode

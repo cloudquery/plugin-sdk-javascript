@@ -13,11 +13,17 @@ import { Text } from './text.js';
   });
 });
 
-['', 'test string', String('new string object'), new Text('new text object')].forEach((v, index) => {
-  test(`valid strings: '${v}' (${index})`, (t) => {
-    const s = new Text(v);
+[
+  { value: '', expected: '' },
+  { value: 'test string', expected: 'test string' },
+  { value: String('new string object'), expected: 'new string object' },
+  { value: new Text('new text object'), expected: 'new text object' },
+  { value: new TextEncoder().encode('test'), expected: 'test' },
+].forEach(({ value, expected }, index) => {
+  test(`valid strings: '${value}' (${index})`, (t) => {
+    const s = new Text(value);
     t.is(s.valid, true);
-    t.is(s.value, v.toString());
+    t.is(s.value, expected);
     t.true(DataType.isUtf8(s.dataType));
   });
 });

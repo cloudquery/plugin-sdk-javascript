@@ -30,29 +30,32 @@ export class Text implements Scalar<string> {
       return;
     }
 
-    switch (typeof value) {
-      case 'object': {
-        if (value !== undefined && value !== null && Object.hasOwn(value, 'toString')) {
-          this._value = value.toString();
-          this._valid = true;
-          return;
-        }
-        break;
-      }
-      case 'string': {
-        this._value = value.toString();
-        this._valid = true;
-        return;
-      }
+    if (typeof value === 'string') {
+      this._value = value;
+      this._valid = true;
+      return;
     }
+
+    if (value instanceof Uint8Array) {
+      this._value = new TextDecoder().decode(value);
+      this._valid = true;
+      return;
+    }
+
+    if (typeof value!.toString === 'function' && value!.toString !== Object.prototype.toString) {
+      this._value = value!.toString();
+      this._valid = true;
+      return;
+    }
+
     throw new Error(`Unable to set '${value}' as Text`);
   }
 
-  public toString = (): string => {
+  public toString() {
     if (this._valid) {
       return this._value.toString();
     }
 
     return NULL_VALUE;
-  };
+  }
 }
