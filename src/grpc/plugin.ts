@@ -6,6 +6,7 @@ import { encodeTables } from '../schema/table.js';
 
 export class MigrateTable extends pluginV3.cloudquery.plugin.v3.Sync.MessageMigrateTable {}
 export class SyncRequest extends pluginV3.cloudquery.plugin.v3.Sync.Request {}
+export class Insert extends pluginV3.cloudquery.plugin.v3.Sync.MessageInsert {}
 export class SyncResponse extends pluginV3.cloudquery.plugin.v3.Sync.Response {}
 export class ReadRequest extends pluginV3.cloudquery.plugin.v3.Read.Request {}
 export class ReadResponse extends pluginV3.cloudquery.plugin.v3.Read.Response {}

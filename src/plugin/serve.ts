@@ -25,9 +25,9 @@ export const createServeCommand = (plugin: Plugin) => {
       'serve',
       'start plugin gRPC server',
       () => {},
-      ({ address, network, logLevel, logFormat, sentry: sentry, otelEndpoint, telemetryLevel }: ServeArguments) => {
+      ({ address, logLevel, logFormat }: ServeArguments) => {
         const logger = createLogger(logLevel, logFormat);
-        logger.info(JSON.stringify({ address, network, logLevel, logFormat, sentry, otelEndpoint, telemetryLevel }));
+        plugin.setLogger(logger);
         startServer(logger, address, plugin);
       },
     )

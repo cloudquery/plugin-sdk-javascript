@@ -40,14 +40,15 @@ export interface DestinationClient {
 }
 
 export interface Client extends SourceClient, DestinationClient {
-  init: (spec: string, options: NewClientOptions) => Promise<void>;
   close: () => Promise<void>;
 }
 
 export interface Plugin extends Client {
+  getLogger: () => Logger;
   setLogger: (logger: Logger) => void;
   name: () => string;
   version: () => string;
+  init: (spec: string, options: NewClientOptions) => Promise<void>;
 }
 
 export const newUnimplementedSource = (): SourceClient => {
@@ -75,6 +76,9 @@ export const newPlugin = (name: string, version: string, newClient: NewClientFun
     },
     read: (stream: ReadStream) => {
       return plugin.client?.read(stream) ?? new Error('client not initialized');
+    },
+    getLogger: () => {
+      return plugin.logger!;
     },
     setLogger: (logger: Logger) => {
       plugin.logger = logger;
