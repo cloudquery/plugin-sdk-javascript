@@ -1,9 +1,12 @@
-import { StructRowProxy } from '@apache-arrow/esnext-esm';
+import { StructRowProxy, Utf8 } from '@apache-arrow/esnext-esm';
 import { pluginV3 } from '@cloudquery/plugin-pb-javascript';
+import { default as Ajv } from 'ajv';
 
 import { WriteRequest, WriteStream, ReadStream, ReadRequest } from '../grpc/plugin.js';
-import { Plugin, newPlugin, SyncOptions, TableOptions, NewClientOptions } from '../plugin/plugin.js';
+import { Plugin, newPlugin, SyncOptions, TableOptions, NewClientFunction } from '../plugin/plugin.js';
 import { sync } from '../scheduler/scheduler.js';
+import { createColumn } from '../schema/column.js';
+import { pathResolver } from '../schema/resolvers.js';
 import { Table, createTable, filterTables, decodeTable, decodeRecord, getPrimaryKeys } from '../schema/table.js';
 
 export const createMemDBClient = () => {
@@ -17,14 +20,60 @@ export const createMemDBClient = () => {
   };
 };
 
+const spec = {
+  type: 'object',
+  properties: {
+    concurrency: { type: 'integer' },
+  },
+};
+
+type Spec = {
+  concurrency: number;
+};
+
+const ajv = new Ajv.default();
+const validate = ajv.compile(spec);
+
 export const newMemDBPlugin = (): Plugin => {
   const memdbClient = createMemDBClient();
   const memoryDB = memdbClient.memoryDB;
   const tables = memdbClient.tables;
 
   const allTables: Table[] = [
-    createTable({ name: 'table1', title: 'Table 1', description: 'Table 1 description' }),
-    createTable({ name: 'table2', title: 'Table 2', description: 'Table 2 description' }),
+    createTable({
+      name: 'table1',
+      title: 'Table 1',
+      description: 'Table 1 description',
+      resolver: (clientMeta, parent, stream) => {
+        stream.write({ id: 'table1-name1' });
+        stream.write({ id: 'table1-name2' });
+        return Promise.resolve();
+      },
+      columns: [
+        createColumn({
+          name: 'id',
+          type: new Utf8(),
+          resolver: pathResolver('id'),
+        }),
+      ],
+    }),
+    createTable({
+      name: 'table2',
+      title: 'Table 2',
+      description: 'Table 2 description',
+      resolver: (clientMeta, parent, stream) => {
+        stream.write({ name: 'table2-name1' });
+        stream.write({ name: 'table2-name2' });
+        return Promise.resolve();
+      },
+      columns: [
+        createColumn({
+          name: 'name',
+          type: new Utf8(),
+          resolver: pathResolver('name'),
+        }),
+      ],
+    }),
   ];
 
   const memdb: { inserts: unknown[]; [key: string]: unknown } = {
@@ -86,7 +135,8 @@ export const newMemDBPlugin = (): Plugin => {
   };
 
   const pluginClient = {
-    init: (spec: string, options: NewClientOptions) => Promise.resolve(),
+    plugin: null as unknown as Plugin,
+    spec: null as unknown as Spec,
     close: () => Promise.resolve(),
     tables: (options: TableOptions) => {
       const { tables, skipTables, skipDependentTables } = options;
@@ -96,7 +146,19 @@ export const newMemDBPlugin = (): Plugin => {
     sync: async (options: SyncOptions) => {
       const { stream, tables, skipTables, skipDependentTables, deterministicCQId } = options;
       const filtered = filterTables(allTables, tables, skipTables, skipDependentTables);
-      return await sync(memdbClient, filtered, stream, { deterministicCQId });
+      const logger = pluginClient.plugin.getLogger();
+      const {
+        spec: { concurrency },
+      } = pluginClient;
+
+      return await sync({
+        logger,
+        client: memdbClient,
+        stream,
+        tables: filtered,
+        deterministicCQId,
+        concurrency,
+      });
     },
     write(stream: WriteStream): Promise<void> {
       return new Promise((resolve, reject) => {
@@ -176,5 +238,19 @@ export const newMemDBPlugin = (): Plugin => {
     },
   };
 
-  return newPlugin('memdb', '0.0.1', () => Promise.resolve(pluginClient));
+  const newClient: NewClientFunction = (logger, spec, options) => {
+    const parsedSpec = JSON.parse(spec) as Partial<Spec>;
+    const validSchema = validate(parsedSpec);
+    if (!validSchema) {
+      const messages = validate.errors?.map((error) => error.message).join(', ');
+      return Promise.reject(new Error(`Invalid spec: ${messages}`));
+    }
+    const { concurrency = 10_000 } = parsedSpec;
+    pluginClient.spec = { concurrency };
+    return Promise.resolve(pluginClient);
+  };
+
+  const plugin = newPlugin('memdb', '0.0.1', newClient);
+  pluginClient.plugin = plugin;
+  return plugin;
 };

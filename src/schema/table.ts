@@ -9,8 +9,8 @@ import { ClientMeta } from './meta.js';
 import { Resource } from './resource.js';
 import { Nullable } from './types.js';
 
-export type TableResolver = (clientMeta: ClientMeta, parent: Nullable<Resource>, stream: Writable) => void;
-export type RowResolver = (clientMeta: ClientMeta, resource: Resource) => void;
+export type TableResolver = (clientMeta: ClientMeta, parent: Nullable<Resource>, stream: Writable) => Promise<void>;
+export type RowResolver = (clientMeta: ClientMeta, resource: Resource) => Promise<void>;
 export type Multiplexer = (clientMeta: ClientMeta) => ClientMeta[];
 export type Transform = (table: Table) => void;
 
@@ -38,10 +38,10 @@ export const createTable = ({
   columns = [],
   relations = [],
   transform = () => {},
-  resolver = () => {},
+  resolver = () => Promise.resolve(),
   multiplexer = () => [],
-  postResourceResolver = () => {},
-  preResourceResolver = () => {},
+  postResourceResolver = () => Promise.resolve(),
+  preResourceResolver = () => Promise.resolve(),
   isIncremental = false,
   ignoreInTests = false,
   parent = null,

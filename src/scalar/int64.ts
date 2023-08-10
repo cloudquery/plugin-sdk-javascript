@@ -7,7 +7,7 @@ export class Int64 implements Scalar<bigint> {
   private _valid = false;
   private _value: bigint = BigInt(0);
 
-  public constructor(v: unknown) {
+  public constructor(v?: unknown) {
     this.value = v;
     return this;
   }

@@ -1,6 +1,8 @@
-import { Scalar, Vector } from '../scalar/scalar.js';
+import { tableToIPC, Table as ArrowTable, RecordBatch, vectorFromArray } from '@apache-arrow/esnext-esm';
 
-import { Table } from './table.js';
+import { Scalar, Vector, newScalar } from '../scalar/scalar.js';
+
+import { Table, toArrowSchema } from './table.js';
 import { Nullable } from './types.js';
 
 export class Resource {
@@ -13,8 +15,7 @@ export class Resource {
     this.table = table;
     this.parent = parent;
     this.item = item;
-    // TODO: Init from table columns
-    this.data = [];
+    this.data = table.columns.map((column) => newScalar(column.type));
   }
 
   getColumnData(columnName: string): Scalar<unknown> {
@@ -41,3 +42,19 @@ export class Resource {
     this.item = item;
   }
 }
+
+export const encodeResource = (resource: Resource): Uint8Array => {
+  const { table } = resource;
+  const schema = toArrowSchema(table);
+  // TODO: Check if this can be simplified
+  let batch = new RecordBatch(schema, undefined);
+  for (let index = 0; index < table.columns.length; index++) {
+    const column = table.columns[index];
+    const data = resource.getColumnData(column.name);
+    const vector = vectorFromArray([data], column.type);
+    batch = batch.setChildAt(index, vector);
+  }
+  const arrowTable = new ArrowTable(schema, batch);
+  const bytes = tableToIPC(arrowTable);
+  return bytes;
+};

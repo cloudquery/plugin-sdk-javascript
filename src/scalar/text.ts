@@ -7,7 +7,7 @@ export class Text implements Scalar<string> {
   private _valid = false;
   private _value = '';
 
-  public constructor(v: unknown) {
+  public constructor(v?: unknown) {
     this.value = v;
     return this;
   }

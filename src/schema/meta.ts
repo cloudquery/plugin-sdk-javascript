@@ -12,13 +12,13 @@ export type ClientMeta = {
 export const parentCqUUIDResolver = (): ColumnResolver => {
   return (_: ClientMeta, r: Resource, c: Column) => {
     if (r.parent === null) {
-      return r.setColumData(c.name, null);
+      return Promise.resolve(r.setColumData(c.name, null));
     }
     const parentCqID = r.parent.getColumnData(cqIDColumn.name);
     if (parentCqID == null) {
-      return r.setColumData(c.name, null);
+      return Promise.resolve(r.setColumData(c.name, null));
     }
-    return r.setColumData(c.name, parentCqID);
+    return Promise.resolve(r.setColumData(c.name, parentCqID));
   };
 };
 

@@ -6,7 +6,7 @@ import * as arrow from './arrow.js';
 import { ClientMeta } from './meta.js';
 import { Resource } from './resource.js';
 
-export type ColumnResolver = (meta: ClientMeta, resource: Resource, c: Column) => void;
+export type ColumnResolver = (meta: ClientMeta, resource: Resource, c: Column) => Promise<void>;
 
 export type Column = {
   name: string;
@@ -16,9 +16,11 @@ export type Column = {
   notNull: boolean;
   incrementalKey: boolean;
   unique: boolean;
-  resolver?: ColumnResolver;
+  resolver: ColumnResolver;
   ignoreInTests: boolean;
 };
+
+const emptyResolver = () => Promise.resolve();
 
 export const createColumn = ({
   name = '',
@@ -27,7 +29,9 @@ export const createColumn = ({
   incrementalKey = false,
   notNull = false,
   primaryKey = false,
+  resolver = emptyResolver,
   unique = false,
+  ignoreInTests = false,
 }: Partial<Column> = {}): Column => ({
   name,
   type,
@@ -35,8 +39,9 @@ export const createColumn = ({
   primaryKey,
   notNull,
   incrementalKey,
+  resolver,
   unique,
-  ignoreInTests: false,
+  ignoreInTests,
 });
 
 export const formatColumn = (column: Column): string => {

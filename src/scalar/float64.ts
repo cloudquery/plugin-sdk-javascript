@@ -7,7 +7,7 @@ export class Float64 implements Scalar<number> {
   private _valid = false;
   private _value: number = 0;
 
-  public constructor(v: unknown) {
+  public constructor(v?: unknown) {
     this.value = v;
     return this;
   }
