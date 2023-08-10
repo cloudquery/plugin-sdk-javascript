@@ -1,4 +1,4 @@
-import { tableToIPC, Table as ArrowTable, vectorFromArray } from '@apache-arrow/esnext-esm';
+import { tableToIPC, Table as ArrowTable, RecordBatch, vectorFromArray } from '@apache-arrow/esnext-esm';
 
 import { Scalar, Vector, newScalar } from '../scalar/scalar.js';
 
@@ -46,13 +46,15 @@ export class Resource {
 export const encodeResource = (resource: Resource): Uint8Array => {
   const { table } = resource;
   const schema = toArrowSchema(table);
-  const arrowTable = new ArrowTable(schema);
+  // TODO: Check if this can be simplified
+  let batch = new RecordBatch(schema, undefined);
   for (let index = 0; index < table.columns.length; index++) {
     const column = table.columns[index];
     const data = resource.getColumnData(column.name);
     const vector = vectorFromArray([data], column.type);
-    arrowTable.setChildAt(index, vector);
+    batch = batch.setChildAt(index, vector);
   }
+  const arrowTable = new ArrowTable(schema, batch);
   const bytes = tableToIPC(arrowTable);
   return bytes;
 };

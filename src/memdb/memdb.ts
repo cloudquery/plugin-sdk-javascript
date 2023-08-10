@@ -46,7 +46,7 @@ export const newMemDBPlugin = (): Plugin => {
       description: 'Table 1 description',
       resolver: (clientMeta, parent, stream) => {
         stream.write({ id: 'table1-name1' });
-        stream.write({ id: 'table2-name2' });
+        stream.write({ id: 'table1-name2' });
         return Promise.resolve();
       },
       columns: [
