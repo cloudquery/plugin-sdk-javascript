@@ -1,15 +1,8 @@
 import { StructRowProxy } from '@apache-arrow/esnext-esm';
 import { pluginV3 } from '@cloudquery/plugin-pb-javascript';
 
-import { WriteRequest, WriteStream } from '../grpc/plugin.js';
-import {
-  Plugin,
-  newUnimplementedDestination,
-  newPlugin,
-  SyncOptions,
-  TableOptions,
-  NewClientOptions,
-} from '../plugin/plugin.js';
+import { WriteRequest, WriteStream, ReadStream, ReadRequest } from '../grpc/plugin.js';
+import { Plugin, newPlugin, SyncOptions, TableOptions, NewClientOptions } from '../plugin/plugin.js';
 import { sync } from '../scheduler/scheduler.js';
 import { Table, createTable, filterTables, decodeTable, decodeRecord, getPrimaryKeys } from '../schema/table.js';
 
@@ -93,7 +86,6 @@ export const newMemDBPlugin = (): Plugin => {
   };
 
   const pluginClient = {
-    ...newUnimplementedDestination(),
     init: (spec: string, options: NewClientOptions) => Promise.resolve(),
     close: () => Promise.resolve(),
     tables: (options: TableOptions) => {
@@ -149,6 +141,32 @@ export const newMemDBPlugin = (): Plugin => {
 
         stream.on('finish', () => {
           resolve();
+        });
+
+        stream.on('error', (error) => {
+          reject(error);
+        });
+      });
+    },
+    read(stream: ReadStream): Promise<void> {
+      return new Promise((resolve, reject) => {
+        stream.on('data', (request: ReadRequest) => {
+          const table = decodeTable(request.table);
+
+          try {
+            const rows = memoryDB[table.name] || [];
+
+            // We iterate over records in reverse here because we don't set an expectation
+            // of ordering on plugins, and we want to make sure that the tests are not
+            // dependent on the order of insertion either.
+            for (let index = rows.length - 1; index >= 0; index--) {
+              stream.write(rows[index]);
+            }
+            stream.end();
+            resolve();
+          } catch (error) {
+            reject(error);
+          }
         });
 
         stream.on('error', (error) => {

@@ -5,25 +5,18 @@ import { Plugin } from '../plugin/plugin.js';
 import { encodeTables } from '../schema/table.js';
 
 export class MigrateTable extends pluginV3.cloudquery.plugin.v3.Sync.MessageMigrateTable {}
+export class SyncRequest extends pluginV3.cloudquery.plugin.v3.Sync.Request {}
 export class SyncResponse extends pluginV3.cloudquery.plugin.v3.Sync.Response {}
+export class ReadRequest extends pluginV3.cloudquery.plugin.v3.Read.Request {}
 export class ReadResponse extends pluginV3.cloudquery.plugin.v3.Read.Response {}
 export class WriteRequest extends pluginV3.cloudquery.plugin.v3.Write.Request {}
 export class WriteResponse extends pluginV3.cloudquery.plugin.v3.Write.Response {}
 
-export type SyncStream = grpc.ServerWritableStream<
-  pluginV3.cloudquery.plugin.v3.Sync.Request,
-  pluginV3.cloudquery.plugin.v3.Sync.Response
->;
+export type SyncStream = grpc.ServerWritableStream<SyncRequest, SyncResponse>;
 
-export type ReadStream = grpc.ServerWritableStream<
-  pluginV3.cloudquery.plugin.v3.Read.Request,
-  pluginV3.cloudquery.plugin.v3.Read.Response
->;
+export type ReadStream = grpc.ServerWritableStream<ReadRequest, ReadResponse>;
 
-export type WriteStream = grpc.ServerReadableStream<
-  pluginV3.cloudquery.plugin.v3.Write.Request,
-  pluginV3.cloudquery.plugin.v3.Write.Response
->;
+export type WriteStream = grpc.ServerReadableStream<WriteRequest, WriteResponse>;
 
 export class PluginServer extends pluginV3.cloudquery.plugin.v3.UnimplementedPluginService {
   // Needed due to some TypeScript nonsense
