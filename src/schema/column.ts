@@ -20,6 +20,8 @@ export type Column = {
   ignoreInTests: boolean;
 };
 
+const emptyResolver = () => Promise.resolve();
+
 export const createColumn = ({
   name = '',
   type = new Bool(),
@@ -27,7 +29,7 @@ export const createColumn = ({
   incrementalKey = false,
   notNull = false,
   primaryKey = false,
-  resolver = () => Promise.resolve(),
+  resolver = emptyResolver,
   unique = false,
   ignoreInTests = false,
 }: Partial<Column> = {}): Column => ({

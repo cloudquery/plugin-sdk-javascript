@@ -20,7 +20,7 @@ export type Options = {
   concurrency: number;
 };
 
-class ResolverStream extends Duplex {
+class TableResolverStream extends Duplex {
   queue: unknown[] = [];
 
   constructor() {
@@ -59,7 +59,7 @@ const resolveTable = async (
   syncStream: SyncStream,
 ) => {
   logger.info(`resolving table ${table.name}`);
-  const stream = new ResolverStream();
+  const stream = new TableResolverStream();
   try {
     await table.resolver(client, null, stream);
   } catch (error) {
