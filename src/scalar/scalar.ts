@@ -3,6 +3,7 @@ import { DataType } from '@apache-arrow/esnext-esm';
 import { Bool } from './bool.js';
 import { Float64 } from './float64.js';
 import { Int64 } from './int64.js';
+import { Text } from './text.js';
 import { Timestamp } from './timestamp.js';
 
 export interface Scalar<T> {
@@ -28,4 +29,6 @@ export const newScalar = (dataType: DataType): Scalar<unknown> => {
   if (DataType.isTimestamp(dataType)) {
     return new Timestamp('1970-01-01T00:00:00.000Z');
   }
+
+  return new Text('');
 };
