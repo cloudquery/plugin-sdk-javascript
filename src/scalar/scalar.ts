@@ -18,17 +18,17 @@ export type Vector = Scalar<unknown>[];
 
 export const newScalar = (dataType: DataType): Scalar<unknown> => {
   if (DataType.isBool(dataType)) {
-    return new Bool(false);
+    return new Bool();
   }
   if (DataType.isInt(dataType)) {
-    return new Int64(0);
+    return new Int64();
   }
   if (DataType.isFloat(dataType)) {
-    return new Float64(0);
+    return new Float64();
   }
   if (DataType.isTimestamp(dataType)) {
-    return new Timestamp('1970-01-01T00:00:00.000Z');
+    return new Timestamp();
   }
 
-  return new Text('');
+  return new Text();
 };

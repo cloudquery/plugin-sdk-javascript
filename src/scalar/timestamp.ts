@@ -9,7 +9,7 @@ export class Timestamp implements Scalar<DateTime> {
   private _value: DateTime = DateTime.fromMillis(0);
   private _unit: TimeUnit = TimeUnit.NANOSECOND;
 
-  public constructor(v: unknown, unit?: TimeUnit) {
+  public constructor(v?: unknown, unit?: TimeUnit) {
     this.value = v;
     if (unit) {
       this._unit = unit;

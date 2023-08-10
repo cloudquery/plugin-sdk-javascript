@@ -8,7 +8,7 @@ export class Bool implements Scalar<boolean> {
   private _valid = false;
   private _value = false;
 
-  public constructor(v: unknown) {
+  public constructor(v?: unknown) {
     this.value = v;
     return this;
   }
