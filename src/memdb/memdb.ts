@@ -106,49 +106,55 @@ export const newMemDBPlugin = (): Plugin => {
       const filtered = filterTables(allTables, tables, skipTables, skipDependentTables);
       return await sync(memdbClient, filtered, stream, { deterministicCQId });
     },
-    write(stream: WriteStream): void {
-      stream.on('data', (request: pluginV3.cloudquery.plugin.v3.Write.Request) => {
-        switch (request.message) {
-          case 'migrate_table': {
-            // Update table schema in the `tables` map
-            const table = decodeTable(request.migrate_table.table);
-            tables[table.name] = table;
-            break;
-          }
-
-          case 'insert': {
-            const [tableName, batches] = decodeRecord(request.insert.record);
-
-            if (!memoryDB[tableName]) {
-              memoryDB[tableName] = [];
+    write(stream: WriteStream): Promise<void> {
+      return new Promise((resolve, reject) => {
+        stream.on('data', (request: pluginV3.cloudquery.plugin.v3.Write.Request) => {
+          switch (request.message) {
+            case 'migrate_table': {
+              // Update table schema in the `tables` map
+              const table = decodeTable(request.migrate_table.table);
+              tables[table.name] = table;
+              break;
             }
 
-            const tableSchema = tables[tableName];
-            const pks = getPrimaryKeys(tableSchema);
+            case 'insert': {
+              const [tableName, batches] = decodeRecord(request.insert.record);
 
-            for (const batch of batches) {
-              //eslint-disable-next-line unicorn/no-array-for-each
-              for (const record of batch) {
-                overwrite(tableSchema, pks, record);
+              if (!memoryDB[tableName]) {
+                memoryDB[tableName] = [];
               }
+
+              const tableSchema = tables[tableName];
+              const pks = getPrimaryKeys(tableSchema);
+
+              for (const batch of batches) {
+                //eslint-disable-next-line unicorn/no-array-for-each
+                for (const record of batch) {
+                  overwrite(tableSchema, pks, record);
+                }
+              }
+              break;
             }
-            break;
-          }
 
-          case 'delete': {
-            deleteStale(request.delete);
-            break;
-          }
+            case 'delete': {
+              deleteStale(request.delete);
+              break;
+            }
 
-          default: {
-            throw new Error(`Unknown request message type: ${request.message}`);
+            default: {
+              throw new Error(`Unknown request message type: ${request.message}`);
+            }
           }
-        }
+        });
+
+        stream.on('finish', () => {
+          resolve();
+        });
+
+        stream.on('error', (error) => {
+          reject(error);
+        });
       });
-
-      stream.on('end', () => {});
-
-      stream.on('error', (error) => {});
     },
   };
 
