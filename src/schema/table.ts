@@ -1,10 +1,10 @@
 import { Writable } from 'node:stream';
 
-import { Table as ArrowTable, tableToIPC, Schema } from '@apache-arrow/esnext-esm';
+import { Table as ArrowTable, tableFromIPC, tableToIPC, Schema, RecordBatch } from '@apache-arrow/esnext-esm';
 import { isMatch } from 'matcher';
 
 import * as arrow from './arrow.js';
-import { Column, toArrowField } from './column.js';
+import { Column, fromArrowField, toArrowField } from './column.js';
 import { ClientMeta } from './meta.js';
 import { Resource } from './resource.js';
 import { Nullable } from './types.js';
@@ -80,6 +80,10 @@ export const getTableByName = (tables: Table[], name: string): Table | undefined
   }
 };
 
+export const getPrimaryKeys = (table: Table): string[] => {
+  return table.columns.filter((column) => column.primaryKey).map((column) => column.name);
+};
+
 export const flattenTables = (tables: Table[]): Table[] => {
   return tables.flatMap((table) => [table, ...flattenTables(table.relations.map((c) => ({ ...c, parent: table })))]);
 };
@@ -126,7 +130,7 @@ export const filterTables = (
   return withSkipDependant;
 };
 
-export const toArrowSchema = (table: Table) => {
+export const toArrowSchema = (table: Table): Schema => {
   const metadata = new Map<string, string>();
   metadata.set(arrow.METADATA_TABLE_NAME, table.name);
   metadata.set(arrow.METADATA_TABLE_DESCRIPTION, table.description);
@@ -142,13 +146,35 @@ export const toArrowSchema = (table: Table) => {
   return new Schema(fields, metadata);
 };
 
+export const fromArrowSchema = (schema: Schema): Table => {
+  return createTable({
+    name: schema.metadata.get(arrow.METADATA_TABLE_NAME) || '',
+    title: schema.metadata.get(arrow.METADATA_TABLE_TITLE) || '',
+    description: schema.metadata.get(arrow.METADATA_TABLE_DESCRIPTION) || '',
+    pkConstraintName: schema.metadata.get(arrow.METADATA_CONSTRAINT_NAME) || '',
+    isIncremental: schema.metadata.get(arrow.METADATA_INCREMENTAL) === arrow.METADATA_TRUE,
+    // dependencies: schema.metadata.get(arrow.METADATA_TABLE_DEPENDS_ON) || '',
+    columns: schema.fields.map((f) => fromArrowField(f)),
+  });
+};
+
 export const encodeTable = (table: Table): Uint8Array => {
   const schema = toArrowSchema(table);
   const arrowTable = new ArrowTable(schema);
-  const bytes = tableToIPC(arrowTable);
-  return bytes;
+  return tableToIPC(arrowTable);
 };
 
 export const encodeTables = (tables: Table[]): Uint8Array[] => {
   return tables.map((table) => encodeTable(table));
+};
+
+export const decodeTable = (bytes: Uint8Array): Table => {
+  const arrowTable = tableFromIPC(bytes);
+  return fromArrowSchema(arrowTable.schema);
+};
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const decodeRecord = (bytes: Uint8Array): [string, RecordBatch<any>[]] => {
+  const arrowTable = tableFromIPC(bytes);
+  return [(arrowTable.schema.metadata.get(arrow.METADATA_TABLE_NAME) || '')!, arrowTable.batches];
 };
