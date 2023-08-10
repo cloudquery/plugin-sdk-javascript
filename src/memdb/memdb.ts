@@ -1,7 +1,7 @@
 import { StructRowProxy } from '@apache-arrow/esnext-esm';
 import { pluginV3 } from '@cloudquery/plugin-pb-javascript';
 
-import { WriteStream } from '../grpc/plugin.js';
+import { WriteRequest, WriteStream } from '../grpc/plugin.js';
 import {
   Plugin,
   newUnimplementedDestination,
@@ -108,7 +108,7 @@ export const newMemDBPlugin = (): Plugin => {
     },
     write(stream: WriteStream): Promise<void> {
       return new Promise((resolve, reject) => {
-        stream.on('data', (request: pluginV3.cloudquery.plugin.v3.Write.Request) => {
+        stream.on('data', (request: WriteRequest) => {
           switch (request.message) {
             case 'migrate_table': {
               // Update table schema in the `tables` map
