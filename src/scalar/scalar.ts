@@ -1,6 +1,7 @@
-import { DataType } from '@apache-arrow/esnext-esm';
+import { DataType, Precision } from '@apache-arrow/esnext-esm';
 
 import { Bool } from './bool.js';
+import { Float32 } from './float32.js';
 import { Float64 } from './float64.js';
 import { Int16 } from './int16.js';
 import { Int32 } from './int32.js';
@@ -25,6 +26,7 @@ export const newScalar = (dataType: DataType): Scalar<unknown> => {
   if (DataType.isBool(dataType)) {
     return new Bool();
   }
+
   if (DataType.isInt(dataType)) {
     if (dataType.isSigned) {
       switch (dataType.bitWidth) {
@@ -52,9 +54,21 @@ export const newScalar = (dataType: DataType): Scalar<unknown> => {
       }
     }
   }
+
   if (DataType.isFloat(dataType)) {
-    return new Float64();
+    switch (dataType.precision) {
+      // case Precision.HALF: {
+      // TODO
+      // }
+      case Precision.SINGLE: {
+        return new Float32();
+      }
+      default: {
+        return new Float64();
+      }
+    }
   }
+
   if (DataType.isTimestamp(dataType)) {
     return new Timestamp();
   }
