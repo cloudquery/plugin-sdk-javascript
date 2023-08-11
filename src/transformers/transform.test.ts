@@ -63,7 +63,7 @@ test('should parse object with custom types', (t) => {
       float: 1,
     },
     {
-      getTypeFromValue: function (key: string, value: unknown): DataType | null | undefined {
+      getTypeFromValue: function (key: string): DataType | null | undefined {
         if (key === 'float') return new Float64();
         return undefined;
       },
@@ -86,7 +86,7 @@ test('should parse object with custom types and allow skip columns in type trans
       skip: 'test',
     },
     {
-      getTypeFromValue: function (key: string, value: unknown): DataType | null | undefined {
+      getTypeFromValue: function (key: string): DataType | null | undefined {
         return key === 'skip' ? null : undefined;
       },
     },

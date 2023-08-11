@@ -5,6 +5,7 @@ import { Plugin } from '../plugin/plugin.js';
 import { encodeTables } from '../schema/table.js';
 
 export class MigrateTable extends pluginV3.cloudquery.plugin.v3.Sync.MessageMigrateTable {}
+export class DeleteStale extends pluginV3.cloudquery.plugin.v3.Write.MessageDeleteStale {}
 export class SyncRequest extends pluginV3.cloudquery.plugin.v3.Sync.Request {}
 export class Insert extends pluginV3.cloudquery.plugin.v3.Sync.MessageInsert {}
 export class SyncResponse extends pluginV3.cloudquery.plugin.v3.Sync.Response {}
