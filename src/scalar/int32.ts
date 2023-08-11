@@ -1,10 +1,10 @@
-import { DataType, Int64 as ArrowInt64 } from '@apache-arrow/esnext-esm';
+import { DataType, Int32 as ArrowInt32 } from '@apache-arrow/esnext-esm';
 import { bigIntToNumber } from '@apache-arrow/esnext-esm/util/bigint.js';
 
 import { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
-export class Int64 implements Scalar<bigint> {
+export class Int32 implements Scalar<bigint> {
   private _valid = false;
   private _value: bigint = BigInt(0);
 
@@ -14,7 +14,7 @@ export class Int64 implements Scalar<bigint> {
   }
 
   public get dataType(): DataType {
-    return new ArrowInt64();
+    return new ArrowInt32();
   }
 
   public get valid(): boolean {
@@ -31,15 +31,15 @@ export class Int64 implements Scalar<bigint> {
       return;
     }
 
-    if (value instanceof Int64) {
+    if (value instanceof Int32) {
       this._valid = value.valid;
       this._value = value.value;
       return;
     }
 
     if (typeof value === 'bigint') {
-      if (!this.validInt64(value)) {
-        throw new TypeError(`Value '${value}' cannot be safely converted to Int64`);
+      if (!this.validInt32(value)) {
+        throw new TypeError(`Value '${value}' cannot be safely converted to Int32`);
       }
       this._value = value;
       this._valid = true;
@@ -48,15 +48,15 @@ export class Int64 implements Scalar<bigint> {
 
     if (typeof value === 'number') {
       const v = BigInt(value);
-      if (!this.validInt64(v)) {
-        throw new TypeError(`Value '${value}' cannot be safely converted to Int64`);
+      if (!this.validInt32(v)) {
+        throw new TypeError(`Value '${value}' cannot be safely converted to Int32`);
       }
       this._value = v;
       this._valid = true;
       return;
     }
 
-    throw new Error(`Unable to set '${value}' as Int64`);
+    throw new Error(`Unable to set '${value}' as Int32`);
   }
 
   public toString() {
@@ -67,9 +67,8 @@ export class Int64 implements Scalar<bigint> {
     return NULL_VALUE;
   }
 
-  validInt64(n: bigint) {
-    const MIN_INT64 = BigInt('-9223372036854775808'); // -2^63
-    const MAX_INT64 = BigInt('9223372036854775807'); // 2^63 - 1
-    return Number.isSafeInteger(bigIntToNumber(n)) && n >= MIN_INT64 && n <= MAX_INT64;
+  validInt32(n: bigint) {
+    const number_ = bigIntToNumber(n);
+    return Number.isSafeInteger(number_) && number_ >= -2_147_483_648 && number_ <= 2_147_483_647;
   }
 }
