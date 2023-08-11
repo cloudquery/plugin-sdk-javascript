@@ -1,4 +1,4 @@
-import { Binary, TimeNanosecond } from '@apache-arrow/esnext-esm';
+import { Utf8, TimeNanosecond } from '@apache-arrow/esnext-esm';
 
 import { UUIDType } from '../types/uuid.js';
 
@@ -45,7 +45,7 @@ export const cqSyncTimeColumn = createColumn({
 });
 export const cqSourceNameColumn = createColumn({
   name: '_cq_source_name',
-  type: new Binary(),
+  type: new Utf8(),
   description: 'Internal CQ row that references the source plugin name data was retrieved',
   ignoreInTests: true,
 });
