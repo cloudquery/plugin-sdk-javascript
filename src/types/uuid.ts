@@ -1,4 +1,4 @@
-import { DataType, Binary, Type } from '@apache-arrow/esnext-esm';
+import { DataType, Type } from '@apache-arrow/esnext-esm';
 
 export class UUIDType extends DataType<Type.Binary> {
   readonly extensionName: string = 'uuid';
@@ -15,7 +15,7 @@ export class UUIDType extends DataType<Type.Binary> {
     return new TextEncoder().encode('uuid-serialized').buffer;
   }
 
-  static deserialize(storageType: Binary, serialized: ArrayBuffer): UUIDType {
+  static deserialize(/*storageType: Binary, serialized: ArrayBuffer*/): UUIDType {
     // Implement your deserialization logic here.
     return new UUIDType();
   }

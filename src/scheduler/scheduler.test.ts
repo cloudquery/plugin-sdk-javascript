@@ -9,7 +9,7 @@ test('getRoundRobinTableClients', (t): void => {
   const tables = [
     createTable({
       name: 'table1',
-      multiplexer: (client) => {
+      multiplexer: () => {
         return Array.from({ length: 2 }).map((_, index) => ({
           id: () => `client_${index}`,
         }));
@@ -17,7 +17,7 @@ test('getRoundRobinTableClients', (t): void => {
     }),
     createTable({
       name: 'table2',
-      multiplexer: (client) => {
+      multiplexer: () => {
         return Array.from({ length: 4 }).map((_, index) => ({
           id: () => `client_${index}`,
         }));
@@ -25,7 +25,7 @@ test('getRoundRobinTableClients', (t): void => {
     }),
     createTable({
       name: 'table3',
-      multiplexer: (client) => {
+      multiplexer: () => {
         return Array.from({ length: 1 }).map((_, index) => ({
           id: () => `client_${index}`,
         }));
@@ -33,7 +33,7 @@ test('getRoundRobinTableClients', (t): void => {
     }),
     createTable({
       name: 'table4',
-      multiplexer: (client) => {
+      multiplexer: () => {
         return [];
       },
     }),

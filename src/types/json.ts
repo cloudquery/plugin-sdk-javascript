@@ -1,4 +1,4 @@
-import { DataType, Binary, Type } from '@apache-arrow/esnext-esm';
+import { DataType, Type } from '@apache-arrow/esnext-esm';
 
 export class JSONType extends DataType<Type.Binary> {
   readonly extensionName: string = 'json';
@@ -14,7 +14,7 @@ export class JSONType extends DataType<Type.Binary> {
     return new TextEncoder().encode('json-serialized').buffer;
   }
 
-  static deserialize(storageType: Binary, serialized: ArrayBuffer): JSONType {
+  static deserialize(/*storageType: Binary, serialized: ArrayBuffer*/): JSONType {
     // Implement your deserialization logic here.
     return new JSONType();
   }
