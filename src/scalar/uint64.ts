@@ -67,6 +67,6 @@ export class Uint64 implements Scalar<bigint> {
   }
 
   validUint64(n: bigint) {
-    return Number.isSafeInteger(n) && n >= 0 && n <= 18446744073709551615n;
+    return Number.isSafeInteger(n) && n >= 0 && n <= 18_446_744_073_709_551_615n;
   }
 }

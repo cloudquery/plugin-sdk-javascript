@@ -67,6 +67,6 @@ export class Uint32 implements Scalar<bigint> {
   }
 
   validUint32(n: bigint) {
-    return Number.isSafeInteger(n) && n >= 0 && n <= 4294967295;
+    return Number.isSafeInteger(n) && n >= 0 && n <= 4_294_967_295;
   }
 }

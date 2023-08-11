@@ -67,6 +67,6 @@ export class Uint16 implements Scalar<bigint> {
   }
 
   validUint16(n: bigint) {
-    return Number.isSafeInteger(n) && n >= 0 && n <= 65535;
+    return Number.isSafeInteger(n) && n >= 0 && n <= 65_535;
   }
 }
