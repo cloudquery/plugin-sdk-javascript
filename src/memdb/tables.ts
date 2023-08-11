@@ -4,6 +4,7 @@ import { createColumn } from '../schema/column.js';
 import { addCQIDsColumns } from '../schema/meta.js';
 import { pathResolver, parentColumnResolver } from '../schema/resolvers.js';
 import { createTable } from '../schema/table.js';
+import { JSONType } from '../types/json.js';
 
 export const createTables = () => {
   const allTables = [
@@ -12,14 +13,19 @@ export const createTables = () => {
       title: 'Table 1',
       description: 'Table 1 description',
       resolver: (clientMeta, parent, stream) => {
-        stream.write({ id: 'id-1' });
-        stream.write({ id: 'id-2' });
+        stream.write({ id: 'id-1', json: '{ "a": 1 }' });
+        stream.write({ id: 'id-2', json: [1, 2, 3] });
         return Promise.resolve();
       },
       columns: [
         createColumn({
           name: 'id',
           resolver: pathResolver('id'),
+        }),
+        createColumn({
+          name: 'json',
+          resolver: pathResolver('json'),
+          type: new JSONType(),
         }),
       ],
     }),
