@@ -1,8 +1,8 @@
 import { DataType, Int16 as ArrowInt16 } from '@apache-arrow/esnext-esm';
+import { bigIntToNumber } from '@apache-arrow/esnext-esm/util/bigint.js';
 
 import { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
-import {bigIntToNumber} from "@apache-arrow/esnext-esm/util/bigint.js";
 
 export class Int16 implements Scalar<bigint> {
   private _valid = false;
@@ -68,7 +68,7 @@ export class Int16 implements Scalar<bigint> {
   }
 
   validInt16(n: bigint) {
-    const num = bigIntToNumber(n);
-    return Number.isSafeInteger(num) && num >= -32_768 && num <= 32_767;
+    const number_ = bigIntToNumber(n);
+    return Number.isSafeInteger(number_) && number_ >= -32_768 && number_ <= 32_767;
   }
 }
