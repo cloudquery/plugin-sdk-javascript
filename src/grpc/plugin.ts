@@ -5,6 +5,7 @@ import { Plugin } from '../plugin/plugin.js';
 import { encodeTables } from '../schema/table.js';
 
 export class MigrateTable extends pluginV3.cloudquery.plugin.v3.Sync.MessageMigrateTable {}
+export class DeleteStale extends pluginV3.cloudquery.plugin.v3.Write.MessageDeleteStale {}
 export class SyncRequest extends pluginV3.cloudquery.plugin.v3.Sync.Request {}
 export class Insert extends pluginV3.cloudquery.plugin.v3.Sync.MessageInsert {}
 export class SyncResponse extends pluginV3.cloudquery.plugin.v3.Sync.Response {}
@@ -110,8 +111,16 @@ export class PluginServer extends pluginV3.cloudquery.plugin.v3.UnimplementedPlu
     this.plugin.read(call);
   }
   Write(call: WriteStream, callback: grpc.sendUnaryData<pluginV3.cloudquery.plugin.v3.Write.Response>): void {
-    this.plugin.write(call);
-    callback(null, new pluginV3.cloudquery.plugin.v3.Write.Response());
+    this.plugin
+      .write(call)
+      .then(() => {
+        // eslint-disable-next-line promise/no-callback-in-promise
+        return callback(null, new pluginV3.cloudquery.plugin.v3.Write.Response());
+      })
+      .catch((error) => {
+        // eslint-disable-next-line promise/no-callback-in-promise
+        return callback(error, null);
+      });
   }
   Close(
     call: grpc.ServerUnaryCall<

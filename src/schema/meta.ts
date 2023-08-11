@@ -4,6 +4,7 @@ import { UUIDType } from '../types/uuid.js';
 
 import { Column, createColumn, ColumnResolver } from './column.js';
 import { Resource } from './resource.js';
+import { Table } from './table.js';
 
 export type ClientMeta = {
   id: () => string;
@@ -22,6 +23,7 @@ export const parentCqUUIDResolver = (): ColumnResolver => {
   };
 };
 
+// These columns are managed and populated by the source plugins
 export const cqIDColumn = createColumn({
   name: '_cq_id',
   type: new UUIDType(),
@@ -36,17 +38,25 @@ export const cqParentIDColumn = createColumn({
   resolver: parentCqUUIDResolver(),
   ignoreInTests: true,
 });
+
+// These columns are managed and populated by the destination plugin
 export const cqSyncTimeColumn = createColumn({
   name: '_cq_sync_time',
   type: new TimeNanosecond(),
   description: 'Internal CQ row of when sync was started (this will be the same for all rows in a single fetch)',
-  resolver: parentCqUUIDResolver(),
   ignoreInTests: true,
 });
 export const cqSourceNameColumn = createColumn({
   name: '_cq_source_name',
   type: new Binary(),
   description: 'Internal CQ row that references the source plugin name data was retrieved',
-  resolver: parentCqUUIDResolver(),
   ignoreInTests: true,
 });
+
+export const addCQIDsColumns = (table: Table): Table => {
+  return {
+    ...table,
+    columns: [cqIDColumn, cqParentIDColumn, ...table.columns],
+    relations: table.relations.map((relation) => addCQIDsColumns(relation)),
+  };
+};
