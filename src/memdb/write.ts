@@ -11,54 +11,45 @@ export const createWrite = (
   overwrite: OverwriteFunction,
   deleteStale: DeleteStaleFunction,
 ) => {
-  return (stream: WriteStream): Promise<void> => {
-    return new Promise((resolve, reject) => {
-      stream.on('data', (request: WriteRequest) => {
-        switch (request.message) {
-          case 'migrate_table': {
-            // Update table schema in the `tables` map
-            const table = decodeTable(request.migrate_table.table);
-            tables[table.name] = table;
-            break;
-          }
-
-          case 'insert': {
-            const [tableName, batches] = decodeRecord(request.insert.record);
-
-            if (!memoryDB[tableName]) {
-              memoryDB[tableName] = [];
-            }
-
-            const tableSchema = tables[tableName];
-            const pks = getPrimaryKeys(tableSchema);
-
-            for (const batch of batches) {
-              //eslint-disable-next-line unicorn/no-array-for-each
-              for (const record of batch) {
-                overwrite(tableSchema, pks, record);
-              }
-            }
-            break;
-          }
-
-          case 'delete': {
-            deleteStale(request.delete);
-            break;
-          }
-
-          default: {
-            throw new Error(`Unknown request message type: ${request.message}`);
-          }
+  return async (stream: WriteStream) => {
+    for await (const data of stream) {
+      const request = data as WriteRequest;
+      switch (request.message) {
+        case 'migrate_table': {
+          // Update table schema in the `tables` map
+          const table = decodeTable(request.migrate_table.table);
+          tables[table.name] = table;
+          break;
         }
-      });
 
-      stream.on('finish', () => {
-        resolve();
-      });
+        case 'insert': {
+          const [tableName, batches] = decodeRecord(request.insert.record);
 
-      stream.on('error', (error) => {
-        reject(error);
-      });
-    });
+          if (!memoryDB[tableName]) {
+            memoryDB[tableName] = [];
+          }
+
+          const tableSchema = tables[tableName];
+          const pks = getPrimaryKeys(tableSchema);
+
+          for (const batch of batches) {
+            //eslint-disable-next-line unicorn/no-array-for-each
+            for (const record of batch) {
+              overwrite(tableSchema, pks, record);
+            }
+          }
+          break;
+        }
+
+        case 'delete': {
+          deleteStale(request.delete);
+          break;
+        }
+
+        default: {
+          throw new Error(`Unknown request message type: ${request.message}`);
+        }
+      }
+    }
   };
 };

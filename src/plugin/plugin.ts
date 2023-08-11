@@ -36,7 +36,7 @@ export interface SourceClient {
 
 export interface DestinationClient {
   read: (stream: ReadStream) => void;
-  write: (stream: WriteStream) => void;
+  write: (stream: WriteStream) => Promise<void>;
 }
 
 export interface Client extends SourceClient, DestinationClient {
@@ -72,7 +72,7 @@ export const newPlugin = (name: string, version: string, newClient: NewClientFun
     name: () => name,
     version: () => version,
     write: (stream: WriteStream) => {
-      return plugin.client?.write(stream) ?? new Error('client not initialized');
+      return plugin.client?.write(stream) ?? Promise.reject(new Error('client not initialized'));
     },
     read: (stream: ReadStream) => {
       return plugin.client?.read(stream) ?? new Error('client not initialized');
