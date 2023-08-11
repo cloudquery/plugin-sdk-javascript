@@ -1,9 +1,10 @@
 import { Utf8 as ArrowString } from '@apache-arrow/esnext-esm';
+import { validate } from 'uuid';
 
 import { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
-export class Text implements Scalar<string> {
+export class UUID implements Scalar<string> {
   private _valid = false;
   private _value = '';
 
@@ -32,17 +33,17 @@ export class Text implements Scalar<string> {
 
     if (typeof value === 'string') {
       this._value = value;
-      this._valid = true;
+      this._valid = validate(value);
       return;
     }
 
     if (value instanceof Uint8Array) {
       this._value = new TextDecoder().decode(value);
-      this._valid = true;
+      this._valid = validate(this._value);
       return;
     }
 
-    if (value instanceof Text) {
+    if (value instanceof UUID) {
       this._value = value.value;
       this._valid = value.valid;
       return;
@@ -50,11 +51,11 @@ export class Text implements Scalar<string> {
 
     if (typeof value!.toString === 'function' && value!.toString !== Object.prototype.toString) {
       this._value = value!.toString();
-      this._valid = true;
+      this._valid = validate(this._value);
       return;
     }
 
-    throw new Error(`Unable to set '${value}' as Text`);
+    throw new Error(`Unable to set '${value}' as UUID`);
   }
 
   public toString() {

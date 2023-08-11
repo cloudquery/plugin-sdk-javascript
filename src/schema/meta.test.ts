@@ -90,11 +90,11 @@ test('parentCqUUIDResolver - should set to _cq_id column value when parent has i
   const table = addCQIDsColumns(createTable({ name: 'table1', relations: [createTable({ name: 'table1-child1' })] }));
 
   const parentResource = new Resource(table, null, null);
-  parentResource.setColumData(cqIDColumn.name, 'parent-cq-id');
+  parentResource.setColumData(cqIDColumn.name, '9241a9cb-f580-420f-8fd7-46d2c4f55ccb');
   const childResource = new Resource(table.relations[0], parentResource, null);
 
   parentCqUUIDResolver()({ id: () => '' }, childResource, cqParentIDColumn);
 
-  t.is(childResource.getColumnData(cqParentIDColumn.name).value, 'parent-cq-id');
+  t.is(childResource.getColumnData(cqParentIDColumn.name).value, '9241a9cb-f580-420f-8fd7-46d2c4f55ccb');
   t.is(childResource.getColumnData(cqParentIDColumn.name).valid, true);
 });

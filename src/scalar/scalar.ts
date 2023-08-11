@@ -1,5 +1,7 @@
 import { DataType, Precision } from '@apache-arrow/esnext-esm';
 
+import { UUIDType } from '../types/uuid.js';
+
 import { Bool } from './bool.js';
 import { Date } from './date.js';
 import { Float32 } from './float32.js';
@@ -13,6 +15,7 @@ import { Timestamp } from './timestamp.js';
 import { Uint16 } from './uint16.js';
 import { Uint32 } from './uint32.js';
 import { Uint64 } from './uint64.js';
+import { UUID } from './uuid.js';
 
 export type Stringable = { toString: () => string };
 
@@ -84,6 +87,10 @@ export const newScalar = (dataType: DataType): Scalar<Stringable> => {
 
   if (DataType.isDate(dataType)) {
     return new Date(dataType.unit);
+  }
+
+  if (dataType instanceof UUIDType) {
+    return new UUID();
   }
 
   return new Text();
