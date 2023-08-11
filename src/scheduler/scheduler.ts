@@ -8,8 +8,10 @@ import { SyncStream, SyncResponse, MigrateTable, Insert } from '../grpc/plugin.j
 import { Column } from '../schema/column.js';
 import { ClientMeta } from '../schema/meta.js';
 import { Resource, encodeResource } from '../schema/resource.js';
-import { Table, encodeTable } from '../schema/table.js';
+import { Table, encodeTable, flattenTables } from '../schema/table.js';
 import { Nullable } from '../schema/types.js';
+
+import { setCQId } from './cqid.js';
 
 export type Options = {
   logger: Logger;
@@ -49,6 +51,16 @@ class TableResolverStream extends Duplex {
   }
 }
 
+const validateResource = (resource: Resource) => {
+  const missingPKs = resource.table.columns
+    .filter((column, index) => column.primaryKey && !resource.data[index].valid)
+    .map((column) => column.name);
+
+  if (missingPKs.length > 0) {
+    throw new Error(`missing primary key(s) ${missingPKs.join(', ')}`);
+  }
+};
+
 const resolveColumn = async (client: ClientMeta, table: Table, resource: Resource, column: Column) => {
   try {
     return await column.resolver(client, resource, column);
@@ -63,6 +75,7 @@ const resolveTable = async (
   table: Table,
   parent: Nullable<Resource>,
   syncStream: SyncStream,
+  deterministicCQId: boolean,
 ) => {
   logger.info(`resolving table ${table.name}`);
   const stream = new TableResolverStream();
@@ -104,21 +117,37 @@ const resolveTable = async (
       continue;
     }
 
+    setCQId(resource, deterministicCQId);
+    validateResource(resource);
+
     syncStream.write(new SyncResponse({ insert: new Insert({ record: encodeResource(resource) }) }));
 
-    await pMap(table.relations, (child) => resolveTable(logger, client, child, resource, syncStream));
+    await pMap(table.relations, (child) =>
+      resolveTable(logger, client, child, resource, syncStream, deterministicCQId),
+    );
   }
 };
 
-const syncDfs = async ({ logger, client, tables, stream: syncStream, concurrency }: Omit<Options, 'strategy'>) => {
+const syncDfs = async ({
+  logger,
+  client,
+  tables,
+  stream: syncStream,
+  concurrency,
+  deterministicCQId,
+}: Omit<Options, 'strategy'>) => {
   const tableClients = tables.flatMap((table) => {
     const clients = table.multiplexer(client);
     return clients.map((client) => ({ table, client }));
   });
 
-  await pMap(tableClients, ({ table, client }) => resolveTable(logger, client, table, null, syncStream), {
-    concurrency,
-  });
+  await pMap(
+    tableClients,
+    ({ table, client }) => resolveTable(logger, client, table, null, syncStream, deterministicCQId),
+    {
+      concurrency,
+    },
+  );
 };
 
 export const getRoundRobinTableClients = (tables: Table[], client: ClientMeta) => {
@@ -143,11 +172,16 @@ const syncRoundRobin = async ({
   tables,
   stream: syncStream,
   concurrency,
+  deterministicCQId,
 }: Omit<Options, 'strategy'>) => {
   const tableClients = getRoundRobinTableClients(tables, client);
-  await pMap(tableClients, ({ table, client }) => resolveTable(logger, client, table, null, syncStream), {
-    concurrency,
-  });
+  await pMap(
+    tableClients,
+    ({ table, client }) => resolveTable(logger, client, table, null, syncStream, deterministicCQId),
+    {
+      concurrency,
+    },
+  );
 };
 
 export const sync = async ({
@@ -159,7 +193,7 @@ export const sync = async ({
   strategy = Strategy.dfs,
   deterministicCQId,
 }: Options) => {
-  for (const table of tables) {
+  for (const table of flattenTables(tables)) {
     logger.info(`sending migrate message for table ${table.name}`);
     // eslint-disable-next-line @typescript-eslint/naming-convention
     stream.write(new SyncResponse({ migrate_table: new MigrateTable({ table: encodeTable(table) }) }));

@@ -6,7 +6,9 @@ import { Int64 } from './int64.js';
 import { Text } from './text.js';
 import { Timestamp } from './timestamp.js';
 
-export interface Scalar<T> {
+export type Stringable = { toString: () => string };
+
+export interface Scalar<T extends Stringable> {
   toString: () => string;
   get valid(): boolean;
   get value(): T;
@@ -14,9 +16,9 @@ export interface Scalar<T> {
   get dataType(): DataType;
 }
 
-export type Vector = Scalar<unknown>[];
+export type Vector = Scalar<Stringable>[];
 
-export const newScalar = (dataType: DataType): Scalar<unknown> => {
+export const newScalar = (dataType: DataType): Scalar<Stringable> => {
   if (DataType.isBool(dataType)) {
     return new Bool();
   }
