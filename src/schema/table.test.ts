@@ -1,6 +1,6 @@
 import test from 'ava';
 
-import { filterTables, createTable } from './table.js';
+import { filterTables, createTable, flattenTables } from './table.js';
 
 const tableA = createTable({ name: 'a' });
 const tableC = createTable({ name: 'c' });
@@ -52,7 +52,7 @@ const testCases = [
   {
     name: 'should skip dependent tables when skipDependentTables is specified',
     allTables,
-    tables: ['*'],
+    tables: ['a', 'b'],
     skipTables: [],
     skipDependentTables: true,
     expected: [tableA, tableB],
@@ -75,7 +75,8 @@ testCases.forEach((testCase) => {
       t.throws(() => filterTables(allTables, tables, skipTables, skipDependentTables), { message: expectedError });
       return;
     }
-    const actual = filterTables(allTables, tables, skipTables, skipDependentTables);
+    const filtered = filterTables(allTables, tables, skipTables, skipDependentTables);
+    const actual = flattenTables(filtered);
     t.deepEqual(
       actual.map(({ name }) => name),
       expected.map(({ name }) => name),

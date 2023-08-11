@@ -95,6 +95,21 @@ export const getAllParents = (table: Table): Table[] => {
   return [table.parent, ...getAllParents(table.parent)];
 };
 
+const getAllChildren = (table: Table): Table[] => {
+  return table.relations.flatMap((relation) => [relation, ...getAllChildren(relation)]);
+};
+
+const filterByNamesRecursive = (tables: Table[], names: string[]): Table[] => {
+  const filtered = tables
+    .filter((table) => names.includes(table.name))
+    .map((table) => ({ ...table, relations: filterByNamesRecursive(table.relations, names) }));
+  return filtered;
+};
+
+const deduplicate = (tables: Table[]): Table[] => {
+  return tables.filter((table, index, array) => array.findIndex((t) => t.name === table.name) === index);
+};
+
 export const filterTables = (
   tables: Table[],
   include: string[],
@@ -103,22 +118,22 @@ export const filterTables = (
 ): Table[] => {
   const flattened = flattenTables(tables);
 
-  const withIncludes = flattened.filter((table) => {
-    return isMatch(table.name, include) || getAllParents(table).some((parent) => isMatch(parent.name, include));
-  });
+  const withIncludes = flattened.filter((table) => isMatch(table.name, include));
+
+  // Include all children of included tables if skipDependantTables is false
+  const withChildren = skipDependantTables
+    ? withIncludes
+    : deduplicate(withIncludes.flatMap((table) => [table, ...getAllChildren(table)]));
+
   // If a child was included, include the parent as well
-  const withParents = withIncludes
-    .flatMap((table) => [...getAllParents(table), table])
-    .filter((value, index, array) => array.indexOf(value) === index);
+  const withParents = deduplicate(withChildren.flatMap((table) => [...getAllParents(table), table]));
 
   const withSkipped = withParents.filter((table) => {
     return !isMatch(table.name, skip) && !getAllParents(table).some((parent) => isMatch(parent.name, skip));
   });
 
-  const withSkipDependant = withSkipped.filter((table) => table.parent === null || !skipDependantTables);
-
   const skippedParents = withParents
-    .filter((table) => table.parent && !withSkipDependant.includes(table.parent))
+    .filter((table) => table.parent && !withSkipped.includes(table.parent))
     .map((table) => table.parent!.name);
 
   if (skippedParents.length > 0) {
@@ -127,7 +142,11 @@ export const filterTables = (
     );
   }
 
-  return withSkipDependant;
+  const filtered = filterByNamesRecursive(
+    tables,
+    withSkipped.map((table) => table.name),
+  );
+  return filtered;
 };
 
 export const toArrowSchema = (table: Table): Schema => {
