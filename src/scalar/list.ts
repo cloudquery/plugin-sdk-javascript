@@ -6,17 +6,24 @@ import { isInvalid, NULL_VALUE } from './util.js';
 type TVector<T extends Scalar<unknown>> = T[];
 
 export class List<T extends Scalar<unknown>> implements Scalar<TVector<T>> {
-  private _type: new (value?: unknown) => T;
+  private _childScalarInstance: T;
   private _valid = false;
   private _value: TVector<T> = [];
 
-  constructor(scalarType: new (value?: unknown) => T, initialValue?: unknown) {
-    this._type = scalarType;
-    if (!isInvalid(initialValue)) this.value = initialValue;
+  constructor(childScalarInstance: T, initialValue?: TVector<T>) {
+    this._childScalarInstance = childScalarInstance;
+
+    if (!isInvalid(initialValue)) {
+      this._value = initialValue!.map((value) => {
+        const instance = Object.create(this._childScalarInstance);
+        instance.value = value;
+        return instance;
+      });
+    }
   }
 
   get dataType(): DataType {
-    return new ArrowList(this._type.prototype.dataType);
+    return new ArrowList(this._childScalarInstance.dataType.ArrayType);
   }
 
   set value(inputValue: unknown) {
@@ -30,23 +37,22 @@ export class List<T extends Scalar<unknown>> implements Scalar<TVector<T>> {
     const temporaryVector: TVector<T> = [];
 
     if (inputArray.length > 0) {
-      const firstItemScalar = new this._type();
-      firstItemScalar.value = inputArray[0];
-      const firstItemType = Object.getPrototypeOf(firstItemScalar).constructor;
+      this._childScalarInstance.value = inputArray[0];
+      const firstItemType = Object.getPrototypeOf(this._childScalarInstance).constructor;
 
       for (const item of inputArray) {
-        const scalar = new this._type();
-        scalar.value = item;
-
-        if (Object.getPrototypeOf(scalar).constructor !== firstItemType) {
+        try {
+          this._childScalarInstance.value = item;
+        } catch {
           throw new Error(
-            `Type mismatch: All items should be of the same type as the first item. Expected type ${
-              firstItemType.name
-            }, but got ${Object.getPrototypeOf(scalar).constructor.name}`,
+            `Type mismatch: All items should be of the same type as the first item. Expected type ${firstItemType.name}`,
           );
         }
 
-        temporaryVector.push(scalar);
+        // Here, instead of creating a new scalar, we clone the existing instance with the current value
+        const scalarClone = Object.create(this._childScalarInstance);
+        scalarClone.value = item;
+        temporaryVector.push(scalarClone);
       }
 
       this._value = temporaryVector;

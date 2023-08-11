@@ -6,6 +6,7 @@ import { Float64 } from './float64.js';
 import { Int16 } from './int16.js';
 import { Int32 } from './int32.js';
 import { Int64 } from './int64.js';
+import { List } from './list.js';
 import { Text } from './text.js';
 import { Timestamp } from './timestamp.js';
 import { Uint16 } from './uint16.js';
@@ -71,6 +72,11 @@ export const newScalar = (dataType: DataType): Scalar<unknown> => {
 
   if (DataType.isTimestamp(dataType)) {
     return new Timestamp();
+  }
+
+  if (DataType.isList(dataType)) {
+    const childScalar = newScalar(dataType.valueType);
+    return new List(childScalar);
   }
 
   return new Text();
