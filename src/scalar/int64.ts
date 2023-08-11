@@ -2,6 +2,7 @@ import { DataType, Int64 as ArrowInt64 } from '@apache-arrow/esnext-esm';
 
 import { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
+import {bigIntToNumber} from "@apache-arrow/esnext-esm/util/bigint.js";
 
 export class Int64 implements Scalar<bigint> {
   private _valid = false;
@@ -69,6 +70,6 @@ export class Int64 implements Scalar<bigint> {
   validInt64(n: bigint) {
     const MIN_INT64 = BigInt('-9223372036854775808'); // -2^63
     const MAX_INT64 = BigInt('9223372036854775807'); // 2^63 - 1
-    return Number.isSafeInteger(n) && n >= MIN_INT64 && n <= MAX_INT64;
+    return Number.isSafeInteger(bigIntToNumber(n)) && n >= MIN_INT64 && n <= MAX_INT64;
   }
 }
