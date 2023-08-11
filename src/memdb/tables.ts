@@ -1,8 +1,8 @@
-import { Utf8 } from '@apache-arrow/esnext-esm';
+import { Int64 } from '@apache-arrow/esnext-esm';
 
 import { createColumn } from '../schema/column.js';
 import { addCQIDsColumns } from '../schema/meta.js';
-import { pathResolver } from '../schema/resolvers.js';
+import { pathResolver, parentColumnResolver } from '../schema/resolvers.js';
 import { createTable } from '../schema/table.js';
 
 export const createTables = () => {
@@ -12,14 +12,13 @@ export const createTables = () => {
       title: 'Table 1',
       description: 'Table 1 description',
       resolver: (clientMeta, parent, stream) => {
-        stream.write({ id: 'table1-name1' });
-        stream.write({ id: 'table1-name2' });
+        stream.write({ id: 'id-1' });
+        stream.write({ id: 'id-2' });
         return Promise.resolve();
       },
       columns: [
         createColumn({
           name: 'id',
-          type: new Utf8(),
           resolver: pathResolver('id'),
         }),
       ],
@@ -29,15 +28,58 @@ export const createTables = () => {
       title: 'Table 2',
       description: 'Table 2 description',
       resolver: (clientMeta, parent, stream) => {
-        stream.write({ name: 'table2-name1' });
-        stream.write({ name: 'table2-name2' });
+        stream.write({ name: 'name-1' });
+        stream.write({ name: 'name-2' });
         return Promise.resolve();
       },
       columns: [
         createColumn({
           name: 'name',
-          type: new Utf8(),
           resolver: pathResolver('name'),
+        }),
+      ],
+    }),
+    createTable({
+      name: 'table3',
+      title: 'Table 3',
+      description: 'Table 3 description',
+      resolver: (clientMeta, parent, stream) => {
+        stream.write({ name: 'name-1' });
+        stream.write({ name: 'name-2' });
+        return Promise.resolve();
+      },
+      columns: [
+        createColumn({
+          name: 'name',
+          primaryKey: true,
+          resolver: pathResolver('name'),
+        }),
+      ],
+      relations: [
+        createTable({
+          name: 'table3_child1',
+          resolver: (clientMeta, parent, stream) => {
+            stream.write({ name: 'name-1', id: 1 });
+            stream.write({ name: 'name-2', id: 2 });
+            return Promise.resolve();
+          },
+          columns: [
+            createColumn({
+              name: 'name',
+              resolver: pathResolver('name'),
+            }),
+            createColumn({
+              name: 'id',
+              resolver: pathResolver('id'),
+              type: new Int64(),
+              primaryKey: true,
+            }),
+            createColumn({
+              name: 'parent_name',
+              resolver: parentColumnResolver('name'),
+              primaryKey: true,
+            }),
+          ],
         }),
       ],
     }),

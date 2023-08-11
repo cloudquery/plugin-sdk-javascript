@@ -42,6 +42,12 @@ export class Text implements Scalar<string> {
       return;
     }
 
+    if (value instanceof Text) {
+      this._value = value.value;
+      this._valid = value.valid;
+      return;
+    }
+
     if (typeof value!.toString === 'function' && value!.toString !== Object.prototype.toString) {
       this._value = value!.toString();
       this._valid = true;

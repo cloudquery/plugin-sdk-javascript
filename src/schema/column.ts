@@ -1,6 +1,6 @@
 import { isDeepStrictEqual } from 'node:util';
 
-import { DataType, Field, Bool } from '@apache-arrow/esnext-esm';
+import { DataType, Field, Utf8 } from '@apache-arrow/esnext-esm';
 
 import * as arrow from './arrow.js';
 import { ClientMeta } from './meta.js';
@@ -24,7 +24,7 @@ const emptyResolver = () => Promise.resolve();
 
 export const createColumn = ({
   name = '',
-  type = new Bool(),
+  type = new Utf8(),
   description = '',
   incrementalKey = false,
   notNull = false,

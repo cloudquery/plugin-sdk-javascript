@@ -4,7 +4,7 @@ import test from 'ava';
 import { Text } from './text.js';
 
 // eslint-disable-next-line unicorn/no-null
-[null, undefined].forEach((v) => {
+[null, undefined, new Text()].forEach((v) => {
   test(`should set values to empty string when ${v} is passed`, (t) => {
     const s = new Text(v);
     t.is(s.value, '');

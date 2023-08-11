@@ -14,7 +14,9 @@ import { Uint16 } from './uint16.js';
 import { Uint32 } from './uint32.js';
 import { Uint64 } from './uint64.js';
 
-export interface Scalar<T> {
+export type Stringable = { toString: () => string };
+
+export interface Scalar<T extends Stringable> {
   toString: () => string;
   get valid(): boolean;
   get value(): T;
@@ -22,9 +24,9 @@ export interface Scalar<T> {
   get dataType(): DataType;
 }
 
-export type Vector = Scalar<unknown>[];
+export type Vector = Scalar<Stringable>[];
 
-export const newScalar = (dataType: DataType): Scalar<unknown> => {
+export const newScalar = (dataType: DataType): Scalar<Stringable> => {
   if (DataType.isBool(dataType)) {
     return new Bool();
   }

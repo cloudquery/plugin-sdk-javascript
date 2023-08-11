@@ -4,7 +4,7 @@ import { UUIDType } from '../types/uuid.js';
 
 import { Column, createColumn, ColumnResolver } from './column.js';
 import { Resource } from './resource.js';
-import { Table } from './table.js';
+import { Table, getPrimaryKeys } from './table.js';
 
 export type ClientMeta = {
   id: () => string;
@@ -16,9 +16,6 @@ export const parentCqUUIDResolver = (): ColumnResolver => {
       return Promise.resolve(r.setColumData(c.name, null));
     }
     const parentCqID = r.parent.getColumnData(cqIDColumn.name);
-    if (parentCqID == null) {
-      return Promise.resolve(r.setColumData(c.name, null));
-    }
     return Promise.resolve(r.setColumData(c.name, parentCqID));
   };
 };
@@ -54,9 +51,11 @@ export const cqSourceNameColumn = createColumn({
 });
 
 export const addCQIDsColumns = (table: Table): Table => {
+  const hasPks = getPrimaryKeys(table).length > 0;
+  const cqID = hasPks ? cqIDColumn : { ...cqIDColumn, primaryKey: true };
   return {
     ...table,
-    columns: [cqIDColumn, cqParentIDColumn, ...table.columns],
+    columns: [cqID, cqParentIDColumn, ...table.columns],
     relations: table.relations.map((relation) => addCQIDsColumns(relation)),
   };
 };

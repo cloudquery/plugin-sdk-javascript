@@ -1,7 +1,8 @@
 import { tableToIPC, Table as ArrowTable, RecordBatch, vectorFromArray } from '@apache-arrow/esnext-esm';
 
-import { Scalar, Vector, newScalar } from '../scalar/scalar.js';
+import { Scalar, Vector, newScalar, Stringable } from '../scalar/scalar.js';
 
+import { cqIDColumn } from './meta.js';
 import { Table, toArrowSchema } from './table.js';
 import { Nullable } from './types.js';
 
@@ -18,7 +19,7 @@ export class Resource {
     this.data = table.columns.map((column) => newScalar(column.type));
   }
 
-  getColumnData(columnName: string): Scalar<unknown> {
+  getColumnData(columnName: string): Scalar<Stringable> {
     const columnIndex = this.table.columns.findIndex((c) => c.name === columnName);
     if (columnIndex === undefined) {
       throw new Error(`Column '${columnName}' not found`);
@@ -30,6 +31,14 @@ export class Resource {
     const columnIndex = this.table.columns.findIndex((c) => c.name === columnName);
     if (columnIndex === undefined) {
       throw new Error(`Column '${columnName}' not found`);
+    }
+    this.data[columnIndex].value = value;
+  }
+
+  setCqId(value: string): void {
+    const columnIndex = this.table.columns.findIndex((c) => c.name === cqIDColumn.name);
+    if (columnIndex === -1) {
+      return;
     }
     this.data[columnIndex].value = value;
   }
