@@ -95,6 +95,7 @@ test('parentCqUUIDResolver - should set to _cq_id column value when parent has i
 
   parentCqUUIDResolver()({ id: () => '' }, childResource, cqParentIDColumn);
 
-  t.is(childResource.getColumnData(cqParentIDColumn.name).value, '9241a9cb-f580-420f-8fd7-46d2c4f55ccb');
-  t.is(childResource.getColumnData(cqParentIDColumn.name).valid, true);
+  const cqParentId = childResource.getColumnData(cqParentIDColumn.name);
+  t.is(cqParentId.valid, true);
+  t.is(cqParentId.toString(), '9241a9cb-f580-420f-8fd7-46d2c4f55ccb');
 });

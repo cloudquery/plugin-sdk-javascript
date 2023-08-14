@@ -1,6 +1,7 @@
 import { tableToIPC, Table as ArrowTable, RecordBatch, vectorFromArray } from '@apache-arrow/esnext-esm';
 
 import { Scalar, Vector, newScalar, Stringable } from '../scalar/scalar.js';
+import { isExtensionType } from '../types/extensions.js';
 
 import { cqIDColumn } from './meta.js';
 import { Table, toArrowSchema } from './table.js';
@@ -59,7 +60,11 @@ export const encodeResource = (resource: Resource): Uint8Array => {
   let batch = new RecordBatch(schema, undefined);
   for (let index = 0; index < table.columns.length; index++) {
     const column = table.columns[index];
-    const data = resource.getColumnData(column.name);
+    // For extension types, we need to get the underlying value
+    const data = isExtensionType(column.type)
+      ? resource.getColumnData(column.name).value
+      : resource.getColumnData(column.name);
+
     const vector = vectorFromArray([data], column.type);
     batch = batch.setChildAt(index, vector);
   }

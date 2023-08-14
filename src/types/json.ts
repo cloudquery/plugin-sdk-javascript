@@ -1,13 +1,16 @@
-import { DataType, Type } from '@apache-arrow/esnext-esm';
+import { Type, DataType } from '@apache-arrow/esnext-esm';
 
-export class JSONType extends DataType<Type.Utf8> {
-  readonly extensionName: string = 'json';
+import { ExtensionType } from './extensions.js';
 
-  constructor() {
-    super();
+export class JSONType extends DataType<Type.Binary> implements ExtensionType {
+  get name(): string {
+    return 'json';
+  }
+  get metadata(): string {
+    return 'json-serialized';
   }
 
-  get typeId(): Type.Utf8 {
-    return Type.Utf8;
+  get typeId(): Type.Binary {
+    return Type.Binary;
   }
 }

@@ -9,3 +9,6 @@ export const METADATA_TABLE_NAME = 'cq:table_name';
 export const METADATA_TABLE_TITLE = 'cq:table_title';
 export const METADATA_TABLE_DESCRIPTION = 'cq:table_description';
 export const METADATA_TABLE_DEPENDS_ON = 'cq:table_depends_on';
+
+export const METADATA_ARROW_EXTENSION_NAME = 'ARROW:extension:name';
+export const METADATA_ARROW_EXTENSION_METADATA = 'ARROW:extension:metadata';
