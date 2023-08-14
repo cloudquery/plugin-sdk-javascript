@@ -3,7 +3,7 @@ import { default as Ajv } from 'ajv';
 import type { Plugin, SyncOptions, TableOptions, NewClientFunction } from '../plugin/plugin.js';
 import { newPlugin } from '../plugin/plugin.js';
 import { sync } from '../scheduler/scheduler.js';
-import type { Table} from '../schema/table.js';
+import type { Table } from '../schema/table.js';
 import { filterTables } from '../schema/table.js';
 
 import { createDeleteStale } from './delete-stale.js';

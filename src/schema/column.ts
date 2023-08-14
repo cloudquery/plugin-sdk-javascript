@@ -1,9 +1,9 @@
 import { isDeepStrictEqual } from 'node:util';
 
-import type { DataType} from '@apache-arrow/esnext-esm';
+import type { DataType } from '@apache-arrow/esnext-esm';
 import { Field, Utf8 } from '@apache-arrow/esnext-esm';
 
-import type { ExtensionType} from '../types/extensions.js';
+import type { ExtensionType } from '../types/extensions.js';
 import { isExtensionType } from '../types/extensions.js';
 
 import * as arrow from './arrow.js';

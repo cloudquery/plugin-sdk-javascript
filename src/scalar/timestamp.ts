@@ -1,4 +1,4 @@
-import type { DataType} from '@apache-arrow/esnext-esm';
+import type { DataType } from '@apache-arrow/esnext-esm';
 import { Timestamp as ArrowTimestamp, TimeUnit } from '@apache-arrow/esnext-esm';
 import { DateTime } from 'luxon';
 

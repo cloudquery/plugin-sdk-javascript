@@ -1,5 +1,5 @@
 import type { WriteStream, WriteRequest } from '../grpc/plugin.js';
-import type { Table} from '../schema/table.js';
+import type { Table } from '../schema/table.js';
 import { decodeTable, decodeRecord, getPrimaryKeys } from '../schema/table.js';
 
 import type { DeleteStaleFunction } from './delete-stale.js';

@@ -1,7 +1,7 @@
-import type { DataType} from '@apache-arrow/esnext-esm';
+import type { DataType } from '@apache-arrow/esnext-esm';
 import { Utf8, Int64, Bool } from '@apache-arrow/esnext-esm';
 
-import type { Column} from '../schema/column.js';
+import type { Column } from '../schema/column.js';
 import { createColumn } from '../schema/column.js';
 import { JSONType } from '../types/json.js';
 

@@ -1,4 +1,4 @@
-import type { DataType} from '@apache-arrow/esnext-esm';
+import type { DataType } from '@apache-arrow/esnext-esm';
 import { Float32 as ArrowFloat32 } from '@apache-arrow/esnext-esm';
 
 import type { Scalar } from './scalar.js';

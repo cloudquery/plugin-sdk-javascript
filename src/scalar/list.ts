@@ -1,4 +1,4 @@
-import type { DataType} from '@apache-arrow/esnext-esm';
+import type { DataType } from '@apache-arrow/esnext-esm';
 import { List as ArrowList } from '@apache-arrow/esnext-esm';
 
 import type { Scalar } from './scalar.js';

@@ -4,12 +4,12 @@ import pMap from 'p-map';
 import pTimeout from 'p-timeout';
 import type { Logger } from 'winston';
 
-import type { SyncStream} from '../grpc/plugin.js';
+import type { SyncStream } from '../grpc/plugin.js';
 import { SyncResponse, MigrateTable, Insert } from '../grpc/plugin.js';
 import type { Column } from '../schema/column.js';
 import type { ClientMeta } from '../schema/meta.js';
 import { Resource, encodeResource } from '../schema/resource.js';
-import type { Table} from '../schema/table.js';
+import type { Table } from '../schema/table.js';
 import { encodeTable, flattenTables } from '../schema/table.js';
 import type { Nullable } from '../schema/types.js';
 

@@ -1,4 +1,4 @@
-import type { DataType} from '@apache-arrow/esnext-esm';
+import type { DataType } from '@apache-arrow/esnext-esm';
 import { Int32 as ArrowInt32 } from '@apache-arrow/esnext-esm';
 import { bigIntToNumber } from '@apache-arrow/esnext-esm/util/bigint.js';
 

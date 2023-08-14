@@ -5,7 +5,7 @@ import { UUIDType } from '../types/uuid.js';
 import type { Column, ColumnResolver } from './column.js';
 import { createColumn } from './column.js';
 import type { Resource } from './resource.js';
-import type { Table} from './table.js';
+import type { Table } from './table.js';
 import { getPrimaryKeys } from './table.js';
 
 export type ClientMeta = {

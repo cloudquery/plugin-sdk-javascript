@@ -5,7 +5,7 @@ import { Table as ArrowTable, tableFromIPC, tableToIPC, Schema } from '@apache-a
 import { isMatch } from 'matcher';
 
 import * as arrow from './arrow.js';
-import type { Column} from './column.js';
+import type { Column } from './column.js';
 import { fromArrowField, toArrowField } from './column.js';
 import type { ClientMeta } from './meta.js';
 import type { Resource } from './resource.js';
