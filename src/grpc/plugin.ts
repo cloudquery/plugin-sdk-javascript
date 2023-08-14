@@ -2,7 +2,7 @@ import { pluginV3 } from '@cloudquery/plugin-pb-javascript';
 import grpc = require('@grpc/grpc-js');
 
 import { Plugin } from '../plugin/plugin.js';
-import { encodeTables } from '../schema/table.js';
+import { encodeTables, flattenTables } from '../schema/table.js';
 
 export class MigrateTable extends pluginV3.cloudquery.plugin.v3.Sync.MessageMigrateTable {}
 export class DeleteStale extends pluginV3.cloudquery.plugin.v3.Write.MessageDeleteStale {}
@@ -81,8 +81,12 @@ export class PluginServer extends pluginV3.cloudquery.plugin.v3.UnimplementedPlu
     this.plugin
       .tables({ tables, skipTables, skipDependentTables })
       .then((tables) => {
+        const flattened = flattenTables(tables);
         // eslint-disable-next-line promise/no-callback-in-promise
-        return callback(null, new pluginV3.cloudquery.plugin.v3.GetTables.Response({ tables: encodeTables(tables) }));
+        return callback(
+          null,
+          new pluginV3.cloudquery.plugin.v3.GetTables.Response({ tables: encodeTables(flattened) }),
+        );
       })
       .catch((error) => {
         // eslint-disable-next-line promise/no-callback-in-promise
