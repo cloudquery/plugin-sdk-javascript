@@ -1,5 +1,5 @@
 import { FixedSizeBinary } from '@apache-arrow/esnext-esm';
-import { validate } from 'uuid';
+import { parse, stringify } from 'uuid';
 
 import { Nullable } from '../schema/types.js';
 
@@ -33,14 +33,15 @@ export class UUID implements Scalar<Nullable<Uint8Array>> {
     }
 
     if (typeof value === 'string') {
-      this._value = new TextEncoder().encode(value);
-      this._valid = validate(value);
+      // parse throws on invalid uuids
+      this._value = parse(value);
+      this._valid = true;
       return;
     }
 
     if (value instanceof Uint8Array) {
       this._value = value;
-      this._valid = validate(new TextDecoder().decode(value));
+      this._valid = true;
       return;
     }
 
@@ -51,8 +52,9 @@ export class UUID implements Scalar<Nullable<Uint8Array>> {
     }
 
     if (typeof value!.toString === 'function' && value!.toString !== Object.prototype.toString) {
-      this._value = Buffer.from(value!.toString());
-      this._valid = validate(value!.toString());
+      // parse throws on invalid uuids
+      this._value = parse(value!.toString());
+      this._valid = true;
       return;
     }
 
@@ -61,7 +63,7 @@ export class UUID implements Scalar<Nullable<Uint8Array>> {
 
   public toString() {
     if (this._valid) {
-      return new TextDecoder().decode(this._value);
+      return stringify(this._value!);
     }
 
     return NULL_VALUE;
