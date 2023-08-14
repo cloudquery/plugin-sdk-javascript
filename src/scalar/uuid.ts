@@ -1,9 +1,9 @@
 import { FixedSizeBinary } from '@apache-arrow/esnext-esm';
 import { parse, stringify } from 'uuid';
 
-import { Nullable } from '../schema/types.js';
+import type { Nullable } from '../schema/types.js';
 
-import { Scalar } from './scalar.js';
+import type { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
 export class UUID implements Scalar<Nullable<Uint8Array>> {

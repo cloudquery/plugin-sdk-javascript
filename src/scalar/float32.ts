@@ -1,6 +1,7 @@
-import { DataType, Float32 as ArrowFloat32 } from '@apache-arrow/esnext-esm';
+import type { DataType} from '@apache-arrow/esnext-esm';
+import { Float32 as ArrowFloat32 } from '@apache-arrow/esnext-esm';
 
-import { Scalar } from './scalar.js';
+import type { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
 export class Float32 implements Scalar<number> {

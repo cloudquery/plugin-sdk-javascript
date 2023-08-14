@@ -1,7 +1,7 @@
-import { Logger } from 'winston';
+import type { Logger } from 'winston';
 
-import { SyncStream, ReadStream, WriteStream } from '../grpc/plugin.js';
-import { Table } from '../schema/table.js';
+import type { SyncStream, ReadStream, WriteStream } from '../grpc/plugin.js';
+import type { Table } from '../schema/table.js';
 
 export type BackendOptions = {
   tableName: string;

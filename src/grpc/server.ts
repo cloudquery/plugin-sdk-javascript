@@ -1,8 +1,8 @@
 import { pluginV3, discovery1 } from '@cloudquery/plugin-pb-javascript';
 import grpc = require('@grpc/grpc-js');
-import winston from 'winston';
+import type winston from 'winston';
 
-import { Plugin } from '../plugin/plugin.js';
+import type { Plugin } from '../plugin/plugin.js';
 
 import { DiscoveryServer } from './discovery.js';
 import { PluginServer } from './plugin.js';

@@ -1,6 +1,6 @@
-import { StructRowProxy } from '@apache-arrow/esnext-esm';
+import type { StructRowProxy } from '@apache-arrow/esnext-esm';
 
-import { Table } from '../schema/table.js';
+import type { Table } from '../schema/table.js';
 
 //eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type OverwriteFunction = (table: Table, primaryKeys: string[], record: StructRowProxy<any>) => void;

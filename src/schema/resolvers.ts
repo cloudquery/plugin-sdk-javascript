@@ -1,6 +1,6 @@
 import { getProperty } from 'dot-prop';
 
-import { ColumnResolver } from './column.js';
+import type { ColumnResolver } from './column.js';
 
 export const pathResolver = (path: string): ColumnResolver => {
   return (_, resource, c) => {

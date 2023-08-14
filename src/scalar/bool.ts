@@ -1,7 +1,7 @@
 import { Bool as ArrowBool } from '@apache-arrow/esnext-esm';
 import { boolean, isBooleanable } from 'boolean';
 
-import { Scalar } from './scalar.js';
+import type { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
 export class Bool implements Scalar<boolean> {

@@ -4,7 +4,7 @@ import { hideBin } from 'yargs/helpers';
 import { startServer, Network } from '../grpc/server.js';
 import { LogFormat, LogLevel, createLogger } from '../logger/logger.js';
 
-import { Plugin } from './plugin.js';
+import type { Plugin } from './plugin.js';
 
 const TELEMETRY_LEVEL_CHOICES = ['none', 'errors', 'stats', 'all'] as const;
 

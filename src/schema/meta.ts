@@ -2,9 +2,11 @@ import { Utf8, TimeNanosecond } from '@apache-arrow/esnext-esm';
 
 import { UUIDType } from '../types/uuid.js';
 
-import { Column, createColumn, ColumnResolver } from './column.js';
-import { Resource } from './resource.js';
-import { Table, getPrimaryKeys } from './table.js';
+import type { Column, ColumnResolver } from './column.js';
+import { createColumn } from './column.js';
+import type { Resource } from './resource.js';
+import type { Table} from './table.js';
+import { getPrimaryKeys } from './table.js';
 
 export type ClientMeta = {
   id: () => string;

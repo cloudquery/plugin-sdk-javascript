@@ -1,8 +1,9 @@
-import { WriteStream, WriteRequest } from '../grpc/plugin.js';
-import { Table, decodeTable, decodeRecord, getPrimaryKeys } from '../schema/table.js';
+import type { WriteStream, WriteRequest } from '../grpc/plugin.js';
+import type { Table} from '../schema/table.js';
+import { decodeTable, decodeRecord, getPrimaryKeys } from '../schema/table.js';
 
-import { DeleteStaleFunction } from './delete-stale.js';
-import { OverwriteFunction } from './overwrite.js';
+import type { DeleteStaleFunction } from './delete-stale.js';
+import type { OverwriteFunction } from './overwrite.js';
 
 export const createWrite = (
   //eslint-disable-next-line @typescript-eslint/no-explicit-any

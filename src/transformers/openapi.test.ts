@@ -1,7 +1,8 @@
 import { Utf8, Int64, Bool } from '@apache-arrow/esnext-esm';
 import test from 'ava';
 
-import { Column, createColumn } from '../schema/column.js';
+import type { Column} from '../schema/column.js';
+import { createColumn } from '../schema/column.js';
 import { JSONType } from '../types/json.js';
 
 import { oapiDefinitionToColumns } from './openapi.js';

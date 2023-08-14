@@ -1,4 +1,4 @@
-import { ReadStream, ReadRequest } from '../grpc/plugin.js';
+import type { ReadStream, ReadRequest } from '../grpc/plugin.js';
 import { decodeTable } from '../schema/table.js';
 
 //eslint-disable-next-line @typescript-eslint/no-explicit-any

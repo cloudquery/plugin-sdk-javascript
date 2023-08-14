@@ -1,6 +1,6 @@
 import { Utf8 as ArrowString } from '@apache-arrow/esnext-esm';
 
-import { Scalar } from './scalar.js';
+import type { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
 export class Text implements Scalar<string> {

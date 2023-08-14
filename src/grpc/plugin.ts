@@ -1,7 +1,7 @@
 import { pluginV3 } from '@cloudquery/plugin-pb-javascript';
 import grpc = require('@grpc/grpc-js');
 
-import { Plugin } from '../plugin/plugin.js';
+import type { Plugin } from '../plugin/plugin.js';
 import { encodeTables, flattenTables } from '../schema/table.js';
 
 export class MigrateTable extends pluginV3.cloudquery.plugin.v3.Sync.MessageMigrateTable {}

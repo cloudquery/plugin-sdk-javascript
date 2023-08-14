@@ -1,6 +1,7 @@
-import { DataType, List as ArrowList } from '@apache-arrow/esnext-esm';
+import type { DataType} from '@apache-arrow/esnext-esm';
+import { List as ArrowList } from '@apache-arrow/esnext-esm';
 
-import { Scalar } from './scalar.js';
+import type { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
 type TVector<T extends Scalar<unknown>> = T[];

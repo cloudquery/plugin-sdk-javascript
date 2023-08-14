@@ -1,6 +1,6 @@
 import { Type, DataType } from '@apache-arrow/esnext-esm';
 
-import { ExtensionType } from './extensions.js';
+import type { ExtensionType } from './extensions.js';
 
 export class JSONType extends DataType<Type.Binary> implements ExtensionType {
   get name(): string {
