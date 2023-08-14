@@ -1,11 +1,11 @@
 import { DataType, List as ArrowList } from '@apache-arrow/esnext-esm';
 
-import { Scalar, Stringable } from './scalar.js';
+import { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
-type TVector<T extends Scalar<Stringable>> = T[];
+type TVector<T extends Scalar<unknown>> = T[];
 
-export class List<T extends Scalar<Stringable>> implements Scalar<TVector<T>> {
+export class List<T extends Scalar<unknown>> implements Scalar<TVector<T>> {
   private _childScalarInstance: T;
   private _valid = false;
   private _value: TVector<T> = [];

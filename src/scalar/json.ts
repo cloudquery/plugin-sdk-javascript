@@ -1,5 +1,7 @@
 import { Utf8 as ArrowString } from '@apache-arrow/esnext-esm';
 
+import { Nullable } from '../schema/types.js';
+
 import { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
@@ -12,9 +14,9 @@ const validate = (value: string) => {
   }
 };
 
-class JSONType implements Scalar<Uint8Array> {
+class JSONType implements Scalar<Nullable<Uint8Array>> {
   private _valid = false;
-  private _value = new TextEncoder().encode(NULL_VALUE);
+  private _value: Nullable<Uint8Array> = null;
 
   public constructor(v?: unknown) {
     this.value = v;
@@ -29,7 +31,7 @@ class JSONType implements Scalar<Uint8Array> {
     return this._valid;
   }
 
-  public get value(): Uint8Array {
+  public get value(): Nullable<Uint8Array> {
     return this._value;
   }
 

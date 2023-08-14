@@ -19,9 +19,7 @@ import { Uint32 } from './uint32.js';
 import { Uint64 } from './uint64.js';
 import { UUID } from './uuid.js';
 
-export type Stringable = { toString: () => string };
-
-export interface Scalar<T extends Stringable> {
+export interface Scalar<T> {
   toString: () => string;
   get valid(): boolean;
   get value(): T;
@@ -29,9 +27,9 @@ export interface Scalar<T extends Stringable> {
   get dataType(): DataType;
 }
 
-export type Vector = Scalar<Stringable>[];
+export type Vector = Scalar<unknown>[];
 
-export const newScalar = (dataType: DataType): Scalar<Stringable> => {
+export const newScalar = (dataType: DataType): Scalar<unknown> => {
   if (DataType.isBool(dataType)) {
     return new Bool();
   }
