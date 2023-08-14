@@ -15,6 +15,7 @@ export const createTables = () => {
       resolver: (clientMeta, parent, stream) => {
         stream.write({ id: 'id-1', json: '{ "a": 1 }' });
         stream.write({ id: 'id-2', json: [1, 2, 3] });
+        stream.write({ id: 'id-3' });
         return Promise.resolve();
       },
       columns: [

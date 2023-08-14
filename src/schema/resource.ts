@@ -1,6 +1,6 @@
 import { tableToIPC, Table as ArrowTable, RecordBatch, vectorFromArray } from '@apache-arrow/esnext-esm';
 
-import { Scalar, Vector, newScalar, Stringable } from '../scalar/scalar.js';
+import { Scalar, Vector, newScalar } from '../scalar/scalar.js';
 import { isExtensionType } from '../types/extensions.js';
 
 import { cqIDColumn } from './meta.js';
@@ -20,7 +20,7 @@ export class Resource {
     this.data = table.columns.map((column) => newScalar(column.type));
   }
 
-  getColumnData(columnName: string): Scalar<Stringable> {
+  getColumnData(columnName: string): Scalar<unknown> {
     const columnIndex = this.table.columns.findIndex((c) => c.name === columnName);
     if (columnIndex === undefined) {
       throw new Error(`Column '${columnName}' not found`);
