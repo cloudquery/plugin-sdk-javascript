@@ -1,27 +1,26 @@
-import { Utf8 as ArrowString } from '@apache-arrow/esnext-esm';
+import { FixedSizeBinary } from '@apache-arrow/esnext-esm';
 import { validate } from 'uuid';
 
 import { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
-export class UUID implements Scalar<string> {
+export class UUID implements Scalar<Uint8Array> {
   private _valid = false;
-  private _value = '';
+  private _value = new TextEncoder().encode(NULL_VALUE);
 
   public constructor(v?: unknown) {
     this.value = v;
-    return this;
   }
 
   public get dataType() {
-    return new ArrowString();
+    return new FixedSizeBinary(16);
   }
 
   public get valid(): boolean {
     return this._valid;
   }
 
-  public get value(): string {
+  public get value(): Uint8Array {
     return this._value;
   }
 
@@ -32,14 +31,14 @@ export class UUID implements Scalar<string> {
     }
 
     if (typeof value === 'string') {
-      this._value = value;
+      this._value = new TextEncoder().encode(value);
       this._valid = validate(value);
       return;
     }
 
     if (value instanceof Uint8Array) {
-      this._value = new TextDecoder().decode(value);
-      this._valid = validate(this._value);
+      this._value = value;
+      this._valid = validate(new TextDecoder().decode(value));
       return;
     }
 
@@ -50,8 +49,8 @@ export class UUID implements Scalar<string> {
     }
 
     if (typeof value!.toString === 'function' && value!.toString !== Object.prototype.toString) {
-      this._value = value!.toString();
-      this._valid = validate(this._value);
+      this._value = Buffer.from(value!.toString());
+      this._valid = validate(value!.toString());
       return;
     }
 
@@ -60,7 +59,7 @@ export class UUID implements Scalar<string> {
 
   public toString() {
     if (this._valid) {
-      return this._value;
+      return new TextDecoder().decode(this._value);
     }
 
     return NULL_VALUE;

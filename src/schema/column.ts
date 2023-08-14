@@ -2,6 +2,8 @@ import { isDeepStrictEqual } from 'node:util';
 
 import { DataType, Field, Utf8 } from '@apache-arrow/esnext-esm';
 
+import { ExtensionType, isExtensionType } from '../types/extensions.js';
+
 import * as arrow from './arrow.js';
 import { ClientMeta } from './meta.js';
 import { Resource } from './resource.js';
@@ -60,7 +62,13 @@ export const toArrowField = (column: Column): Field => {
   metadataMap.set(arrow.METADATA_UNIQUE, unique ? arrow.METADATA_TRUE : arrow.METADATA_FALSE);
   metadataMap.set(arrow.METADATA_INCREMENTAL, incrementalKey ? arrow.METADATA_TRUE : arrow.METADATA_FALSE);
 
-  return new Field(name, type, /*nullable=*/ !notNull, metadataMap);
+  if (isExtensionType(type)) {
+    const { name, metadata } = type as unknown as ExtensionType;
+    metadataMap.set(arrow.METADATA_ARROW_EXTENSION_NAME, name);
+    metadataMap.set(arrow.METADATA_ARROW_EXTENSION_METADATA, metadata);
+  }
+
+  return new Field(name, type, !notNull, metadataMap);
 };
 
 export const fromArrowField = (field: Field): Column => {

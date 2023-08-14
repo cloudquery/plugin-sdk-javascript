@@ -12,9 +12,9 @@ const validate = (value: string) => {
   }
 };
 
-class JSONType implements Scalar<string> {
+class JSONType implements Scalar<Uint8Array> {
   private _valid = false;
-  private _value = '';
+  private _value = new TextEncoder().encode(NULL_VALUE);
 
   public constructor(v?: unknown) {
     this.value = v;
@@ -29,7 +29,7 @@ class JSONType implements Scalar<string> {
     return this._valid;
   }
 
-  public get value(): string {
+  public get value(): Uint8Array {
     return this._value;
   }
 
@@ -40,14 +40,14 @@ class JSONType implements Scalar<string> {
     }
 
     if (typeof value === 'string') {
-      this._value = value;
+      this._value = new TextEncoder().encode(value);
       this._valid = validate(value);
       return;
     }
 
     if (value instanceof Uint8Array) {
-      this._value = new TextDecoder().decode(value);
-      this._valid = validate(this._value);
+      this._value = value;
+      this._valid = validate(new TextDecoder().decode(value));
       return;
     }
 
@@ -58,7 +58,7 @@ class JSONType implements Scalar<string> {
     }
 
     try {
-      this._value = JSON.stringify(value);
+      this._value = new TextEncoder().encode(JSON.stringify(value));
       this._valid = true;
     } catch {
       throw new Error(`Unable to set '${value}' as JSON`);
@@ -67,7 +67,7 @@ class JSONType implements Scalar<string> {
 
   public toString() {
     if (this._valid) {
-      return this._value;
+      return new TextDecoder().decode(this._value);
     }
 
     return NULL_VALUE;

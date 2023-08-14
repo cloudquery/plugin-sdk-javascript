@@ -1,23 +1,20 @@
-import { DataType, Type } from '@apache-arrow/esnext-esm';
+import { Type, FixedSizeBinary } from '@apache-arrow/esnext-esm';
 
-export class UUIDType extends DataType<Type.Utf8> {
-  readonly extensionName: string = 'uuid';
+import { ExtensionType } from './extensions.js';
 
+export class UUIDType extends FixedSizeBinary implements ExtensionType {
   constructor() {
-    super();
+    super(16);
   }
 
-  get typeId(): Type.Utf8 {
-    return Type.Utf8;
+  get name(): string {
+    return 'uuid';
+  }
+  get metadata(): string {
+    return 'uuid-serialized';
   }
 
-  public toString() {
-    return `uuid`;
+  get typeId(): Type.FixedSizeBinary {
+    return Type.FixedSizeBinary;
   }
-
-  protected static [Symbol.toStringTag] = ((proto: UUIDType) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    (<any>proto).ArrayType = Uint8Array;
-    return (proto[Symbol.toStringTag] = 'uuid');
-  })(UUIDType.prototype);
 }
