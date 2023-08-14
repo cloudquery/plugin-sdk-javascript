@@ -15,7 +15,7 @@ export const parentCqUUIDResolver = (): ColumnResolver => {
     if (r.parent === null) {
       return Promise.resolve(r.setColumData(c.name, null));
     }
-    const parentCqID = r.parent.getColumnData(cqIDColumn.name);
+    const parentCqID = r.parent.getColumnData(cqParentIDColumn.name);
     return Promise.resolve(r.setColumData(c.name, parentCqID));
   };
 };
