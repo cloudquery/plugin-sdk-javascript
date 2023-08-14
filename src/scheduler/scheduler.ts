@@ -2,14 +2,16 @@ import { Duplex } from 'node:stream';
 
 import pMap from 'p-map';
 import pTimeout from 'p-timeout';
-import { Logger } from 'winston';
+import type { Logger } from 'winston';
 
-import { SyncStream, SyncResponse, MigrateTable, Insert } from '../grpc/plugin.js';
-import { Column } from '../schema/column.js';
-import { ClientMeta } from '../schema/meta.js';
+import type { SyncStream } from '../grpc/plugin.js';
+import { SyncResponse, MigrateTable, Insert } from '../grpc/plugin.js';
+import type { Column } from '../schema/column.js';
+import type { ClientMeta } from '../schema/meta.js';
 import { Resource, encodeResource } from '../schema/resource.js';
-import { Table, encodeTable, flattenTables } from '../schema/table.js';
-import { Nullable } from '../schema/types.js';
+import type { Table } from '../schema/table.js';
+import { encodeTable, flattenTables } from '../schema/table.js';
+import type { Nullable } from '../schema/types.js';
 
 import { setCQId } from './cqid.js';
 

@@ -1,11 +1,13 @@
 import { tableToIPC, Table as ArrowTable, RecordBatch, vectorFromArray } from '@apache-arrow/esnext-esm';
 
-import { Scalar, Vector, newScalar } from '../scalar/scalar.js';
+import type { Scalar, Vector } from '../scalar/scalar.js';
+import { newScalar } from '../scalar/scalar.js';
 import { isExtensionType } from '../types/extensions.js';
 
 import { cqIDColumn } from './meta.js';
-import { Table, toArrowSchema } from './table.js';
-import { Nullable } from './types.js';
+import type { Table } from './table.js';
+import { toArrowSchema } from './table.js';
+import type { Nullable } from './types.js';
 
 export class Resource {
   item: unknown;

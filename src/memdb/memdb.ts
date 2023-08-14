@@ -1,8 +1,10 @@
 import { default as Ajv } from 'ajv';
 
-import { Plugin, newPlugin, SyncOptions, TableOptions, NewClientFunction } from '../plugin/plugin.js';
+import type { Plugin, SyncOptions, TableOptions, NewClientFunction } from '../plugin/plugin.js';
+import { newPlugin } from '../plugin/plugin.js';
 import { sync } from '../scheduler/scheduler.js';
-import { Table, filterTables } from '../schema/table.js';
+import type { Table } from '../schema/table.js';
+import { filterTables } from '../schema/table.js';
 
 import { createDeleteStale } from './delete-stale.js';
 import { createOverwrite } from './overwrite.js';

@@ -1,4 +1,4 @@
-import { DeleteStale } from '../grpc/plugin.js';
+import type { DeleteStale } from '../grpc/plugin.js';
 
 export type DeleteStaleFunction = (message: DeleteStale) => void;
 

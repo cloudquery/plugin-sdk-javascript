@@ -1,7 +1,8 @@
-import { DataType, Int16 as ArrowInt16 } from '@apache-arrow/esnext-esm';
+import type { DataType } from '@apache-arrow/esnext-esm';
+import { Int16 as ArrowInt16 } from '@apache-arrow/esnext-esm';
 import { bigIntToNumber } from '@apache-arrow/esnext-esm/util/bigint.js';
 
-import { Scalar } from './scalar.js';
+import type { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
 export class Int16 implements Scalar<bigint> {

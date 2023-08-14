@@ -1,4 +1,4 @@
-import { DataType } from '@apache-arrow/esnext-esm';
+import type { DataType } from '@apache-arrow/esnext-esm';
 
 import { JSONType } from './json.js';
 import { UUIDType } from './uuid.js';

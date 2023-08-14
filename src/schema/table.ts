@@ -1,13 +1,15 @@
-import { Writable } from 'node:stream';
+import type { Writable } from 'node:stream';
 
-import { Table as ArrowTable, tableFromIPC, tableToIPC, Schema, RecordBatch } from '@apache-arrow/esnext-esm';
+import type { RecordBatch } from '@apache-arrow/esnext-esm';
+import { Table as ArrowTable, tableFromIPC, tableToIPC, Schema } from '@apache-arrow/esnext-esm';
 import { isMatch } from 'matcher';
 
 import * as arrow from './arrow.js';
-import { Column, fromArrowField, toArrowField } from './column.js';
-import { ClientMeta } from './meta.js';
-import { Resource } from './resource.js';
-import { Nullable } from './types.js';
+import type { Column } from './column.js';
+import { fromArrowField, toArrowField } from './column.js';
+import type { ClientMeta } from './meta.js';
+import type { Resource } from './resource.js';
+import type { Nullable } from './types.js';
 
 export type TableResolver = (clientMeta: ClientMeta, parent: Nullable<Resource>, stream: Writable) => Promise<void>;
 export type RowResolver = (clientMeta: ClientMeta, resource: Resource) => Promise<void>;

@@ -1,7 +1,8 @@
-import { DataType, Timestamp as ArrowTimestamp, TimeUnit } from '@apache-arrow/esnext-esm';
+import type { DataType } from '@apache-arrow/esnext-esm';
+import { Timestamp as ArrowTimestamp, TimeUnit } from '@apache-arrow/esnext-esm';
 import { DateTime } from 'luxon';
 
-import { Scalar } from './scalar.js';
+import type { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
 export class Timestamp implements Scalar<DateTime> {

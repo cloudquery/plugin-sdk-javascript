@@ -1,12 +1,14 @@
 import { isDeepStrictEqual } from 'node:util';
 
-import { DataType, Field, Utf8 } from '@apache-arrow/esnext-esm';
+import type { DataType } from '@apache-arrow/esnext-esm';
+import { Field, Utf8 } from '@apache-arrow/esnext-esm';
 
-import { ExtensionType, isExtensionType } from '../types/extensions.js';
+import type { ExtensionType } from '../types/extensions.js';
+import { isExtensionType } from '../types/extensions.js';
 
 import * as arrow from './arrow.js';
-import { ClientMeta } from './meta.js';
-import { Resource } from './resource.js';
+import type { ClientMeta } from './meta.js';
+import type { Resource } from './resource.js';
 
 export type ColumnResolver = (meta: ClientMeta, resource: Resource, c: Column) => Promise<void>;
 

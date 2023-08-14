@@ -1,8 +1,8 @@
 import { Utf8 as ArrowString } from '@apache-arrow/esnext-esm';
 
-import { Nullable } from '../schema/types.js';
+import type { Nullable } from '../schema/types.js';
 
-import { Scalar } from './scalar.js';
+import type { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
 const validate = (value: string) => {

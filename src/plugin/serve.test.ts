@@ -2,7 +2,8 @@ import test from 'ava';
 
 import { newMemDBPlugin } from '../memdb/memdb.js';
 
-import { createServeCommand, ServeArguments } from './serve.js';
+import type { ServeArguments } from './serve.js';
+import { createServeCommand } from './serve.js';
 
 const serve = createServeCommand(newMemDBPlugin()).exitProcess(false);
 
