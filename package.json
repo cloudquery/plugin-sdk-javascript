@@ -44,7 +44,6 @@
   "author": "cloudquery (https://github.com/cloudquery)",
   "devDependencies": {
     "@ava/typescript": "^4.1.0",
-    "@grpc/grpc-js": "^1.9.0",
     "@tsconfig/node16": "^16.1.0",
     "@types/uuid": "^9.0.2",
     "@types/yargs": "^17.0.24",
@@ -82,6 +81,7 @@
   "dependencies": {
     "@apache-arrow/esnext-esm": "^12.0.1",
     "@cloudquery/plugin-pb-javascript": "^0.0.7",
+    "@grpc/grpc-js": "^1.9.0",
     "@types/luxon": "^3.3.1",
     "ajv": "^8.12.0",
     "boolean": "^3.2.0",
