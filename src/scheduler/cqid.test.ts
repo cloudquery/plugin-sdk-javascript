@@ -27,8 +27,9 @@ test('setCQId - should set to random value if deterministicCQId is false', (t): 
 
   setCQId(resource, false, () => NIL_UUID);
 
-  t.is(resource.getColumnData(cqIDColumn.name).valid, true);
-  t.is(resource.getColumnData(cqIDColumn.name).value.toString(), NIL_UUID);
+  const cqId = resource.getColumnData(cqIDColumn.name);
+  t.is(cqId.valid, true);
+  t.is(cqId.toString(), NIL_UUID);
 });
 
 test('setCQId - should set to random value if deterministicCQId is true and table does not have non _cq_id PKs', (t): void => {
@@ -50,8 +51,9 @@ test('setCQId - should set to random value if deterministicCQId is true and tabl
 
   setCQId(resource, true, () => NIL_UUID);
 
-  t.is(resource.getColumnData(cqIDColumn.name).valid, true);
-  t.is(resource.getColumnData(cqIDColumn.name).value.toString(), NIL_UUID);
+  const cqId = resource.getColumnData(cqIDColumn.name);
+  t.is(cqId.valid, true);
+  t.is(cqId.toString(), NIL_UUID);
 });
 
 test('setCQId - should set to fixed value if deterministicCQId is true and table has non _cq_id PKs', (t): void => {
@@ -78,6 +80,7 @@ test('setCQId - should set to fixed value if deterministicCQId is true and table
 
   setCQId(resource, true);
 
-  t.is(resource.getColumnData(cqIDColumn.name).valid, true);
-  t.is(resource.getColumnData(cqIDColumn.name).value.toString(), '415bd5dd-9bac-5806-b9d1-c53f17d37455');
+  const cqId = resource.getColumnData(cqIDColumn.name);
+  t.is(cqId.valid, true);
+  t.is(cqId.toString(), '415bd5dd-9bac-5806-b9d1-c53f17d37455');
 });
