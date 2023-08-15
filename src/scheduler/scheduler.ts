@@ -120,9 +120,20 @@ const resolveTable = async (
     }
 
     setCQId(resource, deterministicCQId);
-    validateResource(resource);
 
-    syncStream.write(new SyncResponse({ insert: new Insert({ record: encodeResource(resource) }) }));
+    try {
+      validateResource(resource);
+    } catch (error) {
+      logger.error(`error validating resource for table ${table.name}: ${error}`);
+      continue;
+    }
+
+    try {
+      syncStream.write(new SyncResponse({ insert: new Insert({ record: encodeResource(resource) }) }));
+    } catch (error) {
+      logger.error(`error writing insert for table ${table.name}: ${error}`);
+      continue;
+    }
 
     await pMap(table.relations, (child) =>
       resolveTable(logger, client, child, resource, syncStream, deterministicCQId),

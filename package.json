@@ -9,7 +9,13 @@
   ],
   "type": "module",
   "exports": {
-    "./serve": "./dist/serve/serve.js"
+    "./plugin/plugin": "./dist/plugin/plugin.js",
+    "./plugin/serve": "./dist/plugin/serve.js",
+    "./scheduler": "./dist/scheduler/scheduler.js",
+    "./schema/table": "./dist/schema/table.js",
+    "./schema/column": "./dist/schema/column.js",
+    "./schema/resolvers": "./dist/schema/resolvers.js",
+    "./types/*": "./dist/types/*.js"
   },
   "scripts": {
     "dev": "ts-node --esm src/main.ts serve",
