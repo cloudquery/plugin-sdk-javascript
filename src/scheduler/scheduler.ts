@@ -84,7 +84,7 @@ const resolveTable = async (
   try {
     await table.resolver(client, null, stream);
   } catch (error) {
-    logger.error(`error resolving table ${table.name}: ${error}`);
+    logger.error(`error resolving table ${table.name}`, error);
     return;
   } finally {
     stream.end();
@@ -98,7 +98,7 @@ const resolveTable = async (
     try {
       await pTimeout(table.preResourceResolver(client, resource), { milliseconds: resolveResourceTimeout });
     } catch (error) {
-      logger.error(`error resolving preResourceResolver for table ${table.name}: ${error}`);
+      logger.error(`error resolving preResourceResolver for table ${table.name}`, error);
       continue;
     }
 
@@ -108,14 +108,14 @@ const resolveTable = async (
       });
       await pTimeout(allColumnsPromise, { milliseconds: resolveResourceTimeout });
     } catch (error) {
-      logger.error(`error resolving columns for table ${table.name}: ${error}`);
+      logger.error(`error resolving columns for table ${table.name}`, error);
       continue;
     }
 
     try {
       await table.postResourceResolver(client, resource);
     } catch (error) {
-      logger.error(`error resolving postResourceResolver for table ${table.name}: ${error}`);
+      logger.error(`error resolving postResourceResolver for table ${table.name}`, error);
       continue;
     }
 
@@ -124,14 +124,14 @@ const resolveTable = async (
     try {
       validateResource(resource);
     } catch (error) {
-      logger.error(`error validating resource for table ${table.name}: ${error}`);
+      logger.error(`error validating resource for table ${table.name}`, error);
       continue;
     }
 
     try {
       syncStream.write(new SyncResponse({ insert: new Insert({ record: encodeResource(resource) }) }));
     } catch (error) {
-      logger.error(`error writing insert for table ${table.name}: ${error}`);
+      logger.error(`error writing insert for table ${table.name}`, error);
       continue;
     }
 
@@ -139,6 +139,8 @@ const resolveTable = async (
       resolveTable(logger, client, child, resource, syncStream, deterministicCQId),
     );
   }
+
+  logger.info(`done resolving table ${table.name}`);
 };
 
 const syncDfs = async ({
