@@ -10,6 +10,7 @@ import {
   SyncTableResolveError,
   SyncPreResolveError,
   SyncPostResolveError,
+  SyncResourceEncodeError,
 } from '../errors/errors.js';
 import type { SyncStream } from '../grpc/plugin.js';
 import { SyncResponse, MigrateTable, Insert } from '../grpc/plugin.js';
@@ -66,7 +67,7 @@ const validateResource = (resource: Resource) => {
     .map((column) => column.name);
 
   if (missingPKs.length > 0) {
-    throw new SyncValidationError(`missing primary key(s) ${missingPKs.join(', ')}`);
+    throw new SyncValidationError(`missing primary key(s) ${missingPKs.join(', ')} for table ${resource.table.name}`);
   }
 };
 
@@ -146,14 +147,20 @@ const resolveTable = async (
     try {
       validateResource(resource);
     } catch (error) {
-      logger.error(`error validating resource for table ${table.name}`, error);
+      logger.error(error);
       continue;
     }
 
     try {
       syncStream.write(new SyncResponse({ insert: new Insert({ record: encodeResource(resource) }) }));
     } catch (error) {
-      logger.error(`error writing insert for table ${table.name}`, error);
+      const encodeError = new SyncResourceEncodeError(`error encoding resource for table ${table.name}`, {
+        cause: error,
+        props: {
+          resource,
+        },
+      });
+      logger.error(encodeError);
       continue;
     }
 

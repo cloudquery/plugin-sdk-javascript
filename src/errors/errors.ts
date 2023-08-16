@@ -61,3 +61,9 @@ export const SyncTableResolveError = SyncError.subclass('SyncTableResolveError',
 });
 
 export const TransformError = BaseError.subclass('TransformError', { props: { value: undefined as unknown } });
+
+export const SyncResourceEncodeError = BaseError.subclass('SyncResourceEncodeError', {
+  props: {
+    resource: undefined as unknown as ResourceType,
+  },
+});
