@@ -4,6 +4,8 @@ import type { RecordBatch } from '@apache-arrow/esnext-esm';
 import { Table as ArrowTable, tableFromIPC, tableToIPC, Schema } from '@apache-arrow/esnext-esm';
 import { isMatch } from 'matcher';
 
+import { TableError } from '../errors/errors.js';
+
 import * as arrow from './arrow.js';
 import type { Column } from './column.js';
 import { fromArrowField, toArrowField } from './column.js';
@@ -139,7 +141,7 @@ export const filterTables = (
     .map((table) => table.parent!.name);
 
   if (skippedParents.length > 0) {
-    throw new Error(
+    throw new TableError(
       `Can't skip parent table when child table is included. Skipped parents are: ${skippedParents.join(', ')}`,
     );
   }

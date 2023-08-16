@@ -1,6 +1,8 @@
 import { Bool as ArrowBool } from '@apache-arrow/esnext-esm';
 import { boolean, isBooleanable } from 'boolean';
 
+import { FormatError } from '../errors/errors.js';
+
 import type { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
@@ -43,7 +45,7 @@ export class Bool implements Scalar<boolean> {
       return;
     }
 
-    throw new Error(`Unable to set '${value}' as Bool`);
+    throw new FormatError(`Unable to set Bool from value`, { props: { value } });
   }
 
   public toString() {

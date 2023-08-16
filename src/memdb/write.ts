@@ -1,3 +1,4 @@
+import { WriteError } from '../errors/errors.js';
 import type { WriteStream, WriteRequest } from '../grpc/plugin.js';
 import type { Table } from '../schema/table.js';
 import { decodeTable, decodeRecord, getPrimaryKeys } from '../schema/table.js';
@@ -48,7 +49,7 @@ export const createWrite = (
         }
 
         default: {
-          throw new Error(`Unknown request message type: ${request.message}`);
+          throw new WriteError(`Unknown request message type`, { props: { message: request.message } });
         }
       }
     }

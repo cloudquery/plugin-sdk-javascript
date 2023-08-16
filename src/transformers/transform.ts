@@ -1,6 +1,7 @@
 import type { DataType } from '@apache-arrow/esnext-esm';
 import { Field, Utf8, Int64, Float64, Bool, List } from '@apache-arrow/esnext-esm';
 
+import { TransformError } from '../errors/errors.js';
 import type { Column } from '../schema/column.js';
 import { createColumn } from '../schema/column.js';
 import { JSONType } from '../types/json.js';
@@ -31,7 +32,7 @@ function defaultGetTypeFromValue(key: string, value: unknown): DataType | null {
       }
     }
     default: {
-      throw new Error(`Unsupported type: ${typeof value}`);
+      throw new TransformError(`Unsupported type: ${typeof value}`, { props: { value } });
     }
   }
 }

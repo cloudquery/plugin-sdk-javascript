@@ -1,6 +1,8 @@
 import type { DataType } from '@apache-arrow/esnext-esm';
 import { Float64 as ArrowFloat64 } from '@apache-arrow/esnext-esm';
 
+import { FormatError } from '../errors/errors.js';
+
 import type { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
@@ -50,7 +52,7 @@ export class Float64 implements Scalar<number> {
       return;
     }
 
-    throw new Error(`Unable to set '${value}' as Float64`);
+    throw new FormatError(`Unable to set Float64 from value`, { props: { value } });
   }
 
   public toString() {

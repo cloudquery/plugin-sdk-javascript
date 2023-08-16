@@ -2,6 +2,8 @@ import type { DataType } from '@apache-arrow/esnext-esm';
 import { Int16 as ArrowInt16 } from '@apache-arrow/esnext-esm';
 import { bigIntToNumber } from '@apache-arrow/esnext-esm/util/bigint.js';
 
+import { FormatError } from '../errors/errors.js';
+
 import type { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
@@ -57,7 +59,7 @@ export class Int16 implements Scalar<bigint> {
       return;
     }
 
-    throw new Error(`Unable to set '${value}' as Int16`);
+    throw new FormatError(`Unable to set Int16 from value`, { props: { value } });
   }
 
   public toString() {

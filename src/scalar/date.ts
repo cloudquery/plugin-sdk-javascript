@@ -2,6 +2,8 @@ import type { DataType, DateUnit } from '@apache-arrow/esnext-esm';
 import { Date_ as ArrowDate } from '@apache-arrow/esnext-esm';
 import { DateTime } from 'luxon';
 
+import { FormatError } from '../errors/errors.js';
+
 import type { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
@@ -56,7 +58,7 @@ export class Date implements Scalar<DateTime> {
       return;
     }
 
-    throw new Error(`Unable to set '${value}' as Date`);
+    throw new FormatError(`Unable to set Date from value`, { props: { value } });
   }
 
   public toString(): string {

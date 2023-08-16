@@ -1,5 +1,7 @@
 import { Utf8 as ArrowString } from '@apache-arrow/esnext-esm';
 
+import { FormatError } from '../errors/errors.js';
+
 import type { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
@@ -54,7 +56,7 @@ export class Text implements Scalar<string> {
       return;
     }
 
-    throw new Error(`Unable to set '${value}' as Text`);
+    throw new FormatError(`Unable to set Text from value`, { props: { value } });
   }
 
   public toString() {

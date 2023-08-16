@@ -94,6 +94,8 @@
     "dot-prop": "^8.0.2",
     "luxon": "^3.4.0",
     "matcher": "^5.0.0",
+    "modern-errors": "^6.0.0",
+    "modern-errors-bugs": "^4.0.0",
     "p-map": "^6.0.0",
     "p-timeout": "^6.1.2",
     "uuid": "^9.0.0",

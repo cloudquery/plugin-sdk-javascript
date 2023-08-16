@@ -1,6 +1,8 @@
 import type { DataType } from '@apache-arrow/esnext-esm';
 import { List as ArrowList } from '@apache-arrow/esnext-esm';
 
+import { FormatError } from '../errors/errors.js';
+
 import type { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
@@ -45,8 +47,9 @@ export class List<T extends Scalar<unknown>> implements Scalar<TVector<T>> {
         try {
           this._childScalarInstance.value = item;
         } catch {
-          throw new Error(
+          throw new FormatError(
             `Type mismatch: All items should be of the same type as the first item. Expected type ${firstItemType.name}`,
+            { props: { value: inputValue } },
           );
         }
 

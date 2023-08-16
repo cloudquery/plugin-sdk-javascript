@@ -1,5 +1,6 @@
 import { Utf8 as ArrowString } from '@apache-arrow/esnext-esm';
 
+import { FormatError } from '../errors/errors.js';
 import type { Nullable } from '../schema/types.js';
 
 import type { Scalar } from './scalar.js';
@@ -62,8 +63,8 @@ class JSONType implements Scalar<Nullable<Uint8Array>> {
     try {
       this._value = new TextEncoder().encode(JSON.stringify(value));
       this._valid = true;
-    } catch {
-      throw new Error(`Unable to set '${value}' as JSON`);
+    } catch (error) {
+      throw new FormatError(`Unable to set JSON from value`, { cause: error, props: { value } });
     }
   }
 

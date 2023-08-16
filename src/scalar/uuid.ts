@@ -1,6 +1,7 @@
 import { FixedSizeBinary } from '@apache-arrow/esnext-esm';
 import { parse, stringify } from 'uuid';
 
+import { FormatError } from '../errors/errors.js';
 import type { Nullable } from '../schema/types.js';
 
 import type { Scalar } from './scalar.js';
@@ -58,7 +59,7 @@ export class UUID implements Scalar<Nullable<Uint8Array>> {
       return;
     }
 
-    throw new Error(`Unable to set '${value}' as UUID`);
+    throw new FormatError(`Unable to set UUID from value`, { props: { value } });
   }
 
   public toString() {

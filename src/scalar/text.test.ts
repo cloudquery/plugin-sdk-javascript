@@ -29,5 +29,5 @@ import { Text } from './text.js';
 });
 
 test('should throw when unable to set value', (t) => {
-  t.throws(() => new Text({ value: {} }), { message: "Unable to set '[object Object]' as Text" });
+  t.throws(() => new Text({ value: {} }), { message: 'Unable to set Text from value' });
 });
