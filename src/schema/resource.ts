@@ -59,6 +59,7 @@ export class Resource {
 export const encodeResource = (resource: Resource): Uint8Array => {
   const { table } = resource;
   const schema = toArrowSchema(table);
+
   // TODO: Check if this can be simplified
   let batch = new RecordBatch(schema, undefined);
   for (let index = 0; index < table.columns.length; index++) {

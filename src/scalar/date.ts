@@ -3,13 +3,14 @@ import { Date_ as ArrowDate } from '@apache-arrow/esnext-esm';
 import { DateTime } from 'luxon';
 
 import { FormatError } from '../errors/errors.js';
+import type { Nullable } from '../schema/types.js';
 
 import type { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
-export class Date implements Scalar<DateTime> {
+export class Date implements Scalar<Nullable<globalThis.Date>> {
   private _valid = false;
-  private _value: DateTime = DateTime.fromMillis(0);
+  private _value: Nullable<globalThis.Date> = null;
   private _unit: DateUnit;
 
   public constructor(unit: DateUnit, v?: unknown) {
@@ -26,7 +27,7 @@ export class Date implements Scalar<DateTime> {
     return this._valid;
   }
 
-  public get value(): DateTime {
+  public get value(): Nullable<globalThis.Date> {
     return this._value;
   }
 
@@ -52,8 +53,16 @@ export class Date implements Scalar<DateTime> {
       }
     }
 
+    if (value instanceof DateTime) {
+      dateValue = value;
+    }
+
+    if (value instanceof globalThis.Date) {
+      dateValue = DateTime.fromJSDate(value, { zone: 'utc' });
+    }
+
     if (dateValue && dateValue.isValid) {
-      this._value = dateValue;
+      this._value = dateValue.toJSDate();
       this._valid = true;
       return;
     }
@@ -63,7 +72,7 @@ export class Date implements Scalar<DateTime> {
 
   public toString(): string {
     if (this._valid) {
-      return this._value.toISO()!;
+      return this._value!.toISOString();
     }
 
     return NULL_VALUE;

@@ -5,9 +5,9 @@ import { Text } from './text.js';
 
 // eslint-disable-next-line unicorn/no-null
 [null, undefined, new Text()].forEach((v) => {
-  test(`should set values to empty string when ${v} is passed`, (t) => {
+  test(`should set values to null string when ${v} is passed`, (t) => {
     const s = new Text(v);
-    t.is(s.value, '');
+    t.is(s.value, null);
     t.is(s.valid, false);
     t.true(DataType.isUtf8(s.dataType));
   });

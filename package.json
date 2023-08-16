@@ -9,6 +9,7 @@
   ],
   "type": "module",
   "exports": {
+    "./arrow": "./dist/arrow/arrow.js",
     "./plugin/plugin": "./dist/plugin/plugin.js",
     "./plugin/serve": "./dist/plugin/serve.js",
     "./scheduler": "./dist/scheduler/scheduler.js",

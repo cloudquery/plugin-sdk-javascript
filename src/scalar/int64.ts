@@ -3,13 +3,14 @@ import { Int64 as ArrowInt64 } from '@apache-arrow/esnext-esm';
 import { bigIntToNumber } from '@apache-arrow/esnext-esm/util/bigint.js';
 
 import { FormatError } from '../errors/errors.js';
+import type { Nullable } from '../schema/types.js';
 
 import type { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
-export class Int64 implements Scalar<bigint> {
+export class Int64 implements Scalar<Nullable<bigint>> {
   private _valid = false;
-  private _value: bigint = BigInt(0);
+  private _value: Nullable<bigint> = null;
 
   public constructor(v?: unknown) {
     this.value = v;
@@ -24,7 +25,7 @@ export class Int64 implements Scalar<bigint> {
     return this._valid;
   }
 
-  public get value(): bigint {
+  public get value(): Nullable<bigint> {
     return this._value;
   }
 
@@ -64,7 +65,7 @@ export class Int64 implements Scalar<bigint> {
 
   public toString() {
     if (this._valid) {
-      return String(this._value);
+      return String(this._value!);
     }
 
     return NULL_VALUE;

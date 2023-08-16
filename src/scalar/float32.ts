@@ -2,13 +2,14 @@ import type { DataType } from '@apache-arrow/esnext-esm';
 import { Float32 as ArrowFloat32 } from '@apache-arrow/esnext-esm';
 
 import { FormatError } from '../errors/errors.js';
+import type { Nullable } from '../schema/types.js';
 
 import type { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
-export class Float32 implements Scalar<number> {
+export class Float32 implements Scalar<Nullable<number>> {
   private _valid = false;
-  private _value: number = 0;
+  private _value: Nullable<number> = null;
 
   public constructor(v?: unknown) {
     this.value = v;
@@ -23,7 +24,7 @@ export class Float32 implements Scalar<number> {
     return this._valid;
   }
 
-  public get value(): number {
+  public get value(): Nullable<number> {
     return this._value;
   }
 
@@ -65,7 +66,7 @@ export class Float32 implements Scalar<number> {
 
   public toString() {
     if (this._valid) {
-      return String(this._value);
+      return String(this._value!);
     }
 
     return NULL_VALUE;
