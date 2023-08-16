@@ -2,12 +2,15 @@ import type { DataType } from '@apache-arrow/esnext-esm';
 import { Uint32 as ArrowUint32 } from '@apache-arrow/esnext-esm';
 import { bigIntToNumber } from '@apache-arrow/esnext-esm/util/bigint.js';
 
+import { FormatError } from '../errors/errors.js';
+import type { Nullable } from '../schema/types.js';
+
 import type { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
-export class Uint32 implements Scalar<bigint> {
+export class Uint32 implements Scalar<Nullable<bigint>> {
   private _valid = false;
-  private _value: bigint = BigInt(0);
+  private _value: Nullable<bigint> = null;
 
   public constructor(v?: unknown) {
     this.value = v;
@@ -22,7 +25,10 @@ export class Uint32 implements Scalar<bigint> {
     return this._valid;
   }
 
-  public get value(): bigint {
+  public get value(): Nullable<bigint> {
+    if (!this._valid) {
+      return null;
+    }
     return this._value;
   }
 
@@ -57,12 +63,12 @@ export class Uint32 implements Scalar<bigint> {
       return;
     }
 
-    throw new Error(`Unable to set '${value}' as Uint32`);
+    throw new FormatError(`Unable to set Uint32 from value`, { props: { value } });
   }
 
   public toString() {
     if (this._valid) {
-      return String(this._value);
+      return String(this._value!);
     }
 
     return NULL_VALUE;

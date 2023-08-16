@@ -1,12 +1,15 @@
 import { Bool as ArrowBool } from '@apache-arrow/esnext-esm';
 import { boolean, isBooleanable } from 'boolean';
 
+import { FormatError } from '../errors/errors.js';
+import type { Nullable } from '../schema/types.js';
+
 import type { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
-export class Bool implements Scalar<boolean> {
+export class Bool implements Scalar<Nullable<boolean>> {
   private _valid = false;
-  private _value = false;
+  private _value: Nullable<boolean> = null;
 
   public constructor(v?: unknown) {
     this.value = v;
@@ -21,7 +24,10 @@ export class Bool implements Scalar<boolean> {
     return this._valid;
   }
 
-  public get value(): boolean {
+  public get value(): Nullable<boolean> {
+    if (!this._valid) {
+      return null;
+    }
     return this._value;
   }
 
@@ -43,12 +49,12 @@ export class Bool implements Scalar<boolean> {
       return;
     }
 
-    throw new Error(`Unable to set '${value}' as Bool`);
+    throw new FormatError(`Unable to set Bool from value`, { props: { value } });
   }
 
   public toString() {
     if (this._valid) {
-      return String(this._value);
+      return String(this._value!);
     }
 
     return NULL_VALUE;

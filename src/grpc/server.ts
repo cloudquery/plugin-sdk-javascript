@@ -18,7 +18,7 @@ export const startServer = (logger: winston.Logger, address: string, plugin: Plu
 
   server.bindAsync(address, grpc.ServerCredentials.createInsecure(), (error, port) => {
     if (error) {
-      logger.error(error);
+      logger.error('failed to start server', error);
       return;
     }
     server.start();

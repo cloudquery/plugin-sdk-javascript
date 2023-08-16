@@ -1,5 +1,6 @@
 import { tableToIPC, Table as ArrowTable, RecordBatch, vectorFromArray } from '@apache-arrow/esnext-esm';
 
+import { ResourceError } from '../errors/errors.js';
 import type { Scalar, Vector } from '../scalar/scalar.js';
 import { newScalar } from '../scalar/scalar.js';
 import { isExtensionType } from '../types/extensions.js';
@@ -25,7 +26,7 @@ export class Resource {
   getColumnData(columnName: string): Scalar<unknown> {
     const columnIndex = this.table.columns.findIndex((c) => c.name === columnName);
     if (columnIndex === undefined) {
-      throw new Error(`Column '${columnName}' not found`);
+      throw new ResourceError(`Column '${columnName}' not found`, { props: { resource: this } });
     }
     return this.data[columnIndex];
   }
@@ -33,7 +34,7 @@ export class Resource {
   setColumData(columnName: string, value: unknown): void {
     const columnIndex = this.table.columns.findIndex((c) => c.name === columnName);
     if (columnIndex === undefined) {
-      throw new Error(`Column '${columnName}' not found`);
+      throw new ResourceError(`Column '${columnName}' not found`, { props: { resource: this } });
     }
     this.data[columnIndex].value = value;
   }
@@ -58,6 +59,7 @@ export class Resource {
 export const encodeResource = (resource: Resource): Uint8Array => {
   const { table } = resource;
   const schema = toArrowSchema(table);
+
   // TODO: Check if this can be simplified
   let batch = new RecordBatch(schema, undefined);
   for (let index = 0; index < table.columns.length; index++) {
@@ -74,3 +76,5 @@ export const encodeResource = (resource: Resource): Uint8Array => {
   const bytes = tableToIPC(arrowTable);
   return bytes;
 };
+
+export type ResourceType = Resource;

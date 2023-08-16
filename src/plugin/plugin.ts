@@ -1,5 +1,6 @@
 import type { Logger } from 'winston';
 
+import { UnimplementedError, InitializationError } from '../errors/errors.js';
 import type { SyncStream, ReadStream, WriteStream } from '../grpc/plugin.js';
 import type { Table } from '../schema/table.js';
 
@@ -53,15 +54,15 @@ export interface Plugin extends Client {
 
 export const newUnimplementedSource = (): SourceClient => {
   return {
-    tables: () => Promise.reject(new Error('unimplemented')),
-    sync: () => Promise.reject(new Error('unimplemented')),
+    tables: () => Promise.reject(new UnimplementedError('unimplemented', { props: { method: 'tables' } })),
+    sync: () => Promise.reject(new UnimplementedError('unimplemented', { props: { method: 'sync' } })),
   };
 };
 
 export const newUnimplementedDestination = (): DestinationClient => {
   return {
-    read: () => Promise.reject(new Error('unimplemented')),
-    write: () => Promise.reject(new Error('unimplemented')),
+    read: () => Promise.reject(new UnimplementedError('unimplemented', { props: { method: 'read' } })),
+    write: () => Promise.reject(new UnimplementedError('unimplemented', { props: { method: 'write' } })),
   };
 };
 
@@ -72,10 +73,10 @@ export const newPlugin = (name: string, version: string, newClient: NewClientFun
     name: () => name,
     version: () => version,
     write: (stream: WriteStream) => {
-      return plugin.client?.write(stream) ?? Promise.reject(new Error('client not initialized'));
+      return plugin.client?.write(stream) ?? Promise.reject(new InitializationError('client not initialized'));
     },
     read: (stream: ReadStream) => {
-      return plugin.client?.read(stream) ?? new Error('client not initialized');
+      return plugin.client?.read(stream) ?? new InitializationError('client not initialized');
     },
     getLogger: () => {
       return plugin.logger!;
@@ -84,15 +85,15 @@ export const newPlugin = (name: string, version: string, newClient: NewClientFun
       plugin.logger = logger;
     },
     sync: (options: SyncOptions) => {
-      return plugin.client?.sync(options) ?? new Error('client not initialized');
+      return plugin.client?.sync(options) ?? new InitializationError('client not initialized');
     },
     tables: (options: TableOptions) => {
-      return plugin.client?.tables(options) ?? Promise.reject(new Error('client not initialized'));
+      return plugin.client?.tables(options) ?? Promise.reject(new InitializationError('client not initialized'));
     },
     init: async (spec: string, options: NewClientOptions) => {
       plugin.client = await newClient(plugin.logger!, spec, options);
     },
-    close: () => plugin.client?.close() ?? Promise.reject(new Error('client not initialized')),
+    close: () => plugin.client?.close() ?? Promise.reject(new InitializationError('client not initialized')),
   };
 
   return plugin;

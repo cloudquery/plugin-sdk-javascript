@@ -33,5 +33,5 @@ import { Bool } from './bool.js';
 });
 
 test('should throw when unable to set value', (t) => {
-  t.throws(() => new Bool({ value: {} }), { message: "Unable to set '[object Object]' as Bool" });
+  t.throws(() => new Bool({ value: {} }), { message: 'Unable to set Bool from value' });
 });

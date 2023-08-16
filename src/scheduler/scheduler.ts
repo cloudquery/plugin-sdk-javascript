@@ -4,6 +4,14 @@ import pMap from 'p-map';
 import pTimeout from 'p-timeout';
 import type { Logger } from 'winston';
 
+import {
+  SyncValidationError,
+  SyncColumnResolveError,
+  SyncTableResolveError,
+  SyncPreResolveError,
+  SyncPostResolveError,
+  SyncResourceEncodeError,
+} from '../errors/errors.js';
 import type { SyncStream } from '../grpc/plugin.js';
 import { SyncResponse, MigrateTable, Insert } from '../grpc/plugin.js';
 import type { Column } from '../schema/column.js';
@@ -59,7 +67,7 @@ const validateResource = (resource: Resource) => {
     .map((column) => column.name);
 
   if (missingPKs.length > 0) {
-    throw new Error(`missing primary key(s) ${missingPKs.join(', ')}`);
+    throw new SyncValidationError(`missing primary key(s) ${missingPKs.join(', ')} for table ${resource.table.name}`);
   }
 };
 
@@ -67,7 +75,10 @@ const resolveColumn = async (client: ClientMeta, table: Table, resource: Resourc
   try {
     return await column.resolver(client, resource, column);
   } catch (error) {
-    throw new Error(`error resolving column ${column.name} for table ${table.name}: ${error}`);
+    throw new SyncColumnResolveError(`error resolving column ${column.name} for table ${table.name}`, {
+      cause: error,
+      props: { resource, column, table, client },
+    });
   }
 };
 
@@ -84,21 +95,29 @@ const resolveTable = async (
   try {
     await table.resolver(client, null, stream);
   } catch (error) {
-    logger.error(`error resolving table ${table.name}: ${error}`);
+    const tableError = new SyncTableResolveError(`error resolving table ${table.name}`, {
+      cause: error,
+      props: { table, client },
+    });
+    logger.error(`error resolving table ${table.name}`, tableError);
     return;
   } finally {
     stream.end();
   }
 
   for await (const data of stream) {
-    logger.info(`resolving resource for table ${table.name}`);
+    logger.debug(`resolving resource for table ${table.name}`);
     const resolveResourceTimeout = 10 * 60 * 1000;
     const resource = new Resource(table, parent, data);
 
     try {
       await pTimeout(table.preResourceResolver(client, resource), { milliseconds: resolveResourceTimeout });
     } catch (error) {
-      logger.error(`error resolving preResourceResolver for table ${table.name}: ${error}`);
+      const preResolverError = new SyncPreResolveError(`error calling preResourceResolver for table ${table.name}`, {
+        cause: error,
+        props: { resource, table, client },
+      });
+      logger.error(preResolverError);
       continue;
     }
 
@@ -108,26 +127,51 @@ const resolveTable = async (
       });
       await pTimeout(allColumnsPromise, { milliseconds: resolveResourceTimeout });
     } catch (error) {
-      logger.error(`error resolving columns for table ${table.name}: ${error}`);
+      logger.error(`error resolving columns for table ${table.name}`, error);
       continue;
     }
 
     try {
       await table.postResourceResolver(client, resource);
     } catch (error) {
-      logger.error(`error resolving postResourceResolver for table ${table.name}: ${error}`);
+      const postResolveError = new SyncPostResolveError(`error calling postResourceResolver for table ${table.name}`, {
+        cause: error,
+        props: { resource, table, client },
+      });
+      logger.error(postResolveError);
       continue;
     }
 
     setCQId(resource, deterministicCQId);
-    validateResource(resource);
 
-    syncStream.write(new SyncResponse({ insert: new Insert({ record: encodeResource(resource) }) }));
+    try {
+      validateResource(resource);
+    } catch (error) {
+      logger.error(error);
+      continue;
+    }
+
+    try {
+      syncStream.write(new SyncResponse({ insert: new Insert({ record: encodeResource(resource) }) }));
+    } catch (error) {
+      const encodeError = new SyncResourceEncodeError(`error encoding resource for table ${table.name}`, {
+        cause: error,
+        props: {
+          resource,
+        },
+      });
+      logger.error(encodeError);
+      continue;
+    }
+
+    logger.debug(`done resolving resource for table ${table.name}`);
 
     await pMap(table.relations, (child) =>
       resolveTable(logger, client, child, resource, syncStream, deterministicCQId),
     );
   }
+
+  logger.info(`done resolving table ${table.name}`);
 };
 
 const syncDfs = async ({
@@ -213,7 +257,7 @@ export const sync = async ({
       break;
     }
     default: {
-      throw new Error(`unknown strategy ${strategy}`);
+      throw new SyncValidationError(`unknown strategy ${strategy}`);
     }
   }
 

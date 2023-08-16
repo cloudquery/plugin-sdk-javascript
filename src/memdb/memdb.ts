@@ -1,5 +1,6 @@
 import { default as Ajv } from 'ajv';
 
+import { ValidationError } from '../errors/errors.js';
 import type { Plugin, SyncOptions, TableOptions, NewClientFunction } from '../plugin/plugin.js';
 import { newPlugin } from '../plugin/plugin.js';
 import { sync } from '../scheduler/scheduler.js';
@@ -84,7 +85,7 @@ export const newMemDBPlugin = (): Plugin => {
     const validSchema = validate(parsedSpec);
     if (!validSchema) {
       const messages = validate.errors?.map((error) => error.message).join(', ');
-      return Promise.reject(new Error(`Invalid spec: ${messages}`));
+      return Promise.reject(new ValidationError(`Invalid spec: ${messages}`, { props: { spec } }));
     }
     const { concurrency = 10_000 } = parsedSpec;
     pluginClient.spec = { concurrency };

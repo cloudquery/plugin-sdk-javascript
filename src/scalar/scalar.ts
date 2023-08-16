@@ -64,8 +64,7 @@ export const newScalar = (dataType: DataType): Scalar<unknown> => {
 
   if (DataType.isFloat(dataType)) {
     switch (dataType.precision) {
-      // case Precision.HALF: {
-      // TODO
+      // TODO: case Precision.HALF: {
       // }
       case Precision.SINGLE: {
         return new Float32();
@@ -76,8 +75,13 @@ export const newScalar = (dataType: DataType): Scalar<unknown> => {
     }
   }
 
+  if (DataType.isDecimal(dataType)) {
+    // TODO: Add Decimal support
+    return new Float64();
+  }
+
   if (DataType.isTimestamp(dataType)) {
-    return new Timestamp();
+    return new Timestamp(dataType.unit);
   }
 
   if (DataType.isList(dataType)) {

@@ -9,7 +9,14 @@
   ],
   "type": "module",
   "exports": {
-    "./serve": "./dist/serve/serve.js"
+    "./arrow": "./dist/arrow/arrow.js",
+    "./plugin/plugin": "./dist/plugin/plugin.js",
+    "./plugin/serve": "./dist/plugin/serve.js",
+    "./scheduler": "./dist/scheduler/scheduler.js",
+    "./schema/table": "./dist/schema/table.js",
+    "./schema/column": "./dist/schema/column.js",
+    "./schema/resolvers": "./dist/schema/resolvers.js",
+    "./types/*": "./dist/types/*.js"
   },
   "scripts": {
     "dev": "ts-node --esm src/main.ts serve",
@@ -88,10 +95,13 @@
     "dot-prop": "^8.0.2",
     "luxon": "^3.4.0",
     "matcher": "^5.0.0",
+    "modern-errors": "^6.0.0",
+    "modern-errors-bugs": "^4.0.0",
     "p-map": "^6.0.0",
     "p-timeout": "^6.1.2",
     "uuid": "^9.0.0",
     "winston": "^3.10.0",
+    "winston-error-format": "^2.0.0",
     "yargs": "^17.7.2"
   }
 }

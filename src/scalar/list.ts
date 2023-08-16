@@ -1,15 +1,18 @@
 import type { DataType } from '@apache-arrow/esnext-esm';
 import { List as ArrowList } from '@apache-arrow/esnext-esm';
 
+import { FormatError } from '../errors/errors.js';
+import type { Nullable } from '../schema/types.js';
+
 import type { Scalar } from './scalar.js';
 import { isInvalid, NULL_VALUE } from './util.js';
 
 type TVector<T extends Scalar<unknown>> = T[];
 
-export class List<T extends Scalar<unknown>> implements Scalar<TVector<T>> {
+export class List<T extends Scalar<unknown>> implements Scalar<Nullable<TVector<T>>> {
   private _childScalarInstance: T;
   private _valid = false;
-  private _value: TVector<T> = [];
+  private _value: Nullable<TVector<T>> = null;
 
   constructor(childScalarInstance: T, initialValue?: TVector<T>) {
     this._childScalarInstance = childScalarInstance;
@@ -45,8 +48,9 @@ export class List<T extends Scalar<unknown>> implements Scalar<TVector<T>> {
         try {
           this._childScalarInstance.value = item;
         } catch {
-          throw new Error(
+          throw new FormatError(
             `Type mismatch: All items should be of the same type as the first item. Expected type ${firstItemType.name}`,
+            { props: { value: inputValue } },
           );
         }
 
@@ -68,7 +72,10 @@ export class List<T extends Scalar<unknown>> implements Scalar<TVector<T>> {
     return this._valid;
   }
 
-  get value(): TVector<T> {
+  get value(): Nullable<TVector<T>> {
+    if (!this._valid) {
+      return null;
+    }
     return this._value;
   }
 
@@ -76,11 +83,14 @@ export class List<T extends Scalar<unknown>> implements Scalar<TVector<T>> {
     if (!this._valid) {
       return NULL_VALUE;
     }
-    return `[${this._value.map((v) => v.toString()).join(', ')}]`;
+    return `[${this._value!.map((v) => v.toString()).join(', ')}]`;
   }
 
   get length(): number {
-    return this._value.length;
+    if (!this._valid) {
+      return 0;
+    }
+    return this._value!.length;
   }
 
   // If you need an equality method, you can add an equals method similar to the Python __eq__
