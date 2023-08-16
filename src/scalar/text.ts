@@ -24,6 +24,9 @@ export class Text implements Scalar<Nullable<string>> {
   }
 
   public get value(): Nullable<string> {
+    if (!this._valid) {
+      return null;
+    }
     return this._value;
   }
 

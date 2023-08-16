@@ -26,6 +26,9 @@ export class Uint16 implements Scalar<Nullable<bigint>> {
   }
 
   public get value(): Nullable<bigint> {
+    if (!this._valid) {
+      return null;
+    }
     return this._value;
   }
 

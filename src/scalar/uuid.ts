@@ -24,6 +24,9 @@ export class UUID implements Scalar<Nullable<Uint8Array>> {
   }
 
   public get value(): Nullable<Uint8Array> {
+    if (!this._valid) {
+      return null;
+    }
     return this._value;
   }
 

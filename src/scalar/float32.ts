@@ -25,6 +25,9 @@ export class Float32 implements Scalar<Nullable<number>> {
   }
 
   public get value(): Nullable<number> {
+    if (!this._valid) {
+      return null;
+    }
     return this._value;
   }
 

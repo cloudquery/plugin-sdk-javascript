@@ -13,7 +13,7 @@ export class Timestamp implements Scalar<Nullable<globalThis.Date>> {
   private _value: Nullable<globalThis.Date> = null;
   private _unit: TimeUnit = TimeUnit.NANOSECOND;
 
-  public constructor(v?: unknown, unit?: TimeUnit) {
+  public constructor(unit?: TimeUnit, v?: unknown) {
     this.value = v;
     if (unit) {
       this._unit = unit;
@@ -30,6 +30,9 @@ export class Timestamp implements Scalar<Nullable<globalThis.Date>> {
   }
 
   public get value(): Nullable<globalThis.Date> {
+    if (!this._valid) {
+      return null;
+    }
     return this._value;
   }
 

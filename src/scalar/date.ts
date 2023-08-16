@@ -28,6 +28,9 @@ export class Date implements Scalar<Nullable<globalThis.Date>> {
   }
 
   public get value(): Nullable<globalThis.Date> {
+    if (!this._valid) {
+      return null;
+    }
     return this._value;
   }
 

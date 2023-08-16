@@ -73,6 +73,9 @@ export class List<T extends Scalar<unknown>> implements Scalar<Nullable<TVector<
   }
 
   get value(): Nullable<TVector<T>> {
+    if (!this._valid) {
+      return null;
+    }
     return this._value;
   }
 
