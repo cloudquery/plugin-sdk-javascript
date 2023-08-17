@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.0.4](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.0.3...v0.0.4) (2023-08-17)
+
+
+### Bug Fixes
+
+* Remove date in favor of timestamp, handle interval, pass underlying value to arrow ([#62](https://github.com/cloudquery/plugin-sdk-javascript/issues/62)) ([239dccb](https://github.com/cloudquery/plugin-sdk-javascript/commit/239dccb94707a2c8eaaa4b6cfe63836bc10d2694))
+
 ## [0.0.3](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.0.2...v0.0.3) (2023-08-16)
 
 
