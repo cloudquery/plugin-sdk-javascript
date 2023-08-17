@@ -14,12 +14,6 @@ Node.js 16 or higher. Install Node.js from [here](https://nodejs.org/en/download
 npm ci
 ```
 
-### Run in Development mode
-
-```bash
-npm run dev
-```
-
 ### Build
 
 ```bash
