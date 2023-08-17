@@ -1,10 +1,9 @@
-import { DataType, Precision } from '@apache-arrow/esnext-esm';
+import { DataType, Precision, TimeUnit } from '@apache-arrow/esnext-esm';
 
 import { JSONType } from '../types/json.js';
 import { UUIDType } from '../types/uuid.js';
 
 import { Bool } from './bool.js';
-import { Date } from './date.js';
 import { Float32 } from './float32.js';
 import { Float64 } from './float64.js';
 import { Int16 } from './int16.js';
@@ -90,7 +89,13 @@ export const newScalar = (dataType: DataType): Scalar<unknown> => {
   }
 
   if (DataType.isDate(dataType)) {
-    return new Date(dataType.unit);
+    // TODO: Add Date support
+    return new Timestamp(TimeUnit.SECOND);
+  }
+
+  if (DataType.isInterval(dataType)) {
+    // TODO: Add Interval support
+    return new JSONScalar();
   }
 
   if (dataType instanceof UUIDType) {

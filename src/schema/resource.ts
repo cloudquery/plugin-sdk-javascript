@@ -3,7 +3,6 @@ import { tableToIPC, Table as ArrowTable, RecordBatch, vectorFromArray } from '@
 import { ResourceError } from '../errors/errors.js';
 import type { Scalar, Vector } from '../scalar/scalar.js';
 import { newScalar } from '../scalar/scalar.js';
-import { isExtensionType } from '../types/extensions.js';
 
 import { cqIDColumn } from './meta.js';
 import type { Table } from './table.js';
@@ -64,11 +63,7 @@ export const encodeResource = (resource: Resource): Uint8Array => {
   let batch = new RecordBatch(schema, undefined);
   for (let index = 0; index < table.columns.length; index++) {
     const column = table.columns[index];
-    // For extension types, we need to get the underlying value
-    const data = isExtensionType(column.type)
-      ? resource.getColumnData(column.name).value
-      : resource.getColumnData(column.name);
-
+    const data = resource.getColumnData(column.name).value;
     const vector = vectorFromArray([data], column.type);
     batch = batch.setChildAt(index, vector);
   }
