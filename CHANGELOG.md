@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.0.5](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.0.4...v0.0.5) (2023-09-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @grpc/grpc-js to v1.9.2 ([#65](https://github.com/cloudquery/plugin-sdk-javascript/issues/65)) ([ec6565e](https://github.com/cloudquery/plugin-sdk-javascript/commit/ec6565eb19af3d2a38b883a75584bd10511b9e25))
+* **deps:** Update dependency @tsconfig/node16 to v16.1.1 ([#66](https://github.com/cloudquery/plugin-sdk-javascript/issues/66)) ([482939d](https://github.com/cloudquery/plugin-sdk-javascript/commit/482939d685d25f558ef8848e6868e19048f070b5))
+* **deps:** Update dependency @types/uuid to v9.0.3 ([#68](https://github.com/cloudquery/plugin-sdk-javascript/issues/68)) ([4a515a4](https://github.com/cloudquery/plugin-sdk-javascript/commit/4a515a4b84259a0320613b6baba99e35ba643c49))
+* **deps:** Update dependency eslint to v8.48.0 ([#73](https://github.com/cloudquery/plugin-sdk-javascript/issues/73)) ([155a557](https://github.com/cloudquery/plugin-sdk-javascript/commit/155a5573bd08fa86eb1269e1041ac659cb3751e8))
+* **deps:** Update dependency eslint-plugin-import to v2.28.1 ([#69](https://github.com/cloudquery/plugin-sdk-javascript/issues/69)) ([5bc2684](https://github.com/cloudquery/plugin-sdk-javascript/commit/5bc26841d1369bd532c87bbaecb8f7904adb391d))
+* **deps:** Update dependency eslint-plugin-n to v16.0.2 ([#70](https://github.com/cloudquery/plugin-sdk-javascript/issues/70)) ([1c39e33](https://github.com/cloudquery/plugin-sdk-javascript/commit/1c39e336c635505c3dda587133744ce8a90610ee))
+* **deps:** Update dependency luxon to v3.4.2 ([#71](https://github.com/cloudquery/plugin-sdk-javascript/issues/71)) ([d9d15f4](https://github.com/cloudquery/plugin-sdk-javascript/commit/d9d15f488f38c6d9a242015ea22bbc919a064c76))
+* **deps:** Update dependency prettier to v3.0.3 ([#72](https://github.com/cloudquery/plugin-sdk-javascript/issues/72)) ([6e0a720](https://github.com/cloudquery/plugin-sdk-javascript/commit/6e0a7203398c5a602d1ba4d9c77ce6edaf822a97))
+
 ## [0.0.4](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.0.3...v0.0.4) (2023-08-17)
 
 
