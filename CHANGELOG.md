@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.0.7](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.0.6...v0.0.7) (2023-10-02)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @cloudquery/plugin-pb-javascript to ^0.0.9 ([#85](https://github.com/cloudquery/plugin-sdk-javascript/issues/85)) ([ce316f2](https://github.com/cloudquery/plugin-sdk-javascript/commit/ce316f25bd0611de9394871bcf6ef4ab6bf69e52))
+* **deps:** Update dependency @grpc/grpc-js to v1.9.4 ([#76](https://github.com/cloudquery/plugin-sdk-javascript/issues/76)) ([d5a8346](https://github.com/cloudquery/plugin-sdk-javascript/commit/d5a8346d1b02d8dd495bcc0669d48e66fe37a6ec))
+* **deps:** Update dependency @types/yargs to v17.0.26 ([#77](https://github.com/cloudquery/plugin-sdk-javascript/issues/77)) ([0877451](https://github.com/cloudquery/plugin-sdk-javascript/commit/0877451ddc833df47616064cd5d586426274a2b3))
+* **deps:** Update dependency eslint to v8.50.0 ([#81](https://github.com/cloudquery/plugin-sdk-javascript/issues/81)) ([533ce58](https://github.com/cloudquery/plugin-sdk-javascript/commit/533ce5803fa73e414e7b6f24ec32a12791fd4703))
+* **deps:** Update dependency eslint-import-resolver-typescript to v3.6.1 ([#82](https://github.com/cloudquery/plugin-sdk-javascript/issues/82)) ([ad8ca8d](https://github.com/cloudquery/plugin-sdk-javascript/commit/ad8ca8dc9f8d0173092583b40dcabec80f7c9f8f))
+* **deps:** Update dependency eslint-plugin-n to v16.1.0 ([#83](https://github.com/cloudquery/plugin-sdk-javascript/issues/83)) ([e367fe4](https://github.com/cloudquery/plugin-sdk-javascript/commit/e367fe41b84ca5a52e91aa26704f3eae067f3797))
+* **deps:** Update dependency eslint-plugin-you-dont-need-lodash-underscore to v6.13.0 ([#84](https://github.com/cloudquery/plugin-sdk-javascript/issues/84)) ([f2aca02](https://github.com/cloudquery/plugin-sdk-javascript/commit/f2aca02532763c9aa069b3f38ca5363afd918193))
+* **deps:** Update dependency luxon to v3.4.3 ([#79](https://github.com/cloudquery/plugin-sdk-javascript/issues/79)) ([7d79311](https://github.com/cloudquery/plugin-sdk-javascript/commit/7d79311fce11f2c3d6ddba2275f809e61a230d39))
+* **deps:** Update dependency uuid to v9.0.1 ([#80](https://github.com/cloudquery/plugin-sdk-javascript/issues/80)) ([c75ff6a](https://github.com/cloudquery/plugin-sdk-javascript/commit/c75ff6ad756d3093e8e72fb6d6562f08aa74e460))
+
 ## [0.0.6](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.0.5...v0.0.6) (2023-09-01)
 
 
