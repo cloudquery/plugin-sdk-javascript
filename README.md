@@ -35,7 +35,7 @@ npm run dev -- serve
 ### Package as a Docker image
 
 ```bash
-npm run dev -- package
+npm run dev -- package -m test "v1.0.0" . --dist-dir dist-dir
 ```
 
 ### Formatting and Linting
