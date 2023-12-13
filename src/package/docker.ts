@@ -6,6 +6,7 @@ import stream from 'node:stream/promises';
 import { execa } from 'execa';
 import pMap from 'p-map';
 import { pathExists } from 'path-exists';
+import { isDirectory } from 'path-type';
 import { type Logger } from 'winston';
 
 import type { Plugin } from '../plugin/plugin.js';
@@ -161,9 +162,25 @@ const buildDockerfile = async (
   return supportedTargets as SupportedTarget[];
 };
 
+const copyDocumentation = async (logger: Logger, documentationDirectory: string, outputDirectory: string) => {
+  if (!(await pathExists(documentationDirectory))) {
+    throw new Error(`docs directory ${documentationDirectory} does not exist`);
+  }
+  if (!(await isDirectory(documentationDirectory))) {
+    throw new Error(`path to docs ${documentationDirectory} is not a directory`);
+  }
+
+  const outputPath = path.join(outputDirectory, 'docs');
+  logger.info(`Copying docs from ${documentationDirectory} to ${outputPath}`);
+  await fs.cp(documentationDirectory, outputPath, {
+    recursive: true,
+  });
+};
+
 export const packageDocker = async ({ logger, distDir, plugin, pluginDirectory, pluginVersion, message }: Options) => {
   logger.info(`Packaging plugin to ${distDir}`);
   await fs.mkdir(distDir, { recursive: true });
+  await copyDocumentation(logger, path.join(pluginDirectory, 'docs'), distDir);
   await writeTablesJSON(logger, distDir, plugin);
   const supportedTargets = await buildDockerfile(logger, distDir, pluginDirectory, pluginVersion, plugin);
   await writePackageJSON(logger, distDir, message, pluginVersion, supportedTargets, plugin);
