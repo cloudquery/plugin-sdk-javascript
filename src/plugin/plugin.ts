@@ -30,6 +30,20 @@ export type NewClientOptions = {
 
 export type NewClientFunction = (logger: Logger, spec: string, options: NewClientOptions) => Promise<Client>;
 
+export type PluginKind = 'source' | 'destination';
+
+export type BuildTarget = {
+  os: 'linux' | 'darwin' | 'windows';
+  arch: 'amd64' | 'arm64';
+};
+
+export type PluginOptions = {
+  team: string;
+  kind: PluginKind;
+  dockerFile?: string;
+  buildTargets?: BuildTarget[];
+};
+
 export interface SourceClient {
   tables: (options: TableOptions) => Promise<Table[]>;
   sync: (options: SyncOptions) => void;
@@ -49,6 +63,10 @@ export interface Plugin extends Client {
   setLogger: (logger: Logger) => void;
   name: () => string;
   version: () => string;
+  team: () => string | undefined;
+  kind: () => PluginKind | undefined;
+  dockerFile: () => string;
+  buildTargets: () => BuildTarget[];
   init: (spec: string, options: NewClientOptions) => Promise<void>;
 }
 
@@ -66,12 +84,26 @@ export const newUnimplementedDestination = (): DestinationClient => {
   };
 };
 
-export const newPlugin = (name: string, version: string, newClient: NewClientFunction): Plugin => {
+const defaultBuildTargets: BuildTarget[] = [
+  { os: 'linux', arch: 'amd64' },
+  { os: 'linux', arch: 'arm64' },
+];
+
+export const newPlugin = (
+  name: string,
+  version: string,
+  newClient: NewClientFunction,
+  options?: PluginOptions,
+): Plugin => {
   const plugin = {
     client: undefined as Client | undefined,
     logger: undefined as Logger | undefined,
     name: () => name,
     version: () => version,
+    team: () => options?.team,
+    kind: () => options?.kind,
+    dockerFile: () => options?.dockerFile || 'Dockerfile',
+    buildTargets: () => options?.buildTargets || defaultBuildTargets,
     write: (stream: WriteStream) => {
       return plugin.client?.write(stream) ?? Promise.reject(new InitializationError('client not initialized'));
     },

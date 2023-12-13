@@ -4,7 +4,7 @@ This is the high-level package to use for developing CloudQuery plugins in JavaS
 
 ## Prerequisites
 
-Node.js 16 or higher. Install Node.js from [here](https://nodejs.org/en/download/).
+Node.js 20 or higher. Install Node.js from [here](https://nodejs.org/en/download/).
 
 ## Setup
 
@@ -29,7 +29,13 @@ npm test
 ### Start a local memory based plugin server
 
 ```bash
-npm run dev
+npm run dev -- serve
+```
+
+### Package as a Docker image
+
+```bash
+npm run dev -- package
 ```
 
 ### Formatting and Linting

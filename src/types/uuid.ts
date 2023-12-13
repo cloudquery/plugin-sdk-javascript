@@ -17,4 +17,8 @@ export class UUIDType extends FixedSizeBinary implements ExtensionType {
   get typeId(): Type.FixedSizeBinary {
     return Type.FixedSizeBinary;
   }
+
+  toString(): string {
+    return this.name;
+  }
 }

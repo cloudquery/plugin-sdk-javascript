@@ -80,7 +80,10 @@ export const newMemDBPlugin = (): Plugin => {
     read,
   };
 
-  const newClient: NewClientFunction = (logger, spec /* options */) => {
+  const newClient: NewClientFunction = (logger, spec, { noConnection }) => {
+    if (noConnection) {
+      return Promise.resolve(pluginClient);
+    }
     const parsedSpec = JSON.parse(spec) as Partial<Spec>;
     const validSchema = validate(parsedSpec);
     if (!validSchema) {
@@ -92,7 +95,7 @@ export const newMemDBPlugin = (): Plugin => {
     return Promise.resolve(pluginClient);
   };
 
-  const plugin = newPlugin('memdb', '0.0.1', newClient);
+  const plugin = newPlugin('memdb', '0.0.1', newClient, { team: 'cloudquery', kind: 'source' });
   pluginClient.plugin = plugin;
   return plugin;
 };
