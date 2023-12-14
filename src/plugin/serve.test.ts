@@ -18,8 +18,8 @@ test('should build memdb docker plugin', async (t) => {
     await serve.parse(['package', '-m', 'test', 'v1.0.0', '.', '--dist-dir', outputDirectory, '--log-level', 'debug']);
     t.true(await pathExists(`${outputDirectory}/tables.json`));
     t.true(await pathExists(`${outputDirectory}/package.json`));
-    t.true(await pathExists(`${outputDirectory}/cq-plugin-memdb-v1.0.0-linux-amd64.tar`));
-    t.true(await pathExists(`${outputDirectory}/cq-plugin-memdb-v1.0.0-linux-arm64.tar`));
+    t.true(await pathExists(`${outputDirectory}/plugin-memdb-v1.0.0-linux-amd64.tar`));
+    t.true(await pathExists(`${outputDirectory}/plugin-memdb-v1.0.0-linux-arm64.tar`));
     t.true(await pathExists(`${outputDirectory}/docs/overview.md`));
   });
 });
