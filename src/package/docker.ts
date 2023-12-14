@@ -141,34 +141,31 @@ const buildDockerfile = async (
   const supportedTargets = await pMap(
     plugin.buildTargets(),
     async ({ os, arch }) => {
-      const imageName = `cq-plugin-${plugin.name()}-${pluginVersion}-${os}-${arch}`;
-      const imageTar = `${imageName}.tar`;
+      const imageRepository = `registry.cloudquery.io/${plugin.team()}/${plugin.kind()}-${plugin.name()}`;
+      const imageTag = `${imageRepository}:${pluginVersion}-${os}-${arch}`;
+      const imageTar = `plugin-${plugin.name()}-${pluginVersion}-${os}-${arch}.tar`;
       const imagePath = `${outputDirectory}/${imageTar}`;
-      logger.info(`Building docker image ${imageName}`);
-      logger.debug(
-        `Running command 'docker buildx build -t ${imageName} --platform ${os}/${arch} -f ${dockerFilePath} .'`,
-      );
-      await runDockerCommand(
-        logger,
-        [
-          'buildx',
-          'build',
-          '-t',
-          imageName,
-          '--platform',
-          `${os}/${arch}`,
-          '-f',
-          dockerFilePath,
-          '.',
-          '--progress',
-          'plain',
-          '--load',
-        ],
-        pluginDirectory,
-      );
-      logger.debug(`Saving docker image ${imageName} to ${imagePath}`);
-      logger.debug(`Running command 'docker save -o ${imagePath} ${imageName}'`);
-      await runDockerCommand(logger, ['save', '-o', imagePath, imageName], pluginDirectory);
+      logger.info(`Building docker image ${imageTag}`);
+      const dockerBuildArguments = [
+        'buildx',
+        'build',
+        '-t',
+        imageTag,
+        '--platform',
+        `${os}/${arch}`,
+        '-f',
+        dockerFilePath,
+        '.',
+        '--progress',
+        'plain',
+        '--load',
+      ];
+      logger.debug(`Running command 'docker ${dockerBuildArguments.join(' ')}'`);
+      await runDockerCommand(logger, dockerBuildArguments, pluginDirectory);
+      logger.debug(`Saving docker image ${imageTag} to ${imagePath}`);
+      const dockerSaveArguments = ['save', '-o', imagePath, imageTag];
+      logger.debug(`Running command 'docker ${dockerSaveArguments.join(' ')}'`);
+      await runDockerCommand(logger, dockerSaveArguments, pluginDirectory);
       const checksum = await computeHash(imagePath);
       return { os, arch, path: imageTar, checksum };
     },
