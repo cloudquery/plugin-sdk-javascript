@@ -145,10 +145,25 @@ const buildDockerfile = async (
       const imageTar = `${imageName}.tar`;
       const imagePath = `${outputDirectory}/${imageTar}`;
       logger.info(`Building docker image ${imageName}`);
-      logger.debug(`Running command 'docker build -t ${imageName} --platform ${os}/${arch} -f ${dockerFilePath} .'`);
+      logger.debug(
+        `Running command 'docker buildx build -t ${imageName} --platform ${os}/${arch} -f ${dockerFilePath} .'`,
+      );
       await runDockerCommand(
         logger,
-        ['build', '-t', imageName, '--platform', `${os}/${arch}`, '-f', dockerFilePath, '.', '--progress', 'plain'],
+        [
+          'buildx',
+          'build',
+          '-t',
+          imageName,
+          '--platform',
+          `${os}/${arch}`,
+          '-f',
+          dockerFilePath,
+          '.',
+          '--progress',
+          'plain',
+          '--load',
+        ],
         pluginDirectory,
       );
       logger.debug(`Saving docker image ${imageName} to ${imagePath}`);
