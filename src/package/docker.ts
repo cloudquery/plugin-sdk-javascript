@@ -167,7 +167,8 @@ const buildDockerfile = async (
       logger.debug(`Running command 'docker ${dockerSaveArguments.join(' ')}'`);
       await runDockerCommand(logger, dockerSaveArguments, pluginDirectory);
       const checksum = await computeHash(imagePath);
-      return { os, arch, path: imageTar, checksum };
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      return { os, arch, path: imageTar, checksum, docker_image_tag: imageTag };
     },
     { concurrency: 1 },
   );
