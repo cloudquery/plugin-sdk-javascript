@@ -1,3 +1,5 @@
+import path from 'node:path';
+
 import { valid as semverValid } from 'semver';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
@@ -78,14 +80,12 @@ export const createServeCommand = (plugin: Plugin) => {
               alias: 'D',
               type: 'string',
               description: 'dist directory to output the built plugin. (default: <plugin_directory>/dist)',
-              default: 'dist',
             },
             // eslint-disable-next-line @typescript-eslint/naming-convention
             'docs-dir': {
               type: 'string',
               description:
                 'docs directory containing markdown files to copy to the dist directory. (default: <plugin_directory>/docs)',
-              default: 'docs',
             },
           })
           .positional('pluginVersion', {
@@ -106,7 +106,7 @@ export const createServeCommand = (plugin: Plugin) => {
           throw new Error('plugin team is required');
         }
         if (!plugin.kind()) {
-          throw new Error('plugin icon is required');
+          throw new Error('plugin kind is required');
         }
         if (!plugin.dockerFile()) {
           throw new Error('docker file is required');
@@ -117,6 +117,8 @@ export const createServeCommand = (plugin: Plugin) => {
         if (!semverValid(pluginVersion)) {
           throw new Error(`invalid plugin version: ${pluginVersion}`);
         }
+        distDir = distDir || path.join(pluginDirectory, 'dist');
+        docsDir = docsDir || path.join(pluginDirectory, 'docs');
         await packageDocker({ logger, message, distDir, docsDir, pluginVersion, pluginDirectory, plugin });
       },
     )
