@@ -190,10 +190,18 @@ const copyDocumentation = async (logger: Logger, documentationDirectory: string,
   });
 };
 
-export const packageDocker = async ({ logger, distDir, plugin, pluginDirectory, pluginVersion, message }: Options) => {
+export const packageDocker = async ({
+  logger,
+  distDir,
+  docsDir,
+  plugin,
+  pluginDirectory,
+  pluginVersion,
+  message,
+}: Options) => {
   logger.info(`Packaging plugin to ${distDir}`);
   await fs.mkdir(distDir, { recursive: true });
-  await copyDocumentation(logger, path.join(pluginDirectory, 'docs'), distDir);
+  await copyDocumentation(logger, docsDir, distDir);
   await writeTablesJSON(logger, distDir, plugin);
   const supportedTargets = await buildDockerfile(logger, distDir, pluginDirectory, pluginVersion, plugin);
   await writePackageJSON(logger, distDir, message, pluginVersion, supportedTargets, plugin);
