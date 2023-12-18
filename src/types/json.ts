@@ -13,4 +13,8 @@ export class JSONType extends DataType<Type.Binary> implements ExtensionType {
   get typeId(): Type.Binary {
     return Type.Binary;
   }
+
+  toString(): string {
+    return this.name;
+  }
 }
