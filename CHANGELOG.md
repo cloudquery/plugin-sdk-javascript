@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.0](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.0.9...v0.1.0) (2023-12-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* Require Node.js 20
+
+### Features
+
+* Add package command ([f2f7931](https://github.com/cloudquery/plugin-sdk-javascript/commit/f2f793133e4217e0632c3ef0fff107dc95fd7914))
+
 ## [0.0.9](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.0.8...v0.0.9) (2023-12-01)
 
 
