@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.0...v0.1.1) (2023-12-29)
+
+
+### Bug Fixes
+
+* Add --license placeholder for future use ([#108](https://github.com/cloudquery/plugin-sdk-javascript/issues/108)) ([0537d45](https://github.com/cloudquery/plugin-sdk-javascript/commit/0537d45a7581fee932ca043467cad2fdb32ebeb0))
+
 ## [0.1.0](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.0.9...v0.1.0) (2023-12-18)
 
 
