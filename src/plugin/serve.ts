@@ -54,6 +54,11 @@ export const createServeCommand = (plugin: Plugin) => {
             description: 'network to bind to',
             default: 'tcp',
           },
+          license: {
+            type: 'string',
+            description: 'set offline license file (placeholder for future use)',
+            default: '',
+          },
         });
       },
       ({ address, logLevel, logFormat }: ServeArguments) => {
@@ -163,12 +168,6 @@ export const createServeCommand = (plugin: Plugin) => {
         hidden: true,
         choices: TELEMETRY_LEVEL_CHOICES,
         default: 'all',
-      },
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-      license: {
-        type: 'string',
-        description: 'set offline license file (placeholder for future use)',
-        default: '',
       },
     })
     .env('CQ_')
