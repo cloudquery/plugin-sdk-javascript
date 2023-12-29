@@ -54,6 +54,11 @@ export const createServeCommand = (plugin: Plugin) => {
             description: 'network to bind to',
             default: 'tcp',
           },
+          license: {
+            type: 'string',
+            description: 'set offline license file (placeholder for future use)',
+            default: '',
+          },
         });
       },
       ({ address, logLevel, logFormat }: ServeArguments) => {
