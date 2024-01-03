@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.3...v0.1.4) (2024-01-03)
+
+
+### Bug Fixes
+
+* Rename registry ([#121](https://github.com/cloudquery/plugin-sdk-javascript/issues/121)) ([b9f6d6b](https://github.com/cloudquery/plugin-sdk-javascript/commit/b9f6d6bf3346a2d42c38ded4cabd3deb3a7bc77b))
+
 ## [0.1.3](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.2...v0.1.3) (2024-01-02)
 
 
