@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.5](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.4...v0.1.5) (2024-02-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @cloudquery/plugin-pb-javascript to ^0.0.14 ([#132](https://github.com/cloudquery/plugin-sdk-javascript/issues/132)) ([2fd4d80](https://github.com/cloudquery/plugin-sdk-javascript/commit/2fd4d800bacaaf92f2caf85a07068c0ecdd54f61))
+* **deps:** Update dependency @grpc/grpc-js to v1.9.14 ([#123](https://github.com/cloudquery/plugin-sdk-javascript/issues/123)) ([31069d4](https://github.com/cloudquery/plugin-sdk-javascript/commit/31069d4e864db6f5801b71b4d35e5ca159857f70))
+* **deps:** Update dependency @types/luxon to v3.4.2 ([#128](https://github.com/cloudquery/plugin-sdk-javascript/issues/128)) ([1497bf3](https://github.com/cloudquery/plugin-sdk-javascript/commit/1497bf344cc664dff86d98ee0d6f30f405e13c79))
+* **deps:** Update dependency @types/uuid to v9.0.8 ([#124](https://github.com/cloudquery/plugin-sdk-javascript/issues/124)) ([4678570](https://github.com/cloudquery/plugin-sdk-javascript/commit/4678570c8866dadc811bb8aff5d3c92739ed0e09))
+* **deps:** Update dependency ava to v6.1.1 ([#129](https://github.com/cloudquery/plugin-sdk-javascript/issues/129)) ([45bccb8](https://github.com/cloudquery/plugin-sdk-javascript/commit/45bccb83594489bbcf9cfb1b3db65ca8f11519ee))
+* **deps:** Update dependency eslint-plugin-n to v16.6.2 ([#126](https://github.com/cloudquery/plugin-sdk-javascript/issues/126)) ([70fcc0b](https://github.com/cloudquery/plugin-sdk-javascript/commit/70fcc0bb217f127fa70ffc38814a128c32b50dd8))
+* **deps:** Update dependency eslint-plugin-prettier to v5.1.3 ([#127](https://github.com/cloudquery/plugin-sdk-javascript/issues/127)) ([1b67bba](https://github.com/cloudquery/plugin-sdk-javascript/commit/1b67bba680f9aaaeb09d2485699de0582ae06268))
+
 ## [0.1.4](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.3...v0.1.4) (2024-01-03)
 
 
