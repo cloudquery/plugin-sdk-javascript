@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.6](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.5...v0.1.6) (2024-02-12)
+
+
+### Features
+
+* Implement `GetSpecSchema` plugin gRPC API call ([#133](https://github.com/cloudquery/plugin-sdk-javascript/issues/133)) ([d1568f5](https://github.com/cloudquery/plugin-sdk-javascript/commit/d1568f51c52db6491fab0d14b56a6ea4d2850c78))
+
 ## [0.1.5](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.4...v0.1.5) (2024-02-01)
 
 
