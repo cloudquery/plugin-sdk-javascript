@@ -42,6 +42,7 @@ export type PluginOptions = {
   kind: PluginKind;
   dockerFile?: string;
   buildTargets?: BuildTarget[];
+  jsonSchema?: string;
 };
 
 export interface SourceClient {
@@ -65,6 +66,7 @@ export interface Plugin extends Client {
   version: () => string;
   team: () => string | undefined;
   kind: () => PluginKind | undefined;
+  jsonSchema: () => string | undefined;
   dockerFile: () => string;
   buildTargets: () => BuildTarget[];
   init: (spec: string, options: NewClientOptions) => Promise<void>;
@@ -102,6 +104,7 @@ export const newPlugin = (
     version: () => version,
     team: () => options?.team,
     kind: () => options?.kind,
+    jsonSchema: () => options?.jsonSchema,
     dockerFile: () => options?.dockerFile || 'Dockerfile',
     buildTargets: () => options?.buildTargets || defaultBuildTargets,
     write: (stream: WriteStream) => {
