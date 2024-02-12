@@ -49,9 +49,16 @@ export class PluginServer extends pluginV3.cloudquery.plugin.v3.UnimplementedPlu
   }
 
   GetSpecSchema(
-    call: grpc.ServerUnaryCall<pluginV3.cloudquery.plugin.v3.GetSpecSchema.Request, pluginV3.cloudquery.plugin.v3.GetSpecSchema.Response>,
-    callback: grpc.sendUnaryData<pluginV3.cloudquery.plugin.v3.GetSpecSchema.Response>): void {
-    return callback(null, new pluginV3.cloudquery.plugin.v3.GetSpecSchema.Response({ json_schema: this.plugin.jsonSchema() }));
+    call: grpc.ServerUnaryCall<
+      pluginV3.cloudquery.plugin.v3.GetSpecSchema.Request,
+      pluginV3.cloudquery.plugin.v3.GetSpecSchema.Response
+    >,
+    callback: grpc.sendUnaryData<pluginV3.cloudquery.plugin.v3.GetSpecSchema.Response>,
+  ): void {
+    return callback(
+      null,
+      new pluginV3.cloudquery.plugin.v3.GetSpecSchema.Response({ json_schema: this.plugin.jsonSchema() }),
+    );
   }
 
   Init(

@@ -66,7 +66,7 @@ export interface Plugin extends Client {
   version: () => string;
   team: () => string | undefined;
   kind: () => PluginKind | undefined;
-  jsonSchema: () => string | undefined,
+  jsonSchema: () => string | undefined;
   dockerFile: () => string;
   buildTargets: () => BuildTarget[];
   init: (spec: string, options: NewClientOptions) => Promise<void>;

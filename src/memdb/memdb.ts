@@ -95,11 +95,10 @@ export const newMemDBPlugin = (): Plugin => {
     return Promise.resolve(pluginClient);
   };
 
-  const plugin = newPlugin('memdb', '0.0.1', newClient,
-    {
-      team: 'cloudquery',
-      kind: 'source',
-      jsonSchema: `{
+  const plugin = newPlugin('memdb', '0.0.1', newClient, {
+    team: 'cloudquery',
+    kind: 'source',
+    jsonSchema: `{
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/cloudquery/plugin-sdk-javascript/memdb/spec",
   "$ref": "#/$defs/Spec",
@@ -117,8 +116,7 @@ export const newMemDBPlugin = (): Plugin => {
     },
   }
 }`,
-    },
-  );
+  });
   pluginClient.plugin = plugin;
   return plugin;
 };
