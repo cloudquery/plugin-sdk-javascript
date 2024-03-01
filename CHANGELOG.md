@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.7](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.6...v0.1.7) (2024-03-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @cloudquery/plugin-pb-javascript to ^0.0.16 ([#145](https://github.com/cloudquery/plugin-sdk-javascript/issues/145)) ([165c18a](https://github.com/cloudquery/plugin-sdk-javascript/commit/165c18a73b25c4fb47c1fb18984a6929ee34557a))
+* **deps:** Update dependency @grpc/grpc-js to v1.10.1 ([#139](https://github.com/cloudquery/plugin-sdk-javascript/issues/139)) ([3fa3bdf](https://github.com/cloudquery/plugin-sdk-javascript/commit/3fa3bdf35d83f9334f38c1356915c37ec98ed7a5))
+* **deps:** Update dependency ava to v6.1.2 ([#136](https://github.com/cloudquery/plugin-sdk-javascript/issues/136)) ([f347ef9](https://github.com/cloudquery/plugin-sdk-javascript/commit/f347ef95cf7e14268fa348669ae436babe3e66f6))
+* **deps:** Update dependency eslint to v8.57.0 ([#140](https://github.com/cloudquery/plugin-sdk-javascript/issues/140)) ([bb3612c](https://github.com/cloudquery/plugin-sdk-javascript/commit/bb3612c48b670ad59025e7175d0128ae3c35176b))
+* **deps:** Update dependency eslint-plugin-unused-imports to v3.1.0 ([#141](https://github.com/cloudquery/plugin-sdk-javascript/issues/141)) ([74cdb95](https://github.com/cloudquery/plugin-sdk-javascript/commit/74cdb950b93e92f5393a00668ab26728c7ec63fa))
+* **deps:** Update dependency semver to v7.6.0 ([#142](https://github.com/cloudquery/plugin-sdk-javascript/issues/142)) ([7e98f6a](https://github.com/cloudquery/plugin-sdk-javascript/commit/7e98f6aa18743cda3cabbb34bb26a7b6099ccb16))
+* **deps:** Update typescript-eslint monorepo to v6.21.0 ([#143](https://github.com/cloudquery/plugin-sdk-javascript/issues/143)) ([a939d0d](https://github.com/cloudquery/plugin-sdk-javascript/commit/a939d0da38eeb60d554da2dd2bf3f73f1beb3420))
+
 ## [0.1.6](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.5...v0.1.6) (2024-02-12)
 
 
