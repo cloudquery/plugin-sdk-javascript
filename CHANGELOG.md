@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.8](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.7...v0.1.8) (2024-04-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @grpc/grpc-js to v1.10.4 ([#146](https://github.com/cloudquery/plugin-sdk-javascript/issues/146)) ([23f532d](https://github.com/cloudquery/plugin-sdk-javascript/commit/23f532d2c284f242ebe3524b4fc504828e9d6be4))
+* **deps:** Update dependency @tsconfig/node20 to v20.1.4 ([#147](https://github.com/cloudquery/plugin-sdk-javascript/issues/147)) ([727d75a](https://github.com/cloudquery/plugin-sdk-javascript/commit/727d75a1447476a63a8a020316000dcf6bd25642))
+* **deps:** Update dependency typescript to v5.4.3 ([#149](https://github.com/cloudquery/plugin-sdk-javascript/issues/149)) ([e33acf6](https://github.com/cloudquery/plugin-sdk-javascript/commit/e33acf6403fbfb0092b4a5c138ef206ec8023104))
+* **deps:** Update dependency winston to v3.13.0 ([#150](https://github.com/cloudquery/plugin-sdk-javascript/issues/150)) ([7bf728e](https://github.com/cloudquery/plugin-sdk-javascript/commit/7bf728eacc6950ea4892f5fe596407e4a9b6fc7b))
+
 ## [0.1.7](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.6...v0.1.7) (2024-03-01)
 
 
