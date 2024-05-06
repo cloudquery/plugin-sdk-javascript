@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.11](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.10...v0.1.11) (2024-05-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @grpc/grpc-js to v1.10.6 ([#159](https://github.com/cloudquery/plugin-sdk-javascript/issues/159)) ([04929b4](https://github.com/cloudquery/plugin-sdk-javascript/commit/04929b4e33ea087b211e5f87c0b4c4951a283bc9))
+* **deps:** Update dependency ajv to v8.13.0 ([#164](https://github.com/cloudquery/plugin-sdk-javascript/issues/164)) ([d3d0377](https://github.com/cloudquery/plugin-sdk-javascript/commit/d3d03773376ffa03a147ada112fcfc9cc4e4854c))
+* **deps:** Update dependency eslint-plugin-unused-imports to v3.2.0 ([#165](https://github.com/cloudquery/plugin-sdk-javascript/issues/165)) ([0387ea3](https://github.com/cloudquery/plugin-sdk-javascript/commit/0387ea3293f0ccc1b8982bde25b5f55a60776868))
+* **deps:** Update dependency eslint-plugin-you-dont-need-lodash-underscore to v6.14.0 ([#166](https://github.com/cloudquery/plugin-sdk-javascript/issues/166)) ([c8d5fce](https://github.com/cloudquery/plugin-sdk-javascript/commit/c8d5fcefd6e50a736d72ddbccc81359c0eadadc7))
+* **deps:** Update dependency modern-errors to v7.0.1 ([#160](https://github.com/cloudquery/plugin-sdk-javascript/issues/160)) ([df916b5](https://github.com/cloudquery/plugin-sdk-javascript/commit/df916b51597af9b8ed0e248d64c064374179f250))
+* **deps:** Update dependency p-map to v7.0.2 ([#162](https://github.com/cloudquery/plugin-sdk-javascript/issues/162)) ([3c41e74](https://github.com/cloudquery/plugin-sdk-javascript/commit/3c41e74493d90d7c0669a938dabf8bca0d3bcf02))
+* **deps:** Update dependency typescript to v5.4.5 ([#163](https://github.com/cloudquery/plugin-sdk-javascript/issues/163)) ([22af059](https://github.com/cloudquery/plugin-sdk-javascript/commit/22af0597134a66a1e575513fa389c2dd99f64f6d))
+* **deps:** Update typescript-eslint monorepo to v7.8.0 ([#167](https://github.com/cloudquery/plugin-sdk-javascript/issues/167)) ([68a3c39](https://github.com/cloudquery/plugin-sdk-javascript/commit/68a3c393fc845af117852545069ca71877599042))
+
 ## [0.1.10](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.9...v0.1.10) (2024-04-11)
 
 
