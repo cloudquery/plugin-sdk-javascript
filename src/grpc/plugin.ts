@@ -158,4 +158,54 @@ export class PluginServer extends pluginV3.cloudquery.plugin.v3.UnimplementedPlu
         return callback(error, null);
       });
   }
+
+  TestConnection(
+    call: grpc.ServerUnaryCall<
+      pluginV3.cloudquery.plugin.v3.TestConnection.Request,
+      pluginV3.cloudquery.plugin.v3.TestConnection.Response
+    >,
+    callback: grpc.sendUnaryData<pluginV3.cloudquery.plugin.v3.TestConnection.Response>,
+  ): void {
+    const { spec = new Uint8Array() } = call.request.toObject();
+
+    const stringSpec = new TextDecoder().decode(spec);
+    if (this.plugin.testConnection) {
+      this.plugin
+        .testConnection(stringSpec)
+        .then(({ success, failureCode, failureDescription }) => {
+          // eslint-disable-next-line promise/no-callback-in-promise
+          return callback(
+            null,
+            new pluginV3.cloudquery.plugin.v3.TestConnection.Response({
+              success,
+              failure_code: failureCode,
+              failure_description: failureDescription,
+            }),
+          );
+        })
+        .catch((error) => {
+          // eslint-disable-next-line promise/no-callback-in-promise
+          return callback(error, null);
+        });
+    } else {
+      // fall back to init
+      this.plugin
+        .init(stringSpec, { noConnection: false })
+        .then(() => {
+          // eslint-disable-next-line promise/no-callback-in-promise
+          return callback(null, new pluginV3.cloudquery.plugin.v3.TestConnection.Response({ success: true }));
+        })
+        .catch(() => {
+          // eslint-disable-next-line promise/no-callback-in-promise
+          return callback(
+            null,
+            new pluginV3.cloudquery.plugin.v3.TestConnection.Response({
+              success: false,
+              failure_code: 'UNKNOWN',
+              failure_description: 'Failed to connect',
+            }),
+          );
+        });
+    }
+  }
 }
