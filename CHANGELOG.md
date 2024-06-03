@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.12](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.11...v0.1.12) (2024-06-03)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @cloudquery/plugin-pb-javascript to ^0.0.19 ([#177](https://github.com/cloudquery/plugin-sdk-javascript/issues/177)) ([a9ec712](https://github.com/cloudquery/plugin-sdk-javascript/commit/a9ec7125760c2e391ca893d4ae7b627f4c16007f))
+* **deps:** Update dependency @grpc/grpc-js to v1.10.8 ([#168](https://github.com/cloudquery/plugin-sdk-javascript/issues/168)) ([5a10335](https://github.com/cloudquery/plugin-sdk-javascript/commit/5a10335a65ca0eeef1376d1fc45a10d631df8956))
+* **deps:** Update dependency ajv to v8.14.0 ([#172](https://github.com/cloudquery/plugin-sdk-javascript/issues/172)) ([d82278c](https://github.com/cloudquery/plugin-sdk-javascript/commit/d82278cca533f94249f480404de81b19e28d8186))
+* **deps:** Update dependency ava to v6.1.3 ([#169](https://github.com/cloudquery/plugin-sdk-javascript/issues/169)) ([8eca09e](https://github.com/cloudquery/plugin-sdk-javascript/commit/8eca09ed8ce656f813d66d702ad94964a513abe9))
+* **deps:** Update dependency eslint-plugin-promise to v6.2.0 ([#173](https://github.com/cloudquery/plugin-sdk-javascript/issues/173)) ([aa2c7cb](https://github.com/cloudquery/plugin-sdk-javascript/commit/aa2c7cba66aa21e274992e3170584c4b9883e924))
+* **deps:** Update dependency semver to v7.6.2 ([#171](https://github.com/cloudquery/plugin-sdk-javascript/issues/171)) ([154f3d9](https://github.com/cloudquery/plugin-sdk-javascript/commit/154f3d92bb07cbbd2ffd29373ffe7d91f7f9fe9c))
+
 ## [0.1.11](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.10...v0.1.11) (2024-05-01)
 
 
