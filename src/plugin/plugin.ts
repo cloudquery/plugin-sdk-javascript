@@ -70,6 +70,7 @@ export interface Plugin extends Client {
   dockerFile: () => string;
   buildTargets: () => BuildTarget[];
   init: (spec: string, options: NewClientOptions) => Promise<void>;
+  testConnection?: (spec: string) => Promise<{ success?: boolean; failureCode?: string; failureDescription?: string }>;
 }
 
 export const newUnimplementedSource = (): SourceClient => {
