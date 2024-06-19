@@ -93,7 +93,7 @@ const resolveTable = async (
   logger.info(`resolving table ${table.name}`);
   const stream = new TableResolverStream();
   try {
-    await table.resolver(client, null, stream);
+    await table.resolver(client, parent, stream);
   } catch (error) {
     const tableError = new SyncTableResolveError(`error resolving table ${table.name}`, {
       cause: error,
