@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.14](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.13...v0.1.14) (2024-06-19)
+
+
+### Bug Fixes
+
+* Parent resource is not passed to table resolvers ([#181](https://github.com/cloudquery/plugin-sdk-javascript/issues/181)) ([d992df5](https://github.com/cloudquery/plugin-sdk-javascript/commit/d992df55124c0ddedd489336c2afce7f97e93eaf))
+
 ## [0.1.13](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.12...v0.1.13) (2024-06-11)
 
 
