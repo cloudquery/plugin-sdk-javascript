@@ -1,5 +1,20 @@
 # Changelog
 
+## [0.1.15](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.14...v0.1.15) (2024-07-08)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @cloudquery/plugin-pb-javascript to ^0.0.21 ([#192](https://github.com/cloudquery/plugin-sdk-javascript/issues/192)) ([7985255](https://github.com/cloudquery/plugin-sdk-javascript/commit/798525502ef2d33866e77abd01c1682480bf410a))
+* **deps:** Update dependency @grpc/grpc-js to v1.10.10 ([#183](https://github.com/cloudquery/plugin-sdk-javascript/issues/183)) ([df41c3e](https://github.com/cloudquery/plugin-sdk-javascript/commit/df41c3e0ac8c6d1eee8a74faa1c083e186e002d0))
+* **deps:** Update dependency ajv to v8.16.0 ([#186](https://github.com/cloudquery/plugin-sdk-javascript/issues/186)) ([0254ed4](https://github.com/cloudquery/plugin-sdk-javascript/commit/0254ed46ba5d03ad51764da1fdcc9434459f4a5b))
+* **deps:** Update dependency dot-prop to v9 ([#191](https://github.com/cloudquery/plugin-sdk-javascript/issues/191)) ([902618a](https://github.com/cloudquery/plugin-sdk-javascript/commit/902618aaa9f9ca3096af7c17c258455c65c56351))
+* **deps:** Update dependency eslint-plugin-promise to v6.4.0 ([#188](https://github.com/cloudquery/plugin-sdk-javascript/issues/188)) ([f9b989c](https://github.com/cloudquery/plugin-sdk-javascript/commit/f9b989cc64f8cb2f135bc3e53b70b64d40af774a))
+* **deps:** Update dependency prettier to v3.3.2 ([#187](https://github.com/cloudquery/plugin-sdk-javascript/issues/187)) ([a332aec](https://github.com/cloudquery/plugin-sdk-javascript/commit/a332aec4547ff9a7a243f40eaf157391536f6264))
+* **deps:** Update dependency typescript to v5.5.2 ([#189](https://github.com/cloudquery/plugin-sdk-javascript/issues/189)) ([1587728](https://github.com/cloudquery/plugin-sdk-javascript/commit/158772806e7b826eded5c427a8a64636670b87a5))
+* **deps:** Update dependency winston-error-format to v3.0.1 ([#184](https://github.com/cloudquery/plugin-sdk-javascript/issues/184)) ([4d5427f](https://github.com/cloudquery/plugin-sdk-javascript/commit/4d5427ff9c55e890bfb16d5911ac7a8e96ea8e55))
+* **deps:** Update typescript-eslint monorepo to v7.15.0 ([#190](https://github.com/cloudquery/plugin-sdk-javascript/issues/190)) ([5dead75](https://github.com/cloudquery/plugin-sdk-javascript/commit/5dead75183cc9e1bc53de3081b06ee566c01c599))
+
 ## [0.1.14](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.13...v0.1.14) (2024-06-19)
 
 
