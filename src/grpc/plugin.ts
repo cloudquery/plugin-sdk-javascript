@@ -159,6 +159,16 @@ export class PluginServer extends pluginV3.cloudquery.plugin.v3.UnimplementedPlu
       });
   }
 
+  Transform(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    call: grpc.ServerDuplexStream<
+      pluginV3.cloudquery.plugin.v3.Transform.Request,
+      pluginV3.cloudquery.plugin.v3.Transform.Response
+    >,
+  ): void {
+    throw new Error('Method not implemented.');
+  }
+
   TestConnection(
     call: grpc.ServerUnaryCall<
       pluginV3.cloudquery.plugin.v3.TestConnection.Request,
