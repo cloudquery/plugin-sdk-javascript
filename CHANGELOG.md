@@ -1,5 +1,29 @@
 # Changelog
 
+## [0.1.18](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.17...v0.1.18) (2024-09-04)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @apache-arrow/esnext-esm to v17 ([#209](https://github.com/cloudquery/plugin-sdk-javascript/issues/209)) ([c454a9c](https://github.com/cloudquery/plugin-sdk-javascript/commit/c454a9cde52b7ad1c2407a99824005129830320b))
+* **deps:** Update dependency @cloudquery/plugin-pb-javascript to ^0.0.25 ([#207](https://github.com/cloudquery/plugin-sdk-javascript/issues/207)) ([63d7c6d](https://github.com/cloudquery/plugin-sdk-javascript/commit/63d7c6d9b024de2b4cef846c54bbecb1875c59b3))
+* **deps:** Update dependency @grpc/grpc-js to v1.11.1 ([#203](https://github.com/cloudquery/plugin-sdk-javascript/issues/203)) ([f719a26](https://github.com/cloudquery/plugin-sdk-javascript/commit/f719a264c134107f846b5f31b89de81c27f85d6f))
+* **deps:** Update dependency @types/yargs to v17.0.33 ([#212](https://github.com/cloudquery/plugin-sdk-javascript/issues/212)) ([5c8eacc](https://github.com/cloudquery/plugin-sdk-javascript/commit/5c8eacc627c5e31651193b4a8e40417d450b96fe))
+* **deps:** Update dependency ajv to v8.17.1 ([#204](https://github.com/cloudquery/plugin-sdk-javascript/issues/204)) ([3d62083](https://github.com/cloudquery/plugin-sdk-javascript/commit/3d620839c5d909c4282a7e9e3b646d85aeda5ed4))
+* **deps:** Update dependency eslint-import-resolver-typescript to v3.6.3 ([#213](https://github.com/cloudquery/plugin-sdk-javascript/issues/213)) ([5cf3ac3](https://github.com/cloudquery/plugin-sdk-javascript/commit/5cf3ac3f77b4cf9a8c7d40e902072d42699591e1))
+* **deps:** Update dependency eslint-plugin-prettier to v5.2.1 ([#205](https://github.com/cloudquery/plugin-sdk-javascript/issues/205)) ([b4fa967](https://github.com/cloudquery/plugin-sdk-javascript/commit/b4fa967740182c837cb0271d8ef31c602ec91051))
+* **deps:** Update dependency eslint-plugin-promise to v6.6.0 ([#206](https://github.com/cloudquery/plugin-sdk-javascript/issues/206)) ([f194f27](https://github.com/cloudquery/plugin-sdk-javascript/commit/f194f27b450919ebca36325d934ba0f728469809))
+* **deps:** Update dependency execa to v9 ([#210](https://github.com/cloudquery/plugin-sdk-javascript/issues/210)) ([2d381c2](https://github.com/cloudquery/plugin-sdk-javascript/commit/2d381c298f94479a5566bbb2d0802eee91c7bdf4))
+* **deps:** Update dependency execa to v9.3.1 ([#214](https://github.com/cloudquery/plugin-sdk-javascript/issues/214)) ([3ef5567](https://github.com/cloudquery/plugin-sdk-javascript/commit/3ef55679d7d031060461ca8afd4ac94bc689fcc4))
+* **deps:** Update dependency luxon to v3.5.0 ([#215](https://github.com/cloudquery/plugin-sdk-javascript/issues/215)) ([1d8d3e6](https://github.com/cloudquery/plugin-sdk-javascript/commit/1d8d3e624efceca1262962d153a79b62490529aa))
+* **deps:** Update dependency prettier to v3.3.3 ([#198](https://github.com/cloudquery/plugin-sdk-javascript/issues/198)) ([f8dcf18](https://github.com/cloudquery/plugin-sdk-javascript/commit/f8dcf18f5665f7dd2c25b76d76f558511686402c))
+* **deps:** Update dependency semver to v7.6.3 ([#199](https://github.com/cloudquery/plugin-sdk-javascript/issues/199)) ([49e6c3b](https://github.com/cloudquery/plugin-sdk-javascript/commit/49e6c3b6e0b65f809f3b0b33bf4fd0a3623eceef))
+* **deps:** Update dependency typescript to v5.5.4 ([#201](https://github.com/cloudquery/plugin-sdk-javascript/issues/201)) ([d3af7ed](https://github.com/cloudquery/plugin-sdk-javascript/commit/d3af7ed81ec6c49fd07916a61b0bdb98a6b5e1c3))
+* **deps:** Update dependency uuid to v10 ([#211](https://github.com/cloudquery/plugin-sdk-javascript/issues/211)) ([a6a5168](https://github.com/cloudquery/plugin-sdk-javascript/commit/a6a5168b97efe56aa39c4f2a147671e5d37caee3))
+* **deps:** Update dependency winston to v3.13.1 ([#202](https://github.com/cloudquery/plugin-sdk-javascript/issues/202)) ([909cd7c](https://github.com/cloudquery/plugin-sdk-javascript/commit/909cd7c2da3afb12e0d79f8517feb0236bd0dce4))
+* **deps:** Update dependency winston to v3.14.2 ([#216](https://github.com/cloudquery/plugin-sdk-javascript/issues/216)) ([66bde84](https://github.com/cloudquery/plugin-sdk-javascript/commit/66bde84e8ac20e421c0497c2ae60b1f46d191c87))
+* **deps:** Update typescript-eslint monorepo to v7.18.0 ([#208](https://github.com/cloudquery/plugin-sdk-javascript/issues/208)) ([45196e4](https://github.com/cloudquery/plugin-sdk-javascript/commit/45196e4f56adcfbe7bd9ef6e724fdf066dfd42c1))
+
 ## [0.1.17](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.16...v0.1.17) (2024-07-30)
 
 
