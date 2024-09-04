@@ -14,10 +14,6 @@ export class UUIDType extends FixedSizeBinary implements ExtensionType {
     return 'uuid-serialized';
   }
 
-  get typeId(): Type.FixedSizeBinary {
-    return Type.FixedSizeBinary;
-  }
-
   toString(): string {
     return this.name;
   }
