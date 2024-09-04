@@ -1,4 +1,4 @@
-import { Type, FixedSizeBinary } from '@apache-arrow/esnext-esm';
+import { FixedSizeBinary } from '@apache-arrow/esnext-esm';
 
 import type { ExtensionType } from './extensions.js';
 
@@ -12,10 +12,6 @@ export class UUIDType extends FixedSizeBinary implements ExtensionType {
   }
   get metadata(): string {
     return 'uuid-serialized';
-  }
-
-  get typeId(): Type.FixedSizeBinary {
-    return Type.FixedSizeBinary;
   }
 
   toString(): string {
