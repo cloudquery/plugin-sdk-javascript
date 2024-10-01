@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.19](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.18...v0.1.19) (2024-10-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @cloudquery/plugin-pb-javascript to ^0.0.26 ([#220](https://github.com/cloudquery/plugin-sdk-javascript/issues/220)) ([2314963](https://github.com/cloudquery/plugin-sdk-javascript/commit/2314963512613695cef099d285856498a4aa386c))
+* **deps:** Update dependency @cloudquery/plugin-pb-javascript to ^0.0.27 ([#230](https://github.com/cloudquery/plugin-sdk-javascript/issues/230)) ([9b1af30](https://github.com/cloudquery/plugin-sdk-javascript/commit/9b1af300590fa62f064d3630f4c909b4314613be))
+* **deps:** Update dependency @grpc/grpc-js to v1.11.3 ([#222](https://github.com/cloudquery/plugin-sdk-javascript/issues/222)) ([4031d41](https://github.com/cloudquery/plugin-sdk-javascript/commit/4031d418731974849d7155d787fe3cdca080ebce))
+* **deps:** Update dependency eslint to v8.57.1 ([#223](https://github.com/cloudquery/plugin-sdk-javascript/issues/223)) ([54f4929](https://github.com/cloudquery/plugin-sdk-javascript/commit/54f49297a2a88575b7cae0461cac59e08e8c0a09))
+* **deps:** Update dependency eslint-plugin-import to v2.30.0 ([#224](https://github.com/cloudquery/plugin-sdk-javascript/issues/224)) ([90521e6](https://github.com/cloudquery/plugin-sdk-javascript/commit/90521e6c0786a35f14b37d92b4e01683ac7899c9))
+* **deps:** Update dependency eslint-plugin-unicorn to v55 ([#228](https://github.com/cloudquery/plugin-sdk-javascript/issues/228)) ([60cbdd7](https://github.com/cloudquery/plugin-sdk-javascript/commit/60cbdd749a15ad8d395da9f1987dcbe60a5ad488))
+* **deps:** Update dependency execa to v9.4.0 ([#225](https://github.com/cloudquery/plugin-sdk-javascript/issues/225)) ([ec9d3b2](https://github.com/cloudquery/plugin-sdk-javascript/commit/ec9d3b2e0d690b2112d1ecb00af4e6e99ea0dede))
+* **deps:** Update dependency typescript to v5.6.2 ([#226](https://github.com/cloudquery/plugin-sdk-javascript/issues/226)) ([aa368f3](https://github.com/cloudquery/plugin-sdk-javascript/commit/aa368f369465b38cf1a0fc660e8d9dcdd4da65b7))
+
 ## [0.1.18](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.17...v0.1.18) (2024-09-04)
 
 
