@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.1.21](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.20...v0.1.21) (2024-12-02)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @apache-arrow/esnext-esm to v18 ([#244](https://github.com/cloudquery/plugin-sdk-javascript/issues/244)) ([cf83603](https://github.com/cloudquery/plugin-sdk-javascript/commit/cf8360318efa639d5ad3cabe0eb06599620b98b7))
+* **deps:** Update dependency @cloudquery/plugin-pb-javascript to ^0.0.29 ([#248](https://github.com/cloudquery/plugin-sdk-javascript/issues/248)) ([abab01a](https://github.com/cloudquery/plugin-sdk-javascript/commit/abab01a52b7f5f817e44979861505224e74e13f8))
+* **deps:** Update dependency path-type to v6 ([#245](https://github.com/cloudquery/plugin-sdk-javascript/issues/245)) ([ff672a5](https://github.com/cloudquery/plugin-sdk-javascript/commit/ff672a54c62f1f56a93aa8aab6c4eade9092f7ed))
+* **deps:** Update dependency prettier to v3.4.1 ([#249](https://github.com/cloudquery/plugin-sdk-javascript/issues/249)) ([9f84e4b](https://github.com/cloudquery/plugin-sdk-javascript/commit/9f84e4bb9fec224171b8a8a590ab078ccd76578b))
+* **deps:** Update dependency typescript to v5.7.2 ([#241](https://github.com/cloudquery/plugin-sdk-javascript/issues/241)) ([14289b3](https://github.com/cloudquery/plugin-sdk-javascript/commit/14289b3a8e08ac20cba3d3a209cc553b5d762c48))
+* **deps:** Update dependency uuid to v11 ([#246](https://github.com/cloudquery/plugin-sdk-javascript/issues/246)) ([b5d8e4d](https://github.com/cloudquery/plugin-sdk-javascript/commit/b5d8e4dd9284dac34e981c121cb6e131d215b5e9))
+* **deps:** Update dependency winston to v3.17.0 ([#242](https://github.com/cloudquery/plugin-sdk-javascript/issues/242)) ([8f0754c](https://github.com/cloudquery/plugin-sdk-javascript/commit/8f0754ce5bc0c238a4868b534e91372ff99f94f5))
+
 ## [0.1.20](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.19...v0.1.20) (2024-11-04)
 
 
