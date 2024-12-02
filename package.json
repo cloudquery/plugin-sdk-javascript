@@ -88,7 +88,7 @@
     }
   },
   "dependencies": {
-    "@apache-arrow/esnext-esm": "^17.0.0",
+    "@apache-arrow/esnext-esm": "^18.0.0",
     "@cloudquery/plugin-pb-javascript": "^0.0.28",
     "@grpc/grpc-js": "^1.9.0",
     "@types/luxon": "^3.3.1",
@@ -103,7 +103,7 @@
     "p-map": "^7.0.0",
     "p-timeout": "^6.1.2",
     "path-exists": "^5.0.0",
-    "path-type": "^5.0.0",
+    "path-type": "^6.0.0",
     "semver": "^7.5.4",
     "uuid": "^11.0.0",
     "winston": "^3.10.0",
