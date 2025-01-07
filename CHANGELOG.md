@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.22](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.21...v0.1.22) (2025-01-07)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @cloudquery/plugin-pb-javascript to ^0.0.30 ([#256](https://github.com/cloudquery/plugin-sdk-javascript/issues/256)) ([4ed12a0](https://github.com/cloudquery/plugin-sdk-javascript/commit/4ed12a0b31271f064a5d91b984c8a24a843da210))
+* **deps:** Update dependency @grpc/grpc-js to v1.12.5 ([#251](https://github.com/cloudquery/plugin-sdk-javascript/issues/251)) ([7f14cd1](https://github.com/cloudquery/plugin-sdk-javascript/commit/7f14cd1d255075120df1fee4557aea7de5f94026))
+* **deps:** Update dependency execa to v9.5.2 ([#252](https://github.com/cloudquery/plugin-sdk-javascript/issues/252)) ([e29bc9f](https://github.com/cloudquery/plugin-sdk-javascript/commit/e29bc9f4b4c05b256711032e73a189dec623d0ec))
+* **deps:** Update dependency p-map to v7.0.3 ([#254](https://github.com/cloudquery/plugin-sdk-javascript/issues/254)) ([2908744](https://github.com/cloudquery/plugin-sdk-javascript/commit/29087448c5a86e21f0af179eddd43aaac026513c))
+* **deps:** Update dependency prettier to v3.4.2 ([#255](https://github.com/cloudquery/plugin-sdk-javascript/issues/255)) ([f2b747e](https://github.com/cloudquery/plugin-sdk-javascript/commit/f2b747e823b3bd576d518e88d0d068e664560c1a))
+
 ## [0.1.21](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.20...v0.1.21) (2024-12-02)
 
 
