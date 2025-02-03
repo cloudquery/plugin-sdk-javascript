@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.1.23](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.22...v0.1.23) (2025-02-03)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @apache-arrow/esnext-esm to v19 ([#262](https://github.com/cloudquery/plugin-sdk-javascript/issues/262)) ([65cf803](https://github.com/cloudquery/plugin-sdk-javascript/commit/65cf8033a39390535cb9700a757336cc8c964741))
+* **deps:** Update dependency @cloudquery/plugin-pb-javascript to ^0.0.31 ([#264](https://github.com/cloudquery/plugin-sdk-javascript/issues/264)) ([9bb3fb6](https://github.com/cloudquery/plugin-sdk-javascript/commit/9bb3fb64d3b3debd4c539e553578c73225265cd3))
+* **deps:** Update dependency p-timeout to v6.1.4 ([#257](https://github.com/cloudquery/plugin-sdk-javascript/issues/257)) ([0019a7c](https://github.com/cloudquery/plugin-sdk-javascript/commit/0019a7c3877ff501a4fc795fcbc8423c40e4b6ad))
+* **deps:** Update dependency typescript to v5.7.3 ([#258](https://github.com/cloudquery/plugin-sdk-javascript/issues/258)) ([ed0d619](https://github.com/cloudquery/plugin-sdk-javascript/commit/ed0d619be4f52465eba07681549d99c993daa1c1))
+* **deps:** Update dependency uuid to v11.0.5 ([#260](https://github.com/cloudquery/plugin-sdk-javascript/issues/260)) ([7bed538](https://github.com/cloudquery/plugin-sdk-javascript/commit/7bed538a7cfac489acdc1eac1e708c8dc31657aa))
+* **deps:** Update eslint packages ([#261](https://github.com/cloudquery/plugin-sdk-javascript/issues/261)) ([beaf022](https://github.com/cloudquery/plugin-sdk-javascript/commit/beaf0227d4a4de56e531fc6787245b6af40d6ce8))
+
 ## [0.1.22](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.21...v0.1.22) (2025-01-07)
 
 
