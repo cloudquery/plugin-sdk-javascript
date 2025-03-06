@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.24](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.23...v0.1.24) (2025-03-05)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @apache-arrow/esnext-esm to v19.0.1 ([#265](https://github.com/cloudquery/plugin-sdk-javascript/issues/265)) ([71e723e](https://github.com/cloudquery/plugin-sdk-javascript/commit/71e723e885cb58c7ae30668a8189887cd7143c1c))
+* **deps:** Update dependency @cloudquery/plugin-pb-javascript to ^0.0.32 ([#270](https://github.com/cloudquery/plugin-sdk-javascript/issues/270)) ([1dc7d43](https://github.com/cloudquery/plugin-sdk-javascript/commit/1dc7d43c19c3e92cd673364751b0bf52cc0d9023))
+* **deps:** Update dependency @grpc/grpc-js to v1.12.6 ([#266](https://github.com/cloudquery/plugin-sdk-javascript/issues/266)) ([c19ff46](https://github.com/cloudquery/plugin-sdk-javascript/commit/c19ff4623ce62a05e9039bbc675d6908eee3a1ba))
+* **deps:** Update dependency eslint-import-resolver-typescript to v3.8.3 ([#268](https://github.com/cloudquery/plugin-sdk-javascript/issues/268)) ([9303711](https://github.com/cloudquery/plugin-sdk-javascript/commit/930371154a3f77b48b8ac4a1b80f37756bbbc101))
+* **deps:** Update dependency prettier to v3.5.1 ([#269](https://github.com/cloudquery/plugin-sdk-javascript/issues/269)) ([5c1ddf8](https://github.com/cloudquery/plugin-sdk-javascript/commit/5c1ddf895bf82cb67a52a10d8e90287eedac6737))
+
 ## [0.1.23](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.22...v0.1.23) (2025-02-03)
 
 
