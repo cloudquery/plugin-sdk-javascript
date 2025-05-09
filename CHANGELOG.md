@@ -1,5 +1,14 @@
 # Changelog
 
+## [0.1.26](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.25...v0.1.26) (2025-05-09)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @cloudquery/plugin-pb-javascript to ^0.0.34 ([#280](https://github.com/cloudquery/plugin-sdk-javascript/issues/280)) ([5473220](https://github.com/cloudquery/plugin-sdk-javascript/commit/5473220edda29113b529ee5a0583b12aeaa27667))
+* **deps:** Update dependency prettier to v3.5.3 ([#277](https://github.com/cloudquery/plugin-sdk-javascript/issues/277)) ([8376dba](https://github.com/cloudquery/plugin-sdk-javascript/commit/8376dbaa0e539654ac4598bd4dd4754beafe6d75))
+* **deps:** Update dependency winston-error-format to v3.0.2 ([#278](https://github.com/cloudquery/plugin-sdk-javascript/issues/278)) ([ba90ab7](https://github.com/cloudquery/plugin-sdk-javascript/commit/ba90ab7ab39c13168e29025a8d4b1e1faf07aefb))
+
 ## [0.1.25](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.24...v0.1.25) (2025-04-01)
 
 
