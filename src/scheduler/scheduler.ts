@@ -1,6 +1,7 @@
 import { Duplex } from 'node:stream';
 
 import pMap from 'p-map';
+import pQueue from 'p-queue';
 import pTimeout from 'p-timeout';
 import type { Logger } from 'winston';
 
@@ -92,20 +93,9 @@ const resolveTable = async (
 ) => {
   logger.info(`resolving table ${table.name}`);
   const stream = new TableResolverStream();
-  try {
-    await table.resolver(client, parent, stream);
-  } catch (error) {
-    const tableError = new SyncTableResolveError(`error resolving table ${table.name}`, {
-      cause: error,
-      props: { table, client },
-    });
-    logger.error(`error resolving table ${table.name}`, tableError);
-    return;
-  } finally {
-    stream.end();
-  }
+  const resolverPromise = table.resolver(client, parent, stream);
 
-  for await (const data of stream) {
+  const processData = async (data: unknown) => {
     logger.debug(`resolving resource for table ${table.name}`);
     const resolveResourceTimeout = 10 * 60 * 1000;
     const resource = new Resource(table, parent, data);
@@ -118,7 +108,7 @@ const resolveTable = async (
         props: { resource, table, client },
       });
       logger.error(preResolverError);
-      continue;
+      return;
     }
 
     try {
@@ -128,7 +118,7 @@ const resolveTable = async (
       await pTimeout(allColumnsPromise, { milliseconds: resolveResourceTimeout });
     } catch (error) {
       logger.error(`error resolving columns for table ${table.name}`, error);
-      continue;
+      return;
     }
 
     try {
@@ -139,7 +129,7 @@ const resolveTable = async (
         props: { resource, table, client },
       });
       logger.error(postResolveError);
-      continue;
+      return;
     }
 
     setCQId(resource, deterministicCQId);
@@ -148,7 +138,7 @@ const resolveTable = async (
       validateResource(resource);
     } catch (error) {
       logger.error(error);
-      continue;
+      return;
     }
 
     try {
@@ -161,7 +151,7 @@ const resolveTable = async (
         },
       });
       logger.error(encodeError);
-      continue;
+      return;
     }
 
     logger.debug(`done resolving resource for table ${table.name}`);
@@ -169,6 +159,29 @@ const resolveTable = async (
     await pMap(table.relations, (child) =>
       resolveTable(logger, client, child, resource, syncStream, deterministicCQId),
     );
+  };
+
+  const queue = new pQueue({ concurrency: 5 });
+
+  stream.on('data', async (data) => {
+    await queue.add(() => processData(data));
+  });
+
+  stream.on('end', async () => {
+    await queue.onIdle();
+  });
+
+  try {
+    await resolverPromise;
+  } catch (error) {
+    const tableError = new SyncTableResolveError(`error resolving table ${table.name}`, {
+      cause: error,
+      props: { table, client },
+    });
+    logger.error(`error resolving table ${table.name}`, tableError);
+    return;
+  } finally {
+    stream.end();
   }
 
   logger.info(`done resolving table ${table.name}`);
