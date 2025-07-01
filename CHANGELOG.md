@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.27](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.26...v0.1.27) (2025-07-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @cloudquery/plugin-pb-javascript to ^0.0.35 ([#281](https://github.com/cloudquery/plugin-sdk-javascript/issues/281)) ([b73a94a](https://github.com/cloudquery/plugin-sdk-javascript/commit/b73a94afe5ae7d124f7730b2d8e93dd5bc45ab97))
+* **deps:** Update dependency @cloudquery/plugin-pb-javascript to ^0.0.36 ([#286](https://github.com/cloudquery/plugin-sdk-javascript/issues/286)) ([127cd3c](https://github.com/cloudquery/plugin-sdk-javascript/commit/127cd3cb2fa814a485aaacc847bab20236d02c91))
+* **deps:** Update dependency @grpc/grpc-js to v1.13.4 ([#285](https://github.com/cloudquery/plugin-sdk-javascript/issues/285)) ([0c893fc](https://github.com/cloudquery/plugin-sdk-javascript/commit/0c893fc3287976aa10028d5a77f3ee165badca0b))
+* **deps:** Update dependency @tsconfig/node20 to v20.1.6 ([#284](https://github.com/cloudquery/plugin-sdk-javascript/issues/284)) ([8c81b87](https://github.com/cloudquery/plugin-sdk-javascript/commit/8c81b87f634e4c8510ea409b727c57a019ccddb3))
+
 ## [0.1.26](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.25...v0.1.26) (2025-05-09)
 
 
