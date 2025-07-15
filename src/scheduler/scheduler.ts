@@ -40,25 +40,21 @@ export enum Strategy {
 }
 
 class TableResolverStream extends Duplex {
-  queue: unknown[] = [];
-
   constructor() {
     super({ objectMode: true });
   }
 
-  _read() {
-    while (this.queue.length > 0) {
-      this.push(this.queue.shift());
-    }
-    if (this.writableEnded) {
-      // end readable stream if writable stream has ended
-      this.push(null);
-    }
-  }
+  _read() {}
 
   _write(chunk: unknown, _: string, next: (error?: Error | null) => void) {
-    this.queue.push(chunk);
+    this.emit('data', chunk);
     next();
+  }
+
+  end(callback?: () => void): this {
+    this.emit('end');
+    callback?.();
+    return this;
   }
 }
 
@@ -167,10 +163,6 @@ const resolveTable = async (
     await queue.add(() => processData(data));
   });
 
-  stream.on('end', async () => {
-    await queue.onIdle();
-  });
-
   try {
     await resolverPromise;
   } catch (error) {
@@ -182,6 +174,7 @@ const resolveTable = async (
     return;
   } finally {
     stream.end();
+    await queue.onIdle();
   }
 
   logger.info(`done resolving table ${table.name}`);
