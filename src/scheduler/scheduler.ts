@@ -89,7 +89,6 @@ const resolveTable = async (
 ) => {
   logger.info(`resolving table ${table.name}`);
   const stream = new TableResolverStream();
-  const resolverPromise = table.resolver(client, parent, stream);
 
   const processData = async (data: unknown) => {
     logger.debug(`resolving resource for table ${table.name}`);
@@ -162,6 +161,8 @@ const resolveTable = async (
   stream.on('data', async (data) => {
     await queue.add(() => processData(data));
   });
+
+  const resolverPromise = table.resolver(client, parent, stream);
 
   try {
     await resolverPromise;
