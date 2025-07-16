@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.28](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.27...v0.1.28) (2025-07-16)
+
+
+### Bug Fixes
+
+* Dont `await` on table resovler ([#283](https://github.com/cloudquery/plugin-sdk-javascript/issues/283)) ([f0e24cd](https://github.com/cloudquery/plugin-sdk-javascript/commit/f0e24cd6a09caa43aad300e2c7cfb88243b29de8))
+
 ## [0.1.27](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.26...v0.1.27) (2025-07-01)
 
 
