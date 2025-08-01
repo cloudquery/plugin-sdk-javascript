@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.29](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.28...v0.1.29) (2025-08-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency ava to v6.4.1 ([#289](https://github.com/cloudquery/plugin-sdk-javascript/issues/289)) ([d3d5a4a](https://github.com/cloudquery/plugin-sdk-javascript/commit/d3d5a4a1eb7d775f7efa81985797e24a762c72df))
+* **deps:** Update dependency execa to v9.6.0 ([#290](https://github.com/cloudquery/plugin-sdk-javascript/issues/290)) ([6f5925d](https://github.com/cloudquery/plugin-sdk-javascript/commit/6f5925d24b1b946bc2bd64543a54f5713d24a049))
+* **deps:** Update dependency luxon to v3.7.1 ([#292](https://github.com/cloudquery/plugin-sdk-javascript/issues/292)) ([7b5fd8e](https://github.com/cloudquery/plugin-sdk-javascript/commit/7b5fd8e0f745dd8f6e89c3bef135339c27637200))
+* **deps:** Update dependency modern-errors to v7.1.2 ([#293](https://github.com/cloudquery/plugin-sdk-javascript/issues/293)) ([f72ae5a](https://github.com/cloudquery/plugin-sdk-javascript/commit/f72ae5aff02edad8fd9ec87e4689f62d0f75f30c))
+
 ## [0.1.28](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.27...v0.1.28) (2025-07-16)
 
 
