@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.1.30](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.29...v0.1.30) (2025-10-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @cloudquery/plugin-pb-javascript to ^0.0.37 ([#298](https://github.com/cloudquery/plugin-sdk-javascript/issues/298)) ([eed71ee](https://github.com/cloudquery/plugin-sdk-javascript/commit/eed71eeac2c791a910e599030cffc660cd80424b))
+* **deps:** Update dependency @cloudquery/plugin-pb-javascript to ^0.0.38 ([#311](https://github.com/cloudquery/plugin-sdk-javascript/issues/311)) ([147a4a8](https://github.com/cloudquery/plugin-sdk-javascript/commit/147a4a8dd0ed61b0fdad8ea5271440b0ae47cd0d))
+* **deps:** Update dependency @grpc/grpc-js to v1.14.0 ([#309](https://github.com/cloudquery/plugin-sdk-javascript/issues/309)) ([febc7a6](https://github.com/cloudquery/plugin-sdk-javascript/commit/febc7a6a8ee7127ab65ade38ceaaaf4f5fc20e4a))
+* **deps:** Update dependency @types/semver to v7.7.1 ([#305](https://github.com/cloudquery/plugin-sdk-javascript/issues/305)) ([d831553](https://github.com/cloudquery/plugin-sdk-javascript/commit/d83155360ba710787c2cb55e4b0f93b69aa7962b))
+* **deps:** Update dependency luxon to v3.7.2 ([#306](https://github.com/cloudquery/plugin-sdk-javascript/issues/306)) ([54a1262](https://github.com/cloudquery/plugin-sdk-javascript/commit/54a12628436eb781f466dac0f40749ff323f79b2))
+* **deps:** Update dependency modern-errors to v7.1.3 ([#307](https://github.com/cloudquery/plugin-sdk-javascript/issues/307)) ([e610374](https://github.com/cloudquery/plugin-sdk-javascript/commit/e6103746c8f4280b4f434f7b085e1246d593c4d0))
+* **deps:** Update dependency p-queue to v8.1.1 ([#308](https://github.com/cloudquery/plugin-sdk-javascript/issues/308)) ([39e6a37](https://github.com/cloudquery/plugin-sdk-javascript/commit/39e6a3726652d234001904016c2401955caf12a9))
+* **deps:** Update dependency uuid to v11.1.0 ([#310](https://github.com/cloudquery/plugin-sdk-javascript/issues/310)) ([679f887](https://github.com/cloudquery/plugin-sdk-javascript/commit/679f8876d899ab650975502d77668bc93667d1e3))
+
 ## [0.1.29](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.28...v0.1.29) (2025-09-01)
 
 
