@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.31](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.30...v0.1.31) (2025-11-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @types/yargs to v17.0.34 ([#312](https://github.com/cloudquery/plugin-sdk-javascript/issues/312)) ([7b7063c](https://github.com/cloudquery/plugin-sdk-javascript/commit/7b7063c01b6af3207e77e0b018e9bf4146b92e7c))
+* **deps:** Update dependency modern-errors to v7.1.4 ([#313](https://github.com/cloudquery/plugin-sdk-javascript/issues/313)) ([5de647e](https://github.com/cloudquery/plugin-sdk-javascript/commit/5de647e5079fa324d7976eb2288952f3f2f3d26d))
+* **deps:** Update dependency semver to v7.7.3 ([#315](https://github.com/cloudquery/plugin-sdk-javascript/issues/315)) ([e77fb69](https://github.com/cloudquery/plugin-sdk-javascript/commit/e77fb69753e66bf8e2d1e83a1c2cc00eb2ddae2e))
+* **deps:** Update dependency typescript to v5.9.3 ([#316](https://github.com/cloudquery/plugin-sdk-javascript/issues/316)) ([fd23688](https://github.com/cloudquery/plugin-sdk-javascript/commit/fd236887bb0383ae68a622043f58f57befaf27f7))
+
 ## [0.1.30](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.29...v0.1.30) (2025-10-01)
 
 
