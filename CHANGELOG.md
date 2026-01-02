@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.1.31](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.30...v0.1.31) (2026-01-02)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @cloudquery/plugin-pb-javascript to ^0.0.39 ([#327](https://github.com/cloudquery/plugin-sdk-javascript/issues/327)) ([2a56cfb](https://github.com/cloudquery/plugin-sdk-javascript/commit/2a56cfbe03f21f971f1e2cb0b39e15d3b13c0171))
+* **deps:** Update dependency @grpc/grpc-js to v1.14.1 ([#317](https://github.com/cloudquery/plugin-sdk-javascript/issues/317)) ([4bf2a90](https://github.com/cloudquery/plugin-sdk-javascript/commit/4bf2a9040efce2df4f5cfff811da4180fc9ddbeb))
+* **deps:** Update dependency @grpc/grpc-js to v1.14.3 ([#321](https://github.com/cloudquery/plugin-sdk-javascript/issues/321)) ([e329e90](https://github.com/cloudquery/plugin-sdk-javascript/commit/e329e9009559ac540750c2ef1e2d83427c2f781e))
+* **deps:** Update dependency @tsconfig/node20 to v20.1.8 ([#318](https://github.com/cloudquery/plugin-sdk-javascript/issues/318)) ([a456dd0](https://github.com/cloudquery/plugin-sdk-javascript/commit/a456dd0400f7aca3c10bcb185e9fdba99876394e))
+* **deps:** Update dependency @types/yargs to v17.0.34 ([#312](https://github.com/cloudquery/plugin-sdk-javascript/issues/312)) ([7b7063c](https://github.com/cloudquery/plugin-sdk-javascript/commit/7b7063c01b6af3207e77e0b018e9bf4146b92e7c))
+* **deps:** Update dependency @types/yargs to v17.0.35 ([#319](https://github.com/cloudquery/plugin-sdk-javascript/issues/319)) ([bd4be50](https://github.com/cloudquery/plugin-sdk-javascript/commit/bd4be505010133e38bcd2c40e97b1363fee9efc5))
+* **deps:** Update dependency execa to v9.6.1 ([#322](https://github.com/cloudquery/plugin-sdk-javascript/issues/322)) ([33bee58](https://github.com/cloudquery/plugin-sdk-javascript/commit/33bee58d52d99f236379d6d6d4750b2c11221d97))
+* **deps:** Update dependency modern-errors to v7.1.4 ([#313](https://github.com/cloudquery/plugin-sdk-javascript/issues/313)) ([5de647e](https://github.com/cloudquery/plugin-sdk-javascript/commit/5de647e5079fa324d7976eb2288952f3f2f3d26d))
+* **deps:** Update dependency p-map to v7.0.4 ([#320](https://github.com/cloudquery/plugin-sdk-javascript/issues/320)) ([a39b123](https://github.com/cloudquery/plugin-sdk-javascript/commit/a39b123c96316be4cae4c4953ab390ead1aed8fc))
+* **deps:** Update dependency prettier to v3.7.4 ([#323](https://github.com/cloudquery/plugin-sdk-javascript/issues/323)) ([1bb3308](https://github.com/cloudquery/plugin-sdk-javascript/commit/1bb33081e813f3f4cebd609c29b7ad0052ee1357))
+* **deps:** Update dependency semver to v7.7.3 ([#315](https://github.com/cloudquery/plugin-sdk-javascript/issues/315)) ([e77fb69](https://github.com/cloudquery/plugin-sdk-javascript/commit/e77fb69753e66bf8e2d1e83a1c2cc00eb2ddae2e))
+* **deps:** Update dependency typescript to v5.9.3 ([#316](https://github.com/cloudquery/plugin-sdk-javascript/issues/316)) ([fd23688](https://github.com/cloudquery/plugin-sdk-javascript/commit/fd236887bb0383ae68a622043f58f57befaf27f7))
+* **deps:** Update dependency winston to v3.19.0 ([#324](https://github.com/cloudquery/plugin-sdk-javascript/issues/324)) ([2b896e3](https://github.com/cloudquery/plugin-sdk-javascript/commit/2b896e3b135900d8db4f74b847831e328e425be3))
+
 ## [0.1.30](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.29...v0.1.30) (2025-10-01)
 
 
