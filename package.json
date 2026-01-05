@@ -53,7 +53,7 @@
     "@ava/typescript": "^5.0.0",
     "@tsconfig/node20": "^20.1.2",
     "@types/semver": "^7.5.8",
-    "@types/uuid": "^10.0.0",
+    "@types/uuid": "^11.0.0",
     "@types/yargs": "^17.0.24",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^7.0.0",
