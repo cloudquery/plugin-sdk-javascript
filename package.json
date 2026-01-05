@@ -109,6 +109,6 @@
     "uuid": "^13.0.0",
     "winston": "^3.10.0",
     "winston-error-format": "^3.0.0",
-    "yargs": "^17.7.2"
+    "yargs": "^18.0.0"
   }
 }
