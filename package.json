@@ -102,7 +102,7 @@
     "modern-errors-bugs": "^5.0.0",
     "p-map": "^7.0.0",
     "p-queue": "^9.0.0",
-    "p-timeout": "^6.1.2",
+    "p-timeout": "^7.0.0",
     "path-exists": "^5.0.0",
     "path-type": "^6.0.0",
     "semver": "^7.5.4",
