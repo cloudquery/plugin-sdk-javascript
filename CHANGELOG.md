@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.1.32](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.31...v0.1.32) (2026-02-02)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @apache-arrow/esnext-esm to v21 ([#331](https://github.com/cloudquery/plugin-sdk-javascript/issues/331)) ([31f35e2](https://github.com/cloudquery/plugin-sdk-javascript/commit/31f35e25d1307d265d220c2b0490b37f719e457d))
+* **deps:** Update dependency @ava/typescript to v6 ([#332](https://github.com/cloudquery/plugin-sdk-javascript/issues/332)) ([9329fc2](https://github.com/cloudquery/plugin-sdk-javascript/commit/9329fc2296054276c1a536a75ff225ebf36a4e68))
+* **deps:** Update dependency @types/uuid to v11 ([#333](https://github.com/cloudquery/plugin-sdk-javascript/issues/333)) ([ff44e95](https://github.com/cloudquery/plugin-sdk-javascript/commit/ff44e95cee49033339303aec8fe841bba67afb80))
+* **deps:** Update dependency dot-prop to v10 ([#334](https://github.com/cloudquery/plugin-sdk-javascript/issues/334)) ([43945fa](https://github.com/cloudquery/plugin-sdk-javascript/commit/43945fa29bc92398c496cc3bf5535d1e2feebf60))
+* **deps:** Update dependency matcher to v6 ([#335](https://github.com/cloudquery/plugin-sdk-javascript/issues/335)) ([b6fd0c1](https://github.com/cloudquery/plugin-sdk-javascript/commit/b6fd0c1d5d8812a38e69251aa7c3107c89886d5a))
+* **deps:** Update dependency modern-errors-bugs to v5.0.1 ([#328](https://github.com/cloudquery/plugin-sdk-javascript/issues/328)) ([c48d7d1](https://github.com/cloudquery/plugin-sdk-javascript/commit/c48d7d1f89bb23e6aacb4f2fdeeef081806f51bd))
+* **deps:** Update dependency p-queue to v9 ([#336](https://github.com/cloudquery/plugin-sdk-javascript/issues/336)) ([5385bc8](https://github.com/cloudquery/plugin-sdk-javascript/commit/5385bc867f39706af3647b1b03b613322c24b650))
+* **deps:** Update dependency p-queue to v9.1.0 ([#341](https://github.com/cloudquery/plugin-sdk-javascript/issues/341)) ([2b7c828](https://github.com/cloudquery/plugin-sdk-javascript/commit/2b7c8287a2fbb435ee11887d1c5236715784be6c))
+* **deps:** Update dependency p-timeout to v7 ([#337](https://github.com/cloudquery/plugin-sdk-javascript/issues/337)) ([36e3982](https://github.com/cloudquery/plugin-sdk-javascript/commit/36e3982627d527f7b49f765cf00d1fa9d8812851))
+* **deps:** Update dependency prettier to v3.8.1 ([#342](https://github.com/cloudquery/plugin-sdk-javascript/issues/342)) ([7a1b282](https://github.com/cloudquery/plugin-sdk-javascript/commit/7a1b2823f3bb9cb4d8955eabe7777ccbe6c33010))
+* **deps:** Update dependency tempy to v3.1.1 ([#340](https://github.com/cloudquery/plugin-sdk-javascript/issues/340)) ([5cbc054](https://github.com/cloudquery/plugin-sdk-javascript/commit/5cbc054f66c58ad00912099637d21d9fc3f2b039))
+* **deps:** Update dependency uuid to v13 ([#338](https://github.com/cloudquery/plugin-sdk-javascript/issues/338)) ([814c6c4](https://github.com/cloudquery/plugin-sdk-javascript/commit/814c6c493c5686c73444605499d52d7472df6932))
+* **deps:** Update dependency yargs to v18 ([#339](https://github.com/cloudquery/plugin-sdk-javascript/issues/339)) ([ba8de48](https://github.com/cloudquery/plugin-sdk-javascript/commit/ba8de48fad101bd958ab413c658c4b9db70e9f23))
+
 ## [0.1.31](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.30...v0.1.31) (2026-01-02)
 
 
