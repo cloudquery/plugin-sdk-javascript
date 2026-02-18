@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.33](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.32...v0.1.33) (2026-02-18)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency ajv to v8.18.0 [SECURITY] ([#346](https://github.com/cloudquery/plugin-sdk-javascript/issues/346)) ([dd8a092](https://github.com/cloudquery/plugin-sdk-javascript/commit/dd8a092b0191e85849cf7c091cae981ded75f9d1))
+
 ## [0.1.32](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.31...v0.1.32) (2026-02-02)
 
 
