@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.1.34](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.33...v0.1.34) (2026-02-26)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @tsconfig/node20 to v20.1.9 ([#348](https://github.com/cloudquery/plugin-sdk-javascript/issues/348)) ([d921b0c](https://github.com/cloudquery/plugin-sdk-javascript/commit/d921b0c723b3482ace2b80c28b6f77e69a459a5d))
+* **deps:** Update dependency semver to v7.7.4 ([#349](https://github.com/cloudquery/plugin-sdk-javascript/issues/349)) ([22b308e](https://github.com/cloudquery/plugin-sdk-javascript/commit/22b308ed07eb2f1e21854f73ec108d4b511878ae))
+* **deps:** Update dependency tempy to v3.2.0 ([#350](https://github.com/cloudquery/plugin-sdk-javascript/issues/350)) ([a378078](https://github.com/cloudquery/plugin-sdk-javascript/commit/a378078d6338431a2530ed4d3bff959497676c5f))
+* Update `glob` via overrides ([#355](https://github.com/cloudquery/plugin-sdk-javascript/issues/355)) ([96faedf](https://github.com/cloudquery/plugin-sdk-javascript/commit/96faedf3ce9bf6bda4c37a125b0300007e0db8d4))
+
 ## [0.1.33](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.32...v0.1.33) (2026-02-18)
 
 
