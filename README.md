@@ -11,42 +11,42 @@ Node.js 20 or higher. Install Node.js from [here](https://nodejs.org/en/download
 ### Install dependencies
 
 ```bash
-npm ci
+pnpm install
 ```
 
 ### Build
 
 ```bash
-npm run build
+pnpm build
 ```
 
 ### Test
 
 ```bash
-npm test
+pnpm test
 ```
 
 ### Start a local memory based plugin server
 
 ```bash
-npm run dev -- serve
+pnpm dev -- serve
 ```
 
 ### Package as a Docker image
 
 ```bash
-npm run dev -- package -m test "v1.0.0" . --dist-dir dist-dir
+pnpm dev -- package -m test "v1.0.0" . --dist-dir dist-dir
 ```
 
 ### Formatting and Linting
 
 ```bash
 # This is just to check if the code is formatted
-npm run format:check
+pnpm format:check
 
 # Automatically format code
-npm run format
+pnpm format
 
 # Lint
-npm run lint
+pnpm lint
 ```
