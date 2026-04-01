@@ -154,11 +154,12 @@ export const filterTables = (
 };
 
 export const toArrowSchema = (table: Table): Schema => {
-  const metadata = new Map<string, string>();
-  metadata.set(arrow.METADATA_TABLE_NAME, table.name);
-  metadata.set(arrow.METADATA_TABLE_DESCRIPTION, table.description);
-  metadata.set(arrow.METADATA_TABLE_TITLE, table.title);
-  metadata.set(arrow.METADATA_CONSTRAINT_NAME, table.pkConstraintName);
+  const metadata = new Map<string, string>([
+    [arrow.METADATA_TABLE_NAME, table.name],
+    [arrow.METADATA_TABLE_DESCRIPTION, table.description],
+    [arrow.METADATA_TABLE_TITLE, table.title],
+    [arrow.METADATA_CONSTRAINT_NAME, table.pkConstraintName],
+  ]);
   if (table.isIncremental) {
     metadata.set(arrow.METADATA_INCREMENTAL, arrow.METADATA_TRUE);
   }

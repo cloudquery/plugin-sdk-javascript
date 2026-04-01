@@ -75,8 +75,8 @@ export class Int64 implements Scalar<Nullable<bigint>> {
   }
 
   validInt64(n: bigint) {
-    const MIN_INT64 = BigInt('-9223372036854775808'); // -2^63
-    const MAX_INT64 = BigInt('9223372036854775807'); // 2^63 - 1
+    const MIN_INT64 = -9_223_372_036_854_775_808n; // -2^63
+    const MAX_INT64 = 9_223_372_036_854_775_807n; // 2^63 - 1
     return Number.isSafeInteger(bigIntToNumber(n)) && n >= MIN_INT64 && n <= MAX_INT64;
   }
 }

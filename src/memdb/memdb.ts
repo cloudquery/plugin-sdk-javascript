@@ -1,4 +1,4 @@
-import { default as Ajv } from 'ajv';
+import Ajv from 'ajv';
 
 import { ValidationError } from '../errors/errors.js';
 import type { Plugin, SyncOptions, TableOptions, NewClientFunction } from '../plugin/plugin.js';

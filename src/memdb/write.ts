@@ -35,7 +35,6 @@ export const createWrite = (
           const pks = getPrimaryKeys(tableSchema);
 
           for (const batch of batches) {
-            //eslint-disable-next-line unicorn/no-array-for-each
             for (const record of batch) {
               overwrite(tableSchema, pks, record);
             }
