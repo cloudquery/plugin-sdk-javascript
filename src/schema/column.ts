@@ -59,10 +59,11 @@ export const equals = (column: Column, other: unknown): boolean => {
 
 export const toArrowField = (column: Column): Field => {
   const { name, type, notNull, primaryKey, unique, incrementalKey } = column;
-  const metadataMap = new Map<string, string>();
-  metadataMap.set(arrow.METADATA_PRIMARY_KEY, primaryKey ? arrow.METADATA_TRUE : arrow.METADATA_FALSE);
-  metadataMap.set(arrow.METADATA_UNIQUE, unique ? arrow.METADATA_TRUE : arrow.METADATA_FALSE);
-  metadataMap.set(arrow.METADATA_INCREMENTAL, incrementalKey ? arrow.METADATA_TRUE : arrow.METADATA_FALSE);
+  const metadataMap = new Map<string, string>([
+    [arrow.METADATA_PRIMARY_KEY, primaryKey ? arrow.METADATA_TRUE : arrow.METADATA_FALSE],
+    [arrow.METADATA_UNIQUE, unique ? arrow.METADATA_TRUE : arrow.METADATA_FALSE],
+    [arrow.METADATA_INCREMENTAL, incrementalKey ? arrow.METADATA_TRUE : arrow.METADATA_FALSE],
+  ]);
 
   if (isExtensionType(type)) {
     const { name, metadata } = type as unknown as ExtensionType;

@@ -23,12 +23,12 @@ export const createOverwrite = (memoryDB: Record<string, any[]>): OverwriteFunct
       return primaryKeys.every((key) => existingRecord[key] === record[key]);
     });
 
-    if (recordIndex > -1) {
-      // If record exists, update (overwrite) it
-      tableData[recordIndex] = record;
-    } else {
+    if (recordIndex === -1) {
       // If record doesn't exist, insert it
       tableData.push(record);
+    } else {
+      // If record exists, update (overwrite) it
+      tableData[recordIndex] = record;
     }
 
     memoryDB[table.name] = tableData; // Update the memoryDB with the modified table data
