@@ -3,12 +3,11 @@ import test from 'ava';
 
 import { Text } from './text.js';
 
-// eslint-disable-next-line unicorn/no-null
 [null, undefined, new Text()].forEach((v) => {
   test(`should set values to null string when ${v} is passed`, (t) => {
     const s = new Text(v);
     t.is(s.value, null);
-    t.is(s.valid, false);
+    t.false(s.valid);
     t.true(DataType.isUtf8(s.dataType));
   });
 });
@@ -22,7 +21,7 @@ import { Text } from './text.js';
 ].forEach(({ value, expected }, index) => {
   test(`valid strings: '${value}' (${index})`, (t) => {
     const s = new Text(value);
-    t.is(s.valid, true);
+    t.true(s.valid);
     t.is(s.value, expected);
     t.true(DataType.isUtf8(s.dataType));
   });

@@ -71,7 +71,7 @@ test('parentCqUUIDResolver - should set to null for null parent', (t) => {
 
   parentCqUUIDResolver()({ id: () => '' }, resource, cqParentIDColumn);
 
-  t.is(resource.getColumnData(cqParentIDColumn.name).valid, false);
+  t.false(resource.getColumnData(cqParentIDColumn.name).valid);
 });
 
 test('parentCqUUIDResolver - should set to null for parent with _cq_id column', (t) => {
@@ -83,7 +83,7 @@ test('parentCqUUIDResolver - should set to null for parent with _cq_id column', 
 
   parentCqUUIDResolver()({ id: () => '' }, childResource, cqParentIDColumn);
 
-  t.is(childResource.getColumnData(cqParentIDColumn.name).valid, false);
+  t.false(childResource.getColumnData(cqParentIDColumn.name).valid);
 });
 
 test('parentCqUUIDResolver - should set to _cq_id column value when parent has it', (t) => {
@@ -96,6 +96,6 @@ test('parentCqUUIDResolver - should set to _cq_id column value when parent has i
   parentCqUUIDResolver()({ id: () => '' }, childResource, cqParentIDColumn);
 
   const cqParentId = childResource.getColumnData(cqParentIDColumn.name);
-  t.is(cqParentId.valid, true);
+  t.true(cqParentId.valid);
   t.is(cqParentId.toString(), '9241a9cb-f580-420f-8fd7-46d2c4f55ccb');
 });
