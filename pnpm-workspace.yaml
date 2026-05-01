@@ -1,3 +1,6 @@
 blockExoticSubdeps: true
 
 minimumReleaseAge: 10080 # 7 days
+minimumReleaseAgeExclude:
+  # Renovate security update: uuid@14.0.0
+  - uuid@14.0.0
