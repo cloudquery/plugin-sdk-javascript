@@ -55,7 +55,7 @@
     "@types/semver": "^7.5.8",
     "@types/uuid": "^11.0.0",
     "@types/yargs": "^17.0.24",
-    "ava": "^7.0.0",
+    "ava": "^8.0.0",
     "@eslint/js": "^10.0.0",
     "eslint": "^10.0.0",
     "eslint-config-prettier": "^10.0.0",
