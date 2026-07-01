@@ -13,8 +13,8 @@ export const setCQId = (resource: Resource, deterministicCQId: boolean, generato
   }
 
   const primaryKeys = getPrimaryKeys(resource.table);
-  const cqOnlyPK = primaryKeys.every((pk) => pk === cqIDColumn.name);
-  if (cqOnlyPK) {
+  const isCqOnlyPK = primaryKeys.every((pk) => pk === cqIDColumn.name);
+  if (isCqOnlyPK) {
     return resource.setCqId(randomCQId);
   }
 

@@ -27,9 +27,8 @@ function defaultGetTypeFromValue(key: string, value: unknown): DataType | null {
 
         const field = new Field('element', elementType); // 'element' can be any name as it's just for internal representation
         return new List(field);
-      } else {
-        return new JSONType();
       }
+      return new JSONType();
     }
     default: {
       throw new TransformError(`Unsupported type: ${typeof value}`, { props: { value } });

@@ -85,8 +85,8 @@ export const newMemDBPlugin = (): Plugin => {
       return Promise.resolve(pluginClient);
     }
     const parsedSpec = JSON.parse(spec) as Partial<Spec>;
-    const validSchema = validate(parsedSpec);
-    if (!validSchema) {
+    const isValidSchema = validate(parsedSpec);
+    if (!isValidSchema) {
       const messages = validate.errors?.map((error) => error.message).join(', ');
       return Promise.reject(new ValidationError(`Invalid spec: ${messages}`, { props: { spec } }));
     }

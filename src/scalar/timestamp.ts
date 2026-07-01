@@ -70,7 +70,7 @@ export class Timestamp implements Scalar<Nullable<globalThis.Date>> {
       dateValue = value;
     }
 
-    if (value instanceof globalThis.Date) {
+    if (value instanceof Date) {
       dateValue = DateTime.fromJSDate(value, { zone: 'utc' });
     }
 
