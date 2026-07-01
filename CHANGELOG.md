@@ -1,5 +1,41 @@
 # Changelog
 
+## [0.1.36](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.35...v0.1.36) (2026-07-01)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @ava/typescript to v7 ([#384](https://github.com/cloudquery/plugin-sdk-javascript/issues/384)) ([c8d2ee2](https://github.com/cloudquery/plugin-sdk-javascript/commit/c8d2ee261d32978054c2dd11bfa5789cf8899cdc))
+* **deps:** Update dependency @grpc/grpc-js to v1.14.4 ([#390](https://github.com/cloudquery/plugin-sdk-javascript/issues/390)) ([4d03c9f](https://github.com/cloudquery/plugin-sdk-javascript/commit/4d03c9f2477673244426aeb27a61c70e154d1ecf))
+* **deps:** Update dependency @types/luxon to v3.7.2 ([#400](https://github.com/cloudquery/plugin-sdk-javascript/issues/400)) ([498f9f6](https://github.com/cloudquery/plugin-sdk-javascript/commit/498f9f6bd6e59764bb76a14f9749570d0f810c20))
+* **deps:** Update dependency @vercel/nft to v1.10.2 ([#404](https://github.com/cloudquery/plugin-sdk-javascript/issues/404)) ([a7ab2fa](https://github.com/cloudquery/plugin-sdk-javascript/commit/a7ab2fae89692d1caab6aaa0c34188414471a00e))
+* **deps:** Update dependency @vercel/nft to v1.5.0 ([#366](https://github.com/cloudquery/plugin-sdk-javascript/issues/366)) ([2958b00](https://github.com/cloudquery/plugin-sdk-javascript/commit/2958b0092677ede6bc3b438c8020c515d492535f))
+* **deps:** Update dependency ajv to v8.20.0 ([#392](https://github.com/cloudquery/plugin-sdk-javascript/issues/392)) ([8bbf4b9](https://github.com/cloudquery/plugin-sdk-javascript/commit/8bbf4b92a7b6f3df501103a61295bf0f79af793b))
+* **deps:** Update dependency ava to v7 ([#369](https://github.com/cloudquery/plugin-sdk-javascript/issues/369)) ([f00eaa2](https://github.com/cloudquery/plugin-sdk-javascript/commit/f00eaa2a8a3a0aa6d9a2298fc5b823e9c2c86edf))
+* **deps:** Update dependency ava to v8 ([#396](https://github.com/cloudquery/plugin-sdk-javascript/issues/396)) ([ea019d3](https://github.com/cloudquery/plugin-sdk-javascript/commit/ea019d3ed73cd2669d15c6f362686cc17e29af87))
+* **deps:** Update dependency eslint-plugin-unicorn to v64 ([#385](https://github.com/cloudquery/plugin-sdk-javascript/issues/385)) ([9d9e89b](https://github.com/cloudquery/plugin-sdk-javascript/commit/9d9e89b50c4daa1d7b250adc9c80866af21d6ced))
+* **deps:** Update dependency eslint-plugin-unicorn to v68 ([#408](https://github.com/cloudquery/plugin-sdk-javascript/issues/408)) ([3bfe73d](https://github.com/cloudquery/plugin-sdk-javascript/commit/3bfe73df7d0c6027440652808af099ac8f256e15))
+* **deps:** Update dependency p-queue to v9.1.2 ([#378](https://github.com/cloudquery/plugin-sdk-javascript/issues/378)) ([5143bde](https://github.com/cloudquery/plugin-sdk-javascript/commit/5143bde194666d0bf7ae1136bb1779bcff418bc7))
+* **deps:** Update dependency p-queue to v9.3.0 ([#393](https://github.com/cloudquery/plugin-sdk-javascript/issues/393)) ([679c384](https://github.com/cloudquery/plugin-sdk-javascript/commit/679c384b051d3c847986c0c21386f11b166f3dfa))
+* **deps:** Update dependency prettier to v3.8.3 ([#379](https://github.com/cloudquery/plugin-sdk-javascript/issues/379)) ([746e4eb](https://github.com/cloudquery/plugin-sdk-javascript/commit/746e4eb086c39729b9e23583274b889918ea2204))
+* **deps:** Update dependency prettier to v3.8.4 ([#401](https://github.com/cloudquery/plugin-sdk-javascript/issues/401)) ([b1890f1](https://github.com/cloudquery/plugin-sdk-javascript/commit/b1890f126ca03319e2c7cbfeb17d4d9bd2c1c0ba))
+* **deps:** Update dependency semver to v7.8.1 ([#394](https://github.com/cloudquery/plugin-sdk-javascript/issues/394)) ([f8ee325](https://github.com/cloudquery/plugin-sdk-javascript/commit/f8ee325b62d11c2a8429146605d7681e53fc64cf))
+* **deps:** Update dependency semver to v7.8.5 ([#402](https://github.com/cloudquery/plugin-sdk-javascript/issues/402)) ([36c2021](https://github.com/cloudquery/plugin-sdk-javascript/commit/36c2021463a297c582befc228fcc9119bbb3d520))
+* **deps:** Update dependency typescript to v6 ([#370](https://github.com/cloudquery/plugin-sdk-javascript/issues/370)) ([7175c98](https://github.com/cloudquery/plugin-sdk-javascript/commit/7175c98fd9c0b2c055c0257d2ed05ed837f95539))
+* **deps:** Update dependency typescript to v6.0.3 ([#380](https://github.com/cloudquery/plugin-sdk-javascript/issues/380)) ([924eb88](https://github.com/cloudquery/plugin-sdk-javascript/commit/924eb881575369d6a303e41b8eb97d1aa147470a))
+* **deps:** Update dependency uuid to v14 [SECURITY] ([#387](https://github.com/cloudquery/plugin-sdk-javascript/issues/387)) ([54dc0ab](https://github.com/cloudquery/plugin-sdk-javascript/commit/54dc0aba33896b407aad4e1ec5f012f1d3def6fd))
+* **deps:** Update dependency uuid to v14.0.1 ([#403](https://github.com/cloudquery/plugin-sdk-javascript/issues/403)) ([4a3ac8f](https://github.com/cloudquery/plugin-sdk-javascript/commit/4a3ac8f390f3b3dd13378814e9b4a8c1a15ba48d))
+* **deps:** Update eslint packages ([#382](https://github.com/cloudquery/plugin-sdk-javascript/issues/382)) ([452ae6f](https://github.com/cloudquery/plugin-sdk-javascript/commit/452ae6f9fc2e70757dbd107e28a5c6b0f6bfb798))
+* **deps:** Update eslint packages ([#395](https://github.com/cloudquery/plugin-sdk-javascript/issues/395)) ([44df4eb](https://github.com/cloudquery/plugin-sdk-javascript/commit/44df4eb7edcd15c63e857a853fa5963a32817fd6))
+* **deps:** Update eslint packages ([#397](https://github.com/cloudquery/plugin-sdk-javascript/issues/397)) ([650cedc](https://github.com/cloudquery/plugin-sdk-javascript/commit/650cedcc557a23833b0064722745aef311b5c2c4))
+* **deps:** Update eslint packages ([#405](https://github.com/cloudquery/plugin-sdk-javascript/issues/405)) ([d9bab3e](https://github.com/cloudquery/plugin-sdk-javascript/commit/d9bab3e99d8c15c90589e955a52d695daed5f99d))
+* **deps:** Update eslint packages (major) ([#371](https://github.com/cloudquery/plugin-sdk-javascript/issues/371)) ([5b92e00](https://github.com/cloudquery/plugin-sdk-javascript/commit/5b92e00d4b78dd4a7808f805746224ea4a7471e0))
+* **deps:** Update pnpm to v10.33.0 ([#367](https://github.com/cloudquery/plugin-sdk-javascript/issues/367)) ([75e5981](https://github.com/cloudquery/plugin-sdk-javascript/commit/75e5981e914437587ef149d9a8939f32539d6f67))
+* **deps:** Update pnpm to v10.33.2 ([#381](https://github.com/cloudquery/plugin-sdk-javascript/issues/381)) ([01b4554](https://github.com/cloudquery/plugin-sdk-javascript/commit/01b455449dad692aacdf64ac4fbc1b8b4e389d3e))
+* **deps:** Update pnpm to v10.33.4 ([#391](https://github.com/cloudquery/plugin-sdk-javascript/issues/391)) ([dc15033](https://github.com/cloudquery/plugin-sdk-javascript/commit/dc1503395da5c07060e11867c3f3368ad9af0582))
+* **deps:** Update pnpm to v11 ([#398](https://github.com/cloudquery/plugin-sdk-javascript/issues/398)) ([ec6c8f1](https://github.com/cloudquery/plugin-sdk-javascript/commit/ec6c8f18119dfedf7304148929cac7b4706bff5a))
+* **deps:** Update pnpm to v11.9.0 ([#406](https://github.com/cloudquery/plugin-sdk-javascript/issues/406)) ([335a8dc](https://github.com/cloudquery/plugin-sdk-javascript/commit/335a8dc154f4217d163bbfd847e4a91ee4d4f68e))
+
 ## [0.1.35](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.34...v0.1.35) (2026-02-26)
 
 
