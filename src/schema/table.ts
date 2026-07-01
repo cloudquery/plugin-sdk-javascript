@@ -133,7 +133,7 @@ export const filterTables = (
   const withParents = deduplicate(withChildren.flatMap((table) => [...getAllParents(table), table]));
 
   const withSkipped = withParents.filter((table) => {
-    return !isMatch(table.name, skip) && !getAllParents(table).some((parent) => isMatch(parent.name, skip));
+    return !isMatch(table.name, skip) && getAllParents(table).every((parent) => !isMatch(parent.name, skip));
   });
 
   const skippedParents = withParents

@@ -122,8 +122,8 @@ export const createServeCommand = (plugin: Plugin) => {
         if (!semverValid(pluginVersion)) {
           throw new Error(`invalid plugin version: ${pluginVersion}`);
         }
-        distDir = distDir || path.join(pluginDirectory, 'dist');
-        docsDir = docsDir || path.join(pluginDirectory, 'docs');
+        distDir ||= path.join(pluginDirectory, 'dist');
+        docsDir ||= path.join(pluginDirectory, 'docs');
         await packageDocker({ logger, message, distDir, docsDir, pluginVersion, pluginDirectory, plugin });
       },
     )

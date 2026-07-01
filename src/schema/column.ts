@@ -77,16 +77,16 @@ export const toArrowField = (column: Column): Field => {
 export const fromArrowField = (field: Field): Column => {
   const { name, type, nullable } = field;
   const metadata = field.metadata;
-  const primaryKey = metadata.get(arrow.METADATA_PRIMARY_KEY) === arrow.METADATA_TRUE;
-  const unique = metadata.get(arrow.METADATA_UNIQUE) === arrow.METADATA_TRUE;
-  const incrementalKey = metadata.get(arrow.METADATA_INCREMENTAL) === arrow.METADATA_TRUE;
+  const isPrimaryKey = metadata.get(arrow.METADATA_PRIMARY_KEY) === arrow.METADATA_TRUE;
+  const isUnique = metadata.get(arrow.METADATA_UNIQUE) === arrow.METADATA_TRUE;
+  const isIncrementalKey = metadata.get(arrow.METADATA_INCREMENTAL) === arrow.METADATA_TRUE;
 
   return createColumn({
     name,
     type,
-    primaryKey,
+    primaryKey: isPrimaryKey,
     notNull: !nullable,
-    unique,
-    incrementalKey,
+    unique: isUnique,
+    incrementalKey: isIncrementalKey,
   });
 };

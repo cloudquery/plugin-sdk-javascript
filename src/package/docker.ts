@@ -141,8 +141,8 @@ const buildDockerfile = async (
   const supportedTargets = await pMap(
     plugin.buildTargets(),
     async ({ os, arch }) => {
-      const imageRepository = `docker.cloudquery.io/${plugin.team()}/${plugin.kind()}-${plugin.name()}`;
-      const imageTag = `${imageRepository}:${pluginVersion}-${os}-${arch}`;
+      const imageRepo = `docker.cloudquery.io/${plugin.team()}/${plugin.kind()}-${plugin.name()}`;
+      const imageTag = `${imageRepo}:${pluginVersion}-${os}-${arch}`;
       const imageTar = `plugin-${plugin.name()}-${pluginVersion}-${os}-${arch}.tar`;
       const imagePath = `${outputDirectory}/${imageTar}`;
       logger.info(`Building docker image ${imageTag}`);

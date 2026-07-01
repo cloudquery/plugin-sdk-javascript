@@ -68,7 +68,7 @@ const testCases = [
   },
 ];
 
-testCases.forEach((testCase) => {
+for (const testCase of testCases) {
   test(`filterTables - ${testCase.name}`, (t) => {
     const { allTables, tables, skipTables, skipDependentTables, expected, expectedError } = testCase;
     if (expectedError) {
@@ -82,4 +82,4 @@ testCases.forEach((testCase) => {
       expected.map(({ name }) => name),
     );
   });
-});
+}
