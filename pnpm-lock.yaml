@@ -28,7 +28,7 @@ importers:
         version: 3.2.0
       dot-prop:
         specifier: ^10.0.0
-        version: 10.1.0
+        version: 10.2.0
       execa:
         specifier: ^9.0.0
         version: 9.6.1
@@ -993,8 +993,8 @@ packages:
     resolution: {integrity: sha512-35mSku4ZXK0vfCuHEDAwt55dg2jNajHZ1odvF+8SSr82EsZY4QmXfuWso8oEd8zRhVObSN18aM0CjSdoBX7zIw==}
     engines: {node: '>=0.10.0'}
 
-  dot-prop@10.1.0:
-    resolution: {integrity: sha512-MVUtAugQMOff5RnBy2d9N31iG0lNwg1qAoAOn7pOK5wf94WIaE3My2p3uwTQuvS2AcqchkcR3bHByjaM0mmi7Q==}
+  dot-prop@10.2.0:
+    resolution: {integrity: sha512-BTJ9aZYL3vCfZlZOBLy9v8TUqWGQ0pzFnygKwFZt5udj6viBoFIBviKPUoZLDCPn1FoXffv6McQFDenrm5Krfw==}
     engines: {node: '>=20'}
 
   dunder-proto@1.0.1:
@@ -2336,8 +2336,8 @@ packages:
     resolution: {integrity: sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==}
     engines: {node: '>=12.20'}
 
-  type-fest@5.5.0:
-    resolution: {integrity: sha512-PlBfpQwiUvGViBNX84Yxwjsdhd1TUlXr6zjX7eoirtCPIr08NAmxwa+fcYBTeRQxHo9YC9wwF3m9i700sHma8g==}
+  type-fest@5.8.0:
+    resolution: {integrity: sha512-YGYEVz3Fm5iy/AybuA0oyNFq7H4CgQNfRp/qfe8nurE1kuCeNm3/vfm9X4Mtl+qLyaKJUh5xrFZwogr41SMjYA==}
     engines: {node: '>=20'}
 
   typed-array-buffer@1.0.3:
@@ -3413,9 +3413,9 @@ snapshots:
       esutils: 2.0.3
     optional: true
 
-  dot-prop@10.1.0:
+  dot-prop@10.2.0:
     dependencies:
-      type-fest: 5.5.0
+      type-fest: 5.8.0
 
   dunder-proto@1.0.1:
     dependencies:
@@ -4919,7 +4919,7 @@ snapshots:
 
   type-fest@2.19.0: {}
 
-  type-fest@5.5.0:
+  type-fest@5.8.0:
     dependencies:
       tagged-tag: 1.0.0
 
