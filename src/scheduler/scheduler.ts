@@ -269,5 +269,4 @@ export const sync = async ({
   }
 
   stream.end();
-  return await Promise.resolve();
 };
