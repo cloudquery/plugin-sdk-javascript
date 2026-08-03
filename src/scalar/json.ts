@@ -72,7 +72,7 @@ class JSONType implements Scalar<Nullable<Uint8Array>> {
   }
 
   public toString() {
-    if (this._valid) {
+    if (this._valid && this._value !== null) {
       return new TextDecoder().decode(this._value);
     }
 
