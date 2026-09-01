@@ -110,7 +110,7 @@
     "yargs": "^18.0.0"
   },
   "overrides": {
-    "@vercel/nft": "1.10.2"
+    "@vercel/nft": "1.11.0"
   },
   "packageManager": "pnpm@11.17.0"
 }
