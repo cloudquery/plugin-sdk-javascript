@@ -112,5 +112,5 @@
   "overrides": {
     "@vercel/nft": "1.10.2"
   },
-  "packageManager": "pnpm@11.17.0"
+  "packageManager": "pnpm@11.24.0"
 }
