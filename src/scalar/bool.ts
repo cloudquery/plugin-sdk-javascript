@@ -25,10 +25,7 @@ export class Bool implements Scalar<Nullable<boolean>> {
   }
 
   public get value(): Nullable<boolean> {
-    if (!this._valid) {
-      return null;
-    }
-    return this._value;
+    return this._valid ? this._value : null;
   }
 
   public set value(value: unknown) {
@@ -53,10 +50,6 @@ export class Bool implements Scalar<Nullable<boolean>> {
   }
 
   public toString() {
-    if (this._valid) {
-      return String(this._value!);
-    }
-
-    return NULL_VALUE;
+    return this._valid ? String(this._value!) : NULL_VALUE;
   }
 }

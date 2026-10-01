@@ -30,10 +30,7 @@ export class Timestamp implements Scalar<Nullable<globalThis.Date>> {
   }
 
   public get value(): Nullable<globalThis.Date> {
-    if (!this._valid) {
-      return null;
-    }
-    return this._value;
+    return this._valid ? this._value : null;
   }
 
   public set value(value: unknown) {
@@ -84,10 +81,6 @@ export class Timestamp implements Scalar<Nullable<globalThis.Date>> {
   }
 
   public toString(): string {
-    if (this._valid) {
-      return this._value!.toISOString();
-    }
-
-    return NULL_VALUE;
+    return this._valid ? this._value!.toISOString() : NULL_VALUE;
   }
 }

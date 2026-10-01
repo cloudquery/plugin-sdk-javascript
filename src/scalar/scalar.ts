@@ -102,9 +102,5 @@ export const newScalar = (dataType: DataType): Scalar<unknown> => {
     return new UUID();
   }
 
-  if (dataType instanceof JSONType) {
-    return new JSONScalar();
-  }
-
-  return new Text();
+  return dataType instanceof JSONType ? new JSONScalar() : new Text();
 };

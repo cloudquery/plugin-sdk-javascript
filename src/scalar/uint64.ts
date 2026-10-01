@@ -26,10 +26,7 @@ export class Uint64 implements Scalar<Nullable<bigint>> {
   }
 
   public get value(): Nullable<bigint> {
-    if (!this._valid) {
-      return null;
-    }
-    return this._value;
+    return this._valid ? this._value : null;
   }
 
   public set value(value: unknown) {
@@ -67,11 +64,7 @@ export class Uint64 implements Scalar<Nullable<bigint>> {
   }
 
   public toString() {
-    if (this._valid) {
-      return String(this._value!);
-    }
-
-    return NULL_VALUE;
+    return this._valid ? String(this._value!) : NULL_VALUE;
   }
 
   validUint64(n: bigint) {
