@@ -93,10 +93,7 @@ export const flattenTables = (tables: Table[]): Table[] => {
 };
 
 export const getAllParents = (table: Table): Table[] => {
-  if (table.parent === null) {
-    return [];
-  }
-  return [table.parent, ...getAllParents(table.parent)];
+  return table.parent === null ? [] : [table.parent, ...getAllParents(table.parent)];
 };
 
 const getAllChildren = (table: Table): Table[] => {

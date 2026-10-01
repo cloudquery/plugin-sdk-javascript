@@ -25,10 +25,7 @@ export class Float32 implements Scalar<Nullable<number>> {
   }
 
   public get value(): Nullable<number> {
-    if (!this._valid) {
-      return null;
-    }
-    return this._value;
+    return this._valid ? this._value : null;
   }
 
   public set value(value: unknown) {
@@ -68,11 +65,7 @@ export class Float32 implements Scalar<Nullable<number>> {
   }
 
   public toString() {
-    if (this._valid) {
-      return String(this._value!);
-    }
-
-    return NULL_VALUE;
+    return this._valid ? String(this._value!) : NULL_VALUE;
   }
 
   validFloat32(n: number) {

@@ -33,10 +33,7 @@ class JSONType implements Scalar<Nullable<Uint8Array>> {
   }
 
   public get value(): Nullable<Uint8Array> {
-    if (!this._valid) {
-      return null;
-    }
-    return this._value;
+    return this._valid ? this._value : null;
   }
 
   public set value(value: unknown) {
@@ -72,11 +69,7 @@ class JSONType implements Scalar<Nullable<Uint8Array>> {
   }
 
   public toString() {
-    if (this._valid && this._value !== null) {
-      return new TextDecoder().decode(this._value);
-    }
-
-    return NULL_VALUE;
+    return this._valid && this._value !== null ? new TextDecoder().decode(this._value) : NULL_VALUE;
   }
 }
 

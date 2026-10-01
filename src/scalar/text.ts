@@ -24,10 +24,7 @@ export class Text implements Scalar<Nullable<string>> {
   }
 
   public get value(): Nullable<string> {
-    if (!this._valid) {
-      return null;
-    }
-    return this._value;
+    return this._valid ? this._value : null;
   }
 
   public set value(value: unknown) {
@@ -64,10 +61,6 @@ export class Text implements Scalar<Nullable<string>> {
   }
 
   public toString() {
-    if (this._valid) {
-      return this._value!;
-    }
-
-    return NULL_VALUE;
+    return this._valid ? this._value! : NULL_VALUE;
   }
 }

@@ -66,8 +66,7 @@ test('should parse object with custom types', (t) => {
     },
     {
       getTypeFromValue: function (key: string): DataType | null | undefined {
-        if (key === 'float') return new Float64();
-        return undefined;
+        return key === 'float' ? new Float64() : undefined;
       },
     },
   );
