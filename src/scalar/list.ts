@@ -73,31 +73,20 @@ export class List<T extends Scalar<unknown>> implements Scalar<Nullable<TVector<
   }
 
   get value(): Nullable<TVector<T>> {
-    if (!this._valid) {
-      return null;
-    }
-    return this._value;
+    return this._valid ? this._value : null;
   }
 
   toString(): string {
-    if (!this._valid) {
-      return NULL_VALUE;
-    }
-    return `[${this._value!.map((v) => v.toString()).join(', ')}]`;
+    return this._valid ? `[${this._value!.map((v) => v.toString()).join(', ')}]` : NULL_VALUE;
   }
 
   get length(): number {
-    if (!this._valid) {
-      return 0;
-    }
-    return this._value!.length;
+    return this._valid ? this._value!.length : 0;
   }
 
   // If you need an equality method, you can add an equals method similar to the Python __eq__
   equals(other: List<T>): boolean {
-    if (!other) return false;
-    if (this.constructor !== other.constructor) return false;
-    if (this._valid !== other.valid) return false;
+    if (!other || this.constructor !== other.constructor || this._valid !== other.valid) return false;
     return JSON.stringify(this._value) === JSON.stringify(other.value); // crude equality check for objects, might need refinement.
   }
 }
