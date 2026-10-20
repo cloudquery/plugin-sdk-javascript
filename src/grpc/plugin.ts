@@ -181,6 +181,25 @@ export class PluginServer extends pluginV3.cloudquery.plugin.v3.UnimplementedPlu
     throw new Error('Method not implemented.');
   }
 
+  AssessTables(
+    call: grpc.ServerUnaryCall<
+      pluginV3.cloudquery.plugin.v3.AssessTables.Request,
+      pluginV3.cloudquery.plugin.v3.AssessTables.Response
+    >,
+    callback: grpc.sendUnaryData<pluginV3.cloudquery.plugin.v3.AssessTables.Response>,
+  ): void {
+    return callback({ code: grpc.status.UNIMPLEMENTED, details: 'Method not implemented.' }, null);
+  }
+
+  WriteStream(
+    call: grpc.ServerDuplexStream<
+      pluginV3.cloudquery.plugin.v3.Write.Request,
+      pluginV3.cloudquery.plugin.v3.Write.Response
+    >,
+  ): void {
+    call.emit('error', { code: grpc.status.UNIMPLEMENTED, details: 'Method not implemented.' });
+  }
+
   TestConnection(
     call: grpc.ServerUnaryCall<
       pluginV3.cloudquery.plugin.v3.TestConnection.Request,
