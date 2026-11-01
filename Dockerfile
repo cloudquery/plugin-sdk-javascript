@@ -1,4 +1,4 @@
-FROM node:24.22.2-slim AS builder
+FROM node:26.13.0-slim AS builder
 
 RUN corepack enable && corepack prepare pnpm@11.5.1 --activate
 
@@ -12,7 +12,7 @@ COPY . .
 
 RUN pnpm run build
 
-FROM node:24.22.2-slim AS final
+FROM node:26.13.0-slim AS final
 
 RUN corepack enable && corepack prepare pnpm@11.5.1 --activate
 
