@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.38](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.37...v0.1.38) (2026-11-02)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency @cloudquery/plugin-pb-javascript to ^0.0.43 ([#455](https://github.com/cloudquery/plugin-sdk-javascript/issues/455)) ([836e3da](https://github.com/cloudquery/plugin-sdk-javascript/commit/836e3da5e564788b1b50ac70a30e39995417ba82))
+
 ## [0.1.37](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.36...v0.1.37) (2026-11-02)
 
 
