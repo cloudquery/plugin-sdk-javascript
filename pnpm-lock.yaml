@@ -170,8 +170,8 @@ importers:
         specifier: ^21.0.0
         version: 21.2.0
       '@cloudquery/plugin-pb-javascript':
-        specifier: ^0.0.42
-        version: 0.0.42
+        specifier: ^0.0.43
+        version: 0.0.43
       '@grpc/grpc-js':
         specifier: ^1.9.0
         version: 1.14.5
@@ -319,8 +319,8 @@ packages:
   '@cacheable/utils@2.5.0':
     resolution: {integrity: sha512-buipgOVDkkPXNR5+xBpDw7Zk2n1EvU7qBJCNUcL7rhQ//kfpOXPAvQ511Os0vpLYJ1pZnvudNytkQt2hst3wqA==}
 
-  '@cloudquery/plugin-pb-javascript@0.0.42':
-    resolution: {integrity: sha512-yu38V5HmfAiZ29vtRo5sS/FMsggJwVPdU0rOYIXv/8Ey4ZDSZtaOeUqXpBopHoqRbwDJodcaTa2F056Fhp6SIw==}
+  '@cloudquery/plugin-pb-javascript@0.0.43':
+    resolution: {integrity: sha512-31/O8OWbhypeabUPVukWcbURrc3tjXjtILmMStHS3Ok+Gs1IOoOAevVAuy0IENE2kMhA6FzvOw18opg8CTVRGw==}
     engines: {node: '>=16.17.0'}
 
   '@colors/colors@1.6.0':
@@ -2351,7 +2351,7 @@ snapshots:
       hashery: 1.5.1
       keyv: 5.6.0
 
-  '@cloudquery/plugin-pb-javascript@0.0.42':
+  '@cloudquery/plugin-pb-javascript@0.0.43':
     dependencies:
       google-protobuf: 4.0.2
 
