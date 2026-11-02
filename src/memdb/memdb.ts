@@ -31,14 +31,14 @@ const spec = {
   },
 };
 
-type Spec = {
-  concurrency: number;
-};
-
 const ajv = new Ajv.default();
 const validate = ajv.compile(spec);
 
 export const newMemDBPlugin = (): Plugin => {
+  type Spec = {
+    concurrency: number;
+  };
+
   const memdbClient = createMemDBClient();
   const memoryDB = memdbClient.memoryDB;
   const tables = memdbClient.tables;
