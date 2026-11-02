@@ -1,5 +1,16 @@
 # Changelog
 
+## [0.1.37](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.36...v0.1.37) (2026-11-02)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency matcher to v7 ([#450](https://github.com/cloudquery/plugin-sdk-javascript/issues/450)) ([6985dc9](https://github.com/cloudquery/plugin-sdk-javascript/commit/6985dc948b98297b8f89f634c354673ad0ff8234))
+* **deps:** Update dependency p-timeout to v8 ([#452](https://github.com/cloudquery/plugin-sdk-javascript/issues/452)) ([29c7e2e](https://github.com/cloudquery/plugin-sdk-javascript/commit/29c7e2e797df5a3027d7b0ead5a2278f79cadb08))
+* **deps:** Update eslint packages (major) ([#453](https://github.com/cloudquery/plugin-sdk-javascript/issues/453)) ([143a3e6](https://github.com/cloudquery/plugin-sdk-javascript/commit/143a3e6747d0341cd01feadbdd5606575fec7c26))
+* **deps:** Update Node.js to v24.22.2 ([#447](https://github.com/cloudquery/plugin-sdk-javascript/issues/447)) ([842d6e1](https://github.com/cloudquery/plugin-sdk-javascript/commit/842d6e1837c5bae7d525f70773456f01bde61b7e))
+* **deps:** Update pnpm to v12.15.0 ([#448](https://github.com/cloudquery/plugin-sdk-javascript/issues/448)) ([ffd5cfb](https://github.com/cloudquery/plugin-sdk-javascript/commit/ffd5cfb50056bcc1f41a1268f17952008f27066e))
+
 ## [0.1.36](https://github.com/cloudquery/plugin-sdk-javascript/compare/v0.1.35...v0.1.36) (2026-10-22)
 
 
