@@ -96,7 +96,7 @@
     "dot-prop": "^10.0.0",
     "execa": "^10.0.0",
     "luxon": "^3.4.0",
-    "matcher": "^6.0.0",
+    "matcher": "^7.0.0",
     "modern-errors": "^7.0.0",
     "modern-errors-bugs": "^5.0.0",
     "p-map": "^7.0.0",
