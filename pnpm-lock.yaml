@@ -194,8 +194,8 @@ importers:
         specifier: ^3.4.0
         version: 3.7.2
       matcher:
-        specifier: ^6.0.0
-        version: 6.0.0
+        specifier: ^7.0.0
+        version: 7.0.0
       modern-errors:
         specifier: ^7.0.0
         version: 7.1.4
@@ -1627,6 +1627,10 @@ packages:
   matcher@6.0.0:
     resolution: {integrity: sha512-TzDerdcNtI79w7Av4GT57bLdElPA/VAkjqdMZv8yhuc8geU2z0ljW9anXbX/55aHEMTpYypZb1lxsA/46r9oOQ==}
     engines: {node: '>=20'}
+
+  matcher@7.0.0:
+    resolution: {integrity: sha512-ygfIhMQiuhHCxssmtMDdKypUAXIiKn1JtVwdUD5Nb30t7wFFIyctviPvOraA/2d3vFApzLKFm2c64x/KwuxsgA==}
+    engines: {node: '>=22'}
 
   md5-hex@3.0.1:
     resolution: {integrity: sha512-BUiRtTtV39LIJwinWBjqVsU9xhdnz7/i889V859IBFpuqGAj6LuOvHv5XLbgZ2R7ptJoJaEcxkv88/h25T7Ciw==}
@@ -3628,6 +3632,8 @@ snapshots:
   matcher@6.0.0:
     dependencies:
       escape-string-regexp: 5.0.0
+
+  matcher@7.0.0: {}
 
   md5-hex@3.0.1:
     dependencies:
