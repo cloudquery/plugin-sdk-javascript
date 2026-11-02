@@ -1,6 +1,6 @@
 FROM node:26.13.0-slim AS builder
 
-RUN corepack enable && corepack prepare pnpm@11.5.1 --activate
+RUN npm install -g pnpm@12.15.0
 
 WORKDIR /app
 
@@ -14,7 +14,7 @@ RUN pnpm run build
 
 FROM node:26.13.0-slim AS final
 
-RUN corepack enable && corepack prepare pnpm@11.5.1 --activate
+RUN npm install -g pnpm@12.15.0
 
 WORKDIR /app
 
